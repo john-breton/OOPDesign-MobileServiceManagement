@@ -187,5 +187,5 @@ A Mobile Service Provider,  Company-A,  has the following MRs to comply with:
     - Add User first Name Last Name, phone Number, email Address
 
 
-###During the demo, the menu should be redisplayed after entering every command.
-###During system startup, there are no users, no bundles and no accounts.
+### During the demo, the menu should be redisplayed after entering every command.
+### During system startup, there are no users, no bundles and no accounts.
