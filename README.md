@@ -1,7 +1,4 @@
-## Design Patterns 2020/21
-
-# Mid-Term Exam
-
+# Mid-Term Exam - Design Patterns 2020/21
 # **Exam Exercise - Mobile Services Management**
 ## **The Market Requirements (MRs)**
 A Mobile Service Provider,  Company-A,  has the following MRs to comply with:
