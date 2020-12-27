@@ -1,8 +1,13 @@
-package bundlemanagement.pac;
+package bundlemanagement.component;
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
 
-public class PlatinumDataPLan extends BundleDecorator{
+public class PlatinumDataPLan extends BundleDecorator implements DataPlan{
 	
 	PaCBundle pacbundle;
+	
+	public PlatinumDataPLan() {
+	}
 
 	public PlatinumDataPLan(PaCBundle pacbundle) 
 	{
@@ -20,5 +25,9 @@ public class PlatinumDataPLan extends BundleDecorator{
 		// TODO Auto-generated method stub
 		return pacbundle.cost()+40;
 	}
-
+	
+	public String toString() 
+	{
+		return "10 GB";
+	}
 }

@@ -1,9 +1,14 @@
-package bundlemanagement.pac;
+package bundlemanagement.component;
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
 
-public class SilverDataPLan extends BundleDecorator{
+public class SilverDataPLan extends BundleDecorator implements DataPlan{
 	
 	PaCBundle pacbundle;
 
+	public SilverDataPLan() {
+	}
+	
 	public SilverDataPLan(PaCBundle pacbundle) 
 	{
 		this.pacbundle=pacbundle;
@@ -19,6 +24,11 @@ public class SilverDataPLan extends BundleDecorator{
 	public int cost() {
 		// TODO Auto-generated method stub
 		return pacbundle.cost()+25;
+	}
+	
+	public String toString() 
+	{
+		return "2 GB";
 	}
 
 }

@@ -1,8 +1,13 @@
-package bundlemanagement.pac;
+package bundlemanagement.component;
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
 
-public class GoldMessagingPLan extends BundleDecorator{
+public class GoldMessagingPLan extends BundleDecorator implements MessagingPlan{
 	
 	PaCBundle pacbundle;
+	
+	public GoldMessagingPLan() {
+	}
 
 	public GoldMessagingPLan(PaCBundle pacbundle) 
 	{
@@ -19,6 +24,11 @@ public class GoldMessagingPLan extends BundleDecorator{
 	public int cost() {
 		// TODO Auto-generated method stub
 		return pacbundle.cost()+35;
+	}
+	
+	public String toString() 
+	{
+		return "10K Messages";
 	}
 
 }

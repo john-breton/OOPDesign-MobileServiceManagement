@@ -1,9 +1,15 @@
-package bundlemanagement.pac;
+package bundlemanagement.component;
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
 
-public class GoldDataPLan extends BundleDecorator{
+
+public class GoldDataPLan extends BundleDecorator implements DataPlan{
 	
 	PaCBundle pacbundle;
 
+	public GoldDataPLan() {
+	}
+	
 	public GoldDataPLan(PaCBundle pacbundle) 
 	{
 		this.pacbundle=pacbundle;
@@ -19,6 +25,11 @@ public class GoldDataPLan extends BundleDecorator{
 	public int cost() {
 		// TODO Auto-generated method stub
 		return pacbundle.cost()+30;
+	}
+	
+	public String toString() 
+	{
+		return "4 GB";
 	}
 
 }

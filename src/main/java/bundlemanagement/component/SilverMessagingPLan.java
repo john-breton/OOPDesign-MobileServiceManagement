@@ -1,8 +1,13 @@
-package bundlemanagement.pac;
+package bundlemanagement.component;
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
 
-public class SilverMessagingPLan extends BundleDecorator{
+public class SilverMessagingPLan extends BundleDecorator implements MessagingPlan{
 	
 	PaCBundle pacbundle;
+	
+	public SilverMessagingPLan() {
+	}
 
 	public SilverMessagingPLan(PaCBundle pacbundle) 
 	{
@@ -19,6 +24,11 @@ public class SilverMessagingPLan extends BundleDecorator{
 	public int cost() {
 		// TODO Auto-generated method stub
 		return pacbundle.cost()+25;
+	}
+	
+	public String toString() 
+	{
+		return "5K Messages";
 	}
 
 }

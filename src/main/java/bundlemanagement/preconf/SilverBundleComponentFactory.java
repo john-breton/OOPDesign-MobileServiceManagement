@@ -1,22 +1,23 @@
 package bundlemanagement.preconf;
+import bundlemanagement.component.*;
 
 public class SilverBundleComponentFactory implements BundleComponentFactory{
 
 	public CallingPlan createCallingPlan() {
 		// TODO Auto-generated method stub
-		return new SilverCallingPlan();
+		return new SilverCallingPLan();
 	}
 
 	
 	public MessagingPlan createMessagingPlan() {
 		// TODO Auto-generated method stub
-		return new SilverMessagingPlan();
+		return new SilverMessagingPLan();
 	}
 
 
 	public DataPlan createDataPaln() {
 		// TODO Auto-generated method stub
-		return new SilverDataPlan();
+		return new SilverDataPLan();
 	}
 
 	

@@ -1,23 +1,24 @@
 package bundlemanagement.preconf;
+import bundlemanagement.component.*;
 
 public class PlatinumBundleComponentFactory implements BundleComponentFactory{
 
 
 	public CallingPlan createCallingPlan() {
 		// TODO Auto-generated method stub
-		return new PlatinumCallingPlan();
+		return new PlatinumCallingPLan();
 	}
 
 	
 	public MessagingPlan createMessagingPlan() {
 		// TODO Auto-generated method stub
-		return new PlatinumMessagingPlan();
+		return new PlatinumMessagingPLan();
 	}
 
 	
 	public DataPlan createDataPaln() {
 		// TODO Auto-generated method stub
-		return new PlatinumDataPlan();
+		return new PlatinumDataPLan();
 	}
 
 	
