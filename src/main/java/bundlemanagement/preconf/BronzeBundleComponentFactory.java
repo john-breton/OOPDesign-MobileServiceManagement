@@ -1,23 +1,24 @@
 package bundlemanagement.preconf;
+import bundlemanagement.component.*;
 
 public class BronzeBundleComponentFactory implements BundleComponentFactory{
 
 	
 	public CallingPlan createCallingPlan() {
 		// TODO Auto-generated method stub
-		return new BronzeCallingPlan();
+		return new BronzeCallingPLan();
 	}
 
 	
 	public MessagingPlan createMessagingPlan() {
 		// TODO Auto-generated method stub
-		return new BronzeMessagingPlan();
+		return new BronzeMessagingPLan();
 	}
 
 	
 	public DataPlan createDataPaln() {
 		// TODO Auto-generated method stub
-		return new BronzeDataPlan();
+		return new BronzeDataPLan();
 	}
 
 	

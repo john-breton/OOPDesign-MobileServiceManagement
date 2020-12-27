@@ -1,8 +1,13 @@
-package bundlemanagement.pac;
+package bundlemanagement.component;
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
 
-public class PlatinumMessagingPLan extends BundleDecorator{
+public class PlatinumMessagingPLan extends BundleDecorator implements MessagingPlan{
 	
 	PaCBundle pacbundle;
+	
+	public PlatinumMessagingPLan() {
+	}
 
 	public PlatinumMessagingPLan(PaCBundle pacbundle) 
 	{
@@ -19,6 +24,11 @@ public class PlatinumMessagingPLan extends BundleDecorator{
 	public int cost() {
 		// TODO Auto-generated method stub
 		return pacbundle.cost()+45;
+	}
+	
+	public String toString() 
+	{
+		return "Unlimited Messages";
 	}
 
 }

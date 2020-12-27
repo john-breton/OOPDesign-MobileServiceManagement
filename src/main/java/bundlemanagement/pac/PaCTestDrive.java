@@ -1,4 +1,5 @@
 package bundlemanagement.pac;
+import bundlemanagement.component.*;
 
 public class PaCTestDrive {
 

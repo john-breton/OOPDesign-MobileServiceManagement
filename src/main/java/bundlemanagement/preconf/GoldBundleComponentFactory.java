@@ -1,23 +1,26 @@
 package bundlemanagement.preconf;
+import bundlemanagement.component.*;
+
+
 
 public class GoldBundleComponentFactory implements BundleComponentFactory{
 	
 	
 	public CallingPlan createCallingPlan() {
 		// TODO Auto-generated method stub
-		return new GoldCallingPlan();
+		return new GoldCallingPLan();
 	}
 
 	
 	public MessagingPlan createMessagingPlan() {
 		// TODO Auto-generated method stub
-		return new GoldMessagingPlan();
+		return new GoldMessagingPLan();
 	}
 
 	
 	public DataPlan createDataPaln() {
 		// TODO Auto-generated method stub
-		return new GoldDataPlan();
+		return new GoldDataPLan();
 	}
 
 	
