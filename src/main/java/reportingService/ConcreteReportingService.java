@@ -79,31 +79,27 @@ public class ConcreteReportingService implements PropertyChangeListener {
 		String detailType = property.substring(property.indexOf("::") + 2);
 
 		if (managementType.equals("Account")) {
-			if (detailType.equals("New")) {
-				support.firePropertyChange("printAccountDetails", false, true);
-			}
-			if (detailType.equals("Updating")) {
-				support.firePropertyChange("printAccountDetails", false, true);
-			}
-			if (detailType.equals("Updated")) {
-				support.firePropertyChange("printAccountDetails", false, true);
-			}
-			if (detailType.equals("Delete")) {
-				support.firePropertyChange("printAccountDetails", false, true);
+			switch (detailType) {
+				case "New":
+				case "Updating":
+				case "Updated":
+				case "Delete":
+					support.firePropertyChange("printAccountDetails", false, true);
+					break;
+				default:
+					break;
 			}
 		}
 		if (managementType.equals("User")) {
-			if (detailType.equals("New")) {
-				support.firePropertyChange("printUserDetails", false, true);
-			}
-			if (detailType.equals("Update")) {
-				support.firePropertyChange("printUserDetails", false, true);
-			}
-			if (detailType.equals("Updated")) {
-				support.firePropertyChange("printUserDetails", false, true);
-			}
-			if (detailType.equals("Delete")) {
-				support.firePropertyChange("printUserDetails", false, true);
+			switch (detailType) {
+				case "New":
+				case "Updating":
+				case "Updated":
+				case "Delete":
+					support.firePropertyChange("printAccountDetails", false, true);
+					break;
+				default:
+					break;
 			}
 		}
 		if (managementType.equals("Bundle")) {
