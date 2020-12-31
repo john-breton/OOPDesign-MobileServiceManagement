@@ -1,6 +1,7 @@
 package AccountManagement;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +27,7 @@ public class AccountManagement {
      *
      */
     private AccountManagement() {
+        accountList = new ArrayList<>();
     }
 
     /**
@@ -144,7 +146,7 @@ public class AccountManagement {
                 return acc;
             }
         }
-        System.out.println("Failed to find an existing service account with the provide phone number.");
+        System.out.println("Failed to find an existing service account with the provided phone number.");
         return null;
     }
 
