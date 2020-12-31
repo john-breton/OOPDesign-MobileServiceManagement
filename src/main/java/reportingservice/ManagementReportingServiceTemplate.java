@@ -1,8 +1,10 @@
-package reportingService;
+package reportingservice;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import static reportingservice.PropertyNameStrings.*;
+
 
 /**
  * This is a template for the management classes. It is both an observer and
@@ -23,13 +25,13 @@ import java.beans.PropertyChangeSupport;
  * e.g. "Account::New" propertyNames
  * 
  * @author Matthew Siu
- * @version December 30, 2020
+ * @version December 31, 2020
  * @since December 30, 2020
  *
  */
 
 public class ManagementReportingServiceTemplate implements PropertyChangeListener {
-
+	private static ManagementReportingServiceTemplate uniqueInstance = new ManagementReportingServiceTemplate();
 	private PropertyChangeSupport support;
 
 	/**
@@ -39,6 +41,13 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
 	public ManagementReportingServiceTemplate() {
 		// add this to your constructor
 		support = new PropertyChangeSupport(this);
+	}
+	
+	/**
+	 * getInstance method 
+	 */
+	public static ManagementReportingServiceTemplate getInstance() {
+		return uniqueInstance;
 	}
 
 	/**
@@ -70,7 +79,7 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
 	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		// example
-		if (event.getPropertyName().equals("printAccountDetails")) {
+		if (event.getPropertyName().equals(PRINT_ACCOUNT_DETAILS)) {
 			// print out required details
 			System.out.println("Here's some important information!");
 		}
@@ -83,6 +92,6 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
 	 */
 	public void createAccount() {
 		System.out.println("creating new account");
-		support.firePropertyChange("Account::New", "old information", "new information");
+		support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, "old information", "new information");
 	}
 }

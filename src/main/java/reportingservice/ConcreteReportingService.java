@@ -1,8 +1,9 @@
-package reportingService;
+package reportingservice;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import static reportingservice.PropertyNameStrings.*;
 
 /**
  * This is a concrete implementation of the Reporting Service. It is both an
@@ -28,20 +29,28 @@ import java.beans.PropertyChangeSupport;
  * 
  * 
  * @author Matthew Siu
- * @version December 30, 2020
+ * @version December 31, 2020
  * @since December 30, 2020
  *
  */
 
 public class ConcreteReportingService implements PropertyChangeListener {
 
+	private static ConcreteReportingService uniqueInstance = new ConcreteReportingService();
 	private PropertyChangeSupport support;
 
 	/**
 	 * Constructor for ConcreteReportingService.
 	 */
-	public ConcreteReportingService() {
+	private ConcreteReportingService() {
 		support = new PropertyChangeSupport(this);
+	}
+
+	/**
+	 * getInstance method to ensure this class is a singleton
+	 */
+	public static ConcreteReportingService getInstance() {
+		return uniqueInstance;
 	}
 
 	/**
@@ -75,36 +84,37 @@ public class ConcreteReportingService implements PropertyChangeListener {
 		// property should be in format of "ManagementType::DetailType"
 		// e.g. "Account::New"
 		String property = event.getPropertyName();
-		String managementType = property.substring(0, property.indexOf("::"));
-		String detailType = property.substring(property.indexOf("::") + 2);
+		String managementType = property.substring(0, property.indexOf(PROPERTY_CHANGE_SCOPE_DELIMITER));
+		String detailType = property.substring(
+				property.indexOf(PROPERTY_CHANGE_SCOPE_DELIMITER) + PROPERTY_CHANGE_SCOPE_DELIMITER.length());
 
-		if (managementType.equals("Account")) {
+		if (managementType.equals(ACCOUNT)) {
 			switch (detailType) {
-				case "New":
-				case "Updating":
-				case "Updated":
-				case "Delete":
-					support.firePropertyChange("printAccountDetails", false, true);
-					break;
-				default:
-					break;
+			case NEW:
+			case UPDATING:
+			case UPDATED:
+			case DELETE:
+				support.firePropertyChange(PRINT_ACCOUNT_DETAILS, false, true);
+				break;
+			default:
+				break;
 			}
 		}
-		if (managementType.equals("User")) {
+		if (managementType.equals(USER)) {
 			switch (detailType) {
-				case "New":
-				case "Updating":
-				case "Updated":
-				case "Delete":
-					support.firePropertyChange("printAccountDetails", false, true);
-					break;
-				default:
-					break;
+			case NEW:
+			case UPDATING:
+			case UPDATED:
+			case DELETE:
+				support.firePropertyChange(PRINT_USER_DETAILS, false, true);
+				break;
+			default:
+				break;
 			}
 		}
-		if (managementType.equals("Bundle")) {
-			if (detailType.equals("New")) {
-				support.firePropertyChange("printBundleDetails", false, true);
+		if (managementType.equals(BUNDLE)) {
+			if (detailType.equals(NEW)) {
+				support.firePropertyChange(PRINT_BUNDLE_DETAILS, false, true);
 			}
 		}
 	}

@@ -1,11 +1,11 @@
-package reportingService;
+package reportingservice;
 
 /**
  * This is just a simple test to check that the ConcreteReportingService and
  * ManagementReportingServiceTemplate are working properly
  * 
  * @author Matthew Siu
- * @version December 30, 2020
+ * @version December 31, 2020
  * @since December 30, 2020 @
  */
 public class ReportingTest {
@@ -19,7 +19,7 @@ public class ReportingTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		ConcreteReportingService reportingService = new ConcreteReportingService();
+		ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
 		ManagementReportingServiceTemplate managementService = new ManagementReportingServiceTemplate();
 
 		reportingService.addPropertyChangeListener(managementService);
