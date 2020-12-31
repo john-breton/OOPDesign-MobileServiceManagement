@@ -38,13 +38,13 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
 	 * Constructor for ConcreteReportingService.
 	 * 
 	 */
-	public ManagementReportingServiceTemplate() {
+	private ManagementReportingServiceTemplate() {
 		// add this to your constructor
 		support = new PropertyChangeSupport(this);
 	}
 	
 	/**
-	 * getInstance method 
+	 * getInstance method to ensure it is a singleton
 	 */
 	public static ManagementReportingServiceTemplate getInstance() {
 		return uniqueInstance;
