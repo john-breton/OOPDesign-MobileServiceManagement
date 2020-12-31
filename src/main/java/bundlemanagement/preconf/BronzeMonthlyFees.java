@@ -1,8 +1,9 @@
 package bundlemanagement.preconf;
 
-public class BronzeMonthlyFees implements MonthlyFees{
-	public String toString() 
-	{
-		return "$25";
+public class BronzeMonthlyFees implements MonthlyFees {
+	private static final int bronze_monthly_fee = 25;
+
+	public int monthlyfee() {
+		return bronze_monthly_fee;
 	}
 }

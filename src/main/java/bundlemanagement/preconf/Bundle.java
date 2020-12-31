@@ -6,22 +6,19 @@ public abstract class Bundle {
 	MessagingPlan messagingplan;
 	DataPlan dataplan;
 	MonthlyFees monthlyfees;
-	
-	//it will call ComponenetBundleFactory
+
+	// it will call ComponenetBundleFactory
 	abstract void prepare();
-	
-	void setName(String Name) 
-	{
-		this.Name=Name;
+
+	void setName(String Name) {
+		this.Name = Name;
 	}
-	
-	String getName() 
-	{
+
+	String getName() {
 		return Name;
 	}
-	
-	public String toString() 
-	{
+
+	public String toString() {
 		StringBuffer result = new StringBuffer();
 		result.append("---- " + Name + " ----\n");
 		if (callingplan != null) {
@@ -37,9 +34,32 @@ public abstract class Bundle {
 			result.append("\n");
 		}
 		if (monthlyfees != null) {
-			result.append(monthlyfees);
-			result.append("\n");
+			result.append(monthlyfees.monthlyfee());
+			result.append("$\n");
 		}
+		if (callingplan != null) {
+			if (callingplan.getCallingMinutes() != Integer.MAX_VALUE) {
+				result.append("\nCalling time: ");
+				result.append(callingplan.getCallingMinutes());
+			} else {
+				result.append("\nCalling time: ");
+				result.append("unlimited");
+			}
+		}
+		if (dataplan != null) {
+			result.append("\nData Quantity: ");
+			result.append(dataplan.getDataQuantity());
+		}
+		if (callingplan != null) {
+			if (callingplan.getCallingMinutes() != Integer.MAX_VALUE) {
+				result.append("\nNumber of messages: ");
+				result.append(messagingplan.getNumberOfMessages());
+			} else {
+				result.append("\nNumber of messages: ");
+				result.append("unlimited");
+			}
+		}
+
 		return result.toString();
 	}
 }
