@@ -1,4 +1,4 @@
-package AccountManagement;
+package accountmanagement;
 
 
 import java.util.ArrayList;
@@ -45,14 +45,14 @@ public class AccountManagement {
      * instantiated previously. The phone number is required to be unique,
      * as a specific phone number can only be associated with a single account.
      *
-     * @param user     The User that will belong to the account.
+     * @param user     The username identifier that will belong to the account.
      * @param phoneNum The phone number that will be associated with an account.
      *                 Required to be unique, as a specific phone number can
      *                 only be associated with a single account.
-     * @param bundle   The Bundle that will belong to the account.
+     * @param bundle   The bundle name identifier that will belong to the account.
      * @return True if the service account was added, false otherwise.
      */
-    public boolean addAccount(User user, String phoneNum, Bundle bundle) {
+    public boolean addAccount(String user, String phoneNum, String bundle) {
         // A phoneNum can only be associated with a single Account.
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
@@ -88,7 +88,7 @@ public class AccountManagement {
     public boolean removeAccount(String phoneNum) {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
-                User deletedUser = acc.getUser();
+                String deletedUser = acc.getUser();
                 accountList.remove(acc);
                 System.out.printf(
                         "Successfully removed the service account associated with the phone number %s%n", phoneNum);
@@ -102,7 +102,7 @@ public class AccountManagement {
                 // TODO: Notify the UserManagement system to delete the User.
                 System.out.println(String.format(
                         "Deleted the user %s as they were not associated with another service account.",
-                        deletedUser.getUsername()));
+                        deletedUser));
                 return true;
             }
         }
@@ -113,10 +113,10 @@ public class AccountManagement {
      * Update the bundle associated with a service account.
      *
      * @param phoneNum The phone number of the service account that is being updated.
-     * @param bundle   The new bundle that is being associated with the service account.
+     * @param bundle   The new bundle name identifier that is being associated with the service account.
      * @return True if the service account was updated successfully, false otherwise.
      */
-    public boolean updateAccountBundle(String phoneNum, Bundle bundle) {
+    public boolean updateAccountBundle(String phoneNum, String bundle) {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
                 // Found the service account.

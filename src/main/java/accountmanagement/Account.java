@@ -1,4 +1,4 @@
-package AccountManagement;
+package accountmanagement;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,12 +11,12 @@ import lombok.Setter;
  */
 public class Account {
     /**
-     * Gets the User object for this Account.
+     * Gets the username identifier for this Account.
      *
-     * @return The User for this Account.
+     * @return The username for this Account.
      */
     @Getter
-    private final User user;
+    private final String user;
 
     /**
      * Gets the phone number for this Account.
@@ -28,26 +28,26 @@ public class Account {
 
     /**
      * --GETTER--
-     * Gets the Bundle for this Account.
+     * Gets the bundle name identifier for this Account.
      *
-     * @return The Bundle for this Account.
+     * @return The bundle name for this Account.
      * <p>
      * --SETTER--
      * Sets the Bundle for this Account
-     * @param bundle The Bundle object the Account will now be associated with the Account.
+     * @param bundle The bundle name the Account will now be associated with the Account.
      */
     @Getter
     @Setter
-    private Bundle bundle;
+    private String bundle;
 
     /**
      * Construct a new Account based on the passed parameters.
      *
-     * @param user     The User object to be associated with the Account (Cannot be modified).
+     * @param user     The user String (username identifier) to be associated with the Account (Cannot be modified).
      * @param phoneNum The phone number to be associated with the Account (unique identifier, cannot be modified).
-     * @param bundle   The Bundle object to be associated with the Account (Can be modified).
+     * @param bundle   The bundle String (bundle name identifier) to be associated with the Account (Can be modified).
      */
-    Account(User user, String phoneNum, Bundle bundle) {
+    Account(String user, String phoneNum, String bundle) {
         this.user = user;
         this.phoneNum = phoneNum;
         this.bundle = bundle;
@@ -55,6 +55,9 @@ public class Account {
 
     /**
      * Return a formatted String displaying the Account information.
+     * TODO Send out signals so the other services print out information about the user based on the
+     *      username and the bundle information based on the bundle name. Essentially, this will need
+     *      to be completely replaced once the Observer Pattern gets implemented.
      *
      * @return A formatted String that displays the User, phone number, and Bundle info for the service account.
      */
