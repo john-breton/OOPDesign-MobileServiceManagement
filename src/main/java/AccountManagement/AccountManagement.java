@@ -20,8 +20,8 @@ import java.util.List;
  */
 public class AccountManagement {
     // We will always need an AccountManagement instance, so use eager instantiation.
-    private static AccountManagement uniqueInstance = new AccountManagement();
-    private List<Account> accountList;
+    private static final AccountManagement uniqueInstance = new AccountManagement();
+    private final List<Account> accountList;
 
     /**
      *
@@ -56,16 +56,16 @@ public class AccountManagement {
         // A phoneNum can only be associated with a single Account.
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
-                System.out.println(String.format(
-                        "Failed to add a service account for the phone number %s (Used in another service account)",
-                        phoneNum));
+                System.out.printf(
+                        "Failed to add a service account for the phone number %s (Used in another service account)%n",
+                        phoneNum);
                 return false;
             }
         }
 
         // Add the Account to the list.
         accountList.add(new Account(user, phoneNum, bundle));
-        System.out.println(String.format("Successfully created a service account for the phone number %s", phoneNum));
+        System.out.printf("Successfully created a service account for the phone number %s%n", phoneNum);
         return true;
     }
 
@@ -90,8 +90,8 @@ public class AccountManagement {
             if (acc.getPhoneNum().equals(phoneNum)) {
                 User deletedUser = acc.getUser();
                 accountList.remove(acc);
-                System.out.println(String.format(
-                        "Successfully removed the service account associated with the phone number %s", phoneNum));
+                System.out.printf(
+                        "Successfully removed the service account associated with the phone number %s%n", phoneNum);
                 // Special case, the User the account was associated with is not associated with any other Accounts.
                 // If that's the case, the User must also be deleted (MR 1.9.10)
                 for (Account accUserCheck : accountList) {
@@ -120,16 +120,16 @@ public class AccountManagement {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
                 // Found the service account.
-                System.out.println(String.format(
-                        "Successfully updated the bundle of the service account with the phone number %s", phoneNum));
+                System.out.printf(
+                        "Successfully updated the bundle of the service account with the phone number %s%n", phoneNum);
                 System.out.println(String.format("The new bundle is now %s", bundle));
                 acc.setBundle(bundle);
                 return true;
             }
         }
         // No service account exists with the passed phone number.
-        System.out.println(String.format(
-                "Failed to find a service account with the phone number %s (Bundle was not updated)", phoneNum));
+        System.out.printf(
+                "Failed to find a service account with the phone number %s (Bundle was not updated)%n", phoneNum);
         return false;
     }
 
