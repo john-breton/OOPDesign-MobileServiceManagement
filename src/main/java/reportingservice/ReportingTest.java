@@ -6,7 +6,7 @@ package reportingservice;
  * 
  * @author Matthew Siu
  * @version December 31, 2020
- * @since December 30, 2020 @
+ * @since December 30, 2020
  */
 public class ReportingTest {
 
