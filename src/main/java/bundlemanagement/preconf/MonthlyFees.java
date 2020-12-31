@@ -1,5 +1,5 @@
 package bundlemanagement.preconf;
 
 public interface MonthlyFees {
-	public String toString();
+	int monthlyfee();
 }

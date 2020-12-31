@@ -1,5 +1,7 @@
 package bundlemanagement.preconf;
 
 public interface MessagingPlan {
-	public String toString();
+	String toString();
+
+	int getNumberOfMessages();
 }
