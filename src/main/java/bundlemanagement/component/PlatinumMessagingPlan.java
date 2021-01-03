@@ -19,13 +19,11 @@ public class PlatinumMessagingPlan extends BundleDecorator implements MessagingP
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + PLATINUM_MESSAGING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + PLATINUM_MESSAGING_PLAN_FEE;
 	}
 
@@ -34,7 +32,6 @@ public class PlatinumMessagingPlan extends BundleDecorator implements MessagingP
 	}
 
 	public int getNumberOfMessages() {
-		// TODO Auto-generated method stub
 		return PLATINUM_NUMBER_OF_MESSAGES;
 	}
 

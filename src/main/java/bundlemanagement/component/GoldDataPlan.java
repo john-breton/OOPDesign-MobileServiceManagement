@@ -19,13 +19,11 @@ public class GoldDataPlan extends BundleDecorator implements DataPlan {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + GOLD_DATA_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + GOLD_DATA_PLAN_FEE;
 	}
 
@@ -34,7 +32,6 @@ public class GoldDataPlan extends BundleDecorator implements DataPlan {
 	}
 
 	public int getDataQuantity() {
-		// TODO Auto-generated method stub
 		return GOLD_DATA_QUANTITY;
 	}
 

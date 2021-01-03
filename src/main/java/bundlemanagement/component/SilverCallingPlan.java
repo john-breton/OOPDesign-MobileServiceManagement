@@ -19,13 +19,11 @@ public class SilverCallingPlan extends BundleDecorator implements CallingPlan {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + SILVER_CALLING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + SILVER_CALLING_PLAN_FEE;
 	}
 
@@ -34,7 +32,6 @@ public class SilverCallingPlan extends BundleDecorator implements CallingPlan {
 	}
 
 	public int getCallingMinutes() {
-		// TODO Auto-generated method stub
 		return SILVER_CALLING_MINUTES;
 	}
 

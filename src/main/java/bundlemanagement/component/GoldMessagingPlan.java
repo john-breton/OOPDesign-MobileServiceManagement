@@ -19,13 +19,11 @@ public class GoldMessagingPlan extends BundleDecorator implements MessagingPlan 
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + GOLD_MESSAGING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + GOLD_MESSAGING_PLAN_FEE;
 	}
 
@@ -34,7 +32,6 @@ public class GoldMessagingPlan extends BundleDecorator implements MessagingPlan 
 	}
 
 	public int getNumberOfMessages() {
-		// TODO Auto-generated method stub
 		return GOLD_NUMBER_OF_MESSAGES;
 	}
 

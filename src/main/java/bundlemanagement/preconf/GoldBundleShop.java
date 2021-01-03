@@ -8,8 +8,8 @@ public class GoldBundleShop extends BundleShop {
 		this.goldbundlecomponentfactory = new GoldBundleComponentFactory();
 	}
 
-	protected Bundle createBundle() {
-		Bundle bundle;
+	protected PreconfBundle createBundle() {
+		PreconfBundle bundle;
 		bundle = new PreconfBundle(this.goldbundlecomponentfactory);
 		bundle.setName(GOLD_BUNDLE);
 

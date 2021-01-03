@@ -19,13 +19,11 @@ public class SilverMessagingPlan extends BundleDecorator implements MessagingPla
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + SILVER_MESSAGING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + SILVER_MESSAGING_PLAN_FEE;
 	}
 
@@ -34,7 +32,6 @@ public class SilverMessagingPlan extends BundleDecorator implements MessagingPla
 	}
 
 	public int getNumberOfMessages() {
-		// TODO Auto-generated method stub
 		return SILVER_NUMBER_OF_MESSAGES;
 	}
 

@@ -8,8 +8,8 @@ public class PlatinumBundleShop extends BundleShop {
 		this.platinumbundlecomponentfactory = new PlatinumBundleComponentFactory();
 	}
 
-	protected Bundle createBundle() {
-		Bundle bundle;
+	protected PreconfBundle createBundle() {
+		PreconfBundle bundle;
 
 		bundle = new PreconfBundle(this.platinumbundlecomponentfactory);
 		bundle.setName(PLATINUM_BUNDLE);

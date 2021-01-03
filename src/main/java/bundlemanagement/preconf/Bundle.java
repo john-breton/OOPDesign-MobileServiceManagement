@@ -8,13 +8,12 @@ public abstract class Bundle {
 	MonthlyFees monthlyfees;
 
 	// it will call ComponenetBundleFactory
-	abstract void prepare();
 
-	void setName(String Name) {
+	public void setName(String Name) {
 		this.Name = Name;
 	}
 
-	String getName() {
+	public String getName() {
 		return Name;
 	}
 

@@ -13,18 +13,15 @@ public class ZeroCallingPlan extends BundleDecorator {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + ZERO_CALLING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + ZERO_CALLING_PLAN_FEE;
 	}
 
 	public int getCallingMinutes() {
-		// TODO Auto-generated method stub
 		return ZERO_CALLING_MINUTES;
 	}
 

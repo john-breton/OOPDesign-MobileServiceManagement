@@ -19,13 +19,11 @@ public class BronzeMessagingPlan extends BundleDecorator implements MessagingPla
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + BRONZE_MESSAGING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + BRONZE_NESSAGING_PLAN_FEE;
 	}
 
@@ -34,7 +32,6 @@ public class BronzeMessagingPlan extends BundleDecorator implements MessagingPla
 	}
 
 	public int getNumberOfMessages() {
-		// TODO Auto-generated method stub
 		return BRONZE_NUMBER_OF_MESSAGES;
 	}
 
