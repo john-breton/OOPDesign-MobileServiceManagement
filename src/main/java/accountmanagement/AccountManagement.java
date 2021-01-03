@@ -1,8 +1,12 @@
 package accountmanagement;
 
-
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.List;
+
+import static reportingservice.PropertyNameStrings.*;
 
 /**
  * The AccountManagement class is responsible for managing accounts
@@ -18,15 +22,18 @@ import java.util.List;
  * exist at any given time. This is to prevent data corruption once it comes
  * to multiple admins making use of the AccountManagement service.
  */
-public class AccountManagement {
+public class AccountManagement implements PropertyChangeListener {
     // We will always need an AccountManagement instance, so use eager instantiation.
     private static final AccountManagement uniqueInstance = new AccountManagement();
     private final List<Account> accountList;
+    private final PropertyChangeSupport support;
 
     /**
-     *
+     * Constructor for the AccountManagement class.
+     * Required to be private to ensure the Singleton Pattern is followed.
      */
     private AccountManagement() {
+        support = new PropertyChangeSupport(this);
         accountList = new ArrayList<>();
     }
 
@@ -41,7 +48,7 @@ public class AccountManagement {
 
     /**
      * Add a new service account based on the passed in parameters. This
-     * requires a  User and Bundle object to have already been created and
+     * requires a User and Bundle object to have already been created and
      * instantiated previously. The phone number is required to be unique,
      * as a specific phone number can only be associated with a single account.
      *
@@ -50,23 +57,19 @@ public class AccountManagement {
      *                 Required to be unique, as a specific phone number can
      *                 only be associated with a single account.
      * @param bundle   The bundle name identifier that will belong to the account.
-     * @return True if the service account was added, false otherwise.
      */
-    public boolean addAccount(String user, String phoneNum, String bundle) {
+    public void addAccount(String user, String phoneNum, String bundle) {
         // A phoneNum can only be associated with a single Account.
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
-                System.out.printf(
-                        "Failed to add a service account for the phone number %s (Used in another service account)%n",
-                        phoneNum);
-                return false;
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), acc);
             }
         }
 
         // Add the Account to the list.
-        accountList.add(new Account(user, phoneNum, bundle));
-        System.out.printf("Successfully created a service account for the phone number %s%n", phoneNum);
-        return true;
+        Account acc = new Account(user, phoneNum, bundle);
+        accountList.add(acc);
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(), acc);
     }
 
     /**
@@ -76,37 +79,32 @@ public class AccountManagement {
      */
     public void addAccount(Account acc) {
         accountList.add(acc);
-        System.out.println("Successfully added the service account to the managed service accounts list.");
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(), acc);
     }
 
     /**
      * Remove an account from the list of managed accounts.
      *
      * @param phoneNum The phone number for the service account being removed, as a String.
-     * @return True if the service account was removed successfully, false otherwise.
      */
-    public boolean removeAccount(String phoneNum) {
+    public void removeAccount(String phoneNum) {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
                 String deletedUser = acc.getUser();
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), acc);
                 accountList.remove(acc);
-                System.out.printf(
-                        "Successfully removed the service account associated with the phone number %s%n", phoneNum);
                 // Special case, the User the account was associated with is not associated with any other Accounts.
                 // If that's the case, the User must also be deleted (MR 1.9.10)
                 for (Account accUserCheck : accountList) {
                     if (accUserCheck.getUser().equals(deletedUser)) {
-                        return true;
+                        return;
                     }
                 }
-                // TODO: Notify the UserManagement system to delete the User.
-                System.out.println(String.format(
-                        "Deleted the user %s as they were not associated with another service account.",
-                        deletedUser));
-                return true;
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SPECIAL.getDesc(), acc.getUser());
+                return;
             }
         }
-        return false;
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.FAILURE.getDesc(), new Account(null, phoneNum, null));
     }
 
     /**
@@ -114,40 +112,127 @@ public class AccountManagement {
      *
      * @param phoneNum The phone number of the service account that is being updated.
      * @param bundle   The new bundle name identifier that is being associated with the service account.
-     * @return True if the service account was updated successfully, false otherwise.
      */
-    public boolean updateAccountBundle(String phoneNum, String bundle) {
+    public void updateAccountBundle(String phoneNum, String bundle) {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
-                // Found the service account.
-                System.out.printf(
-                        "Successfully updated the bundle of the service account with the phone number %s%n", phoneNum);
-                System.out.println(String.format("The new bundle is now %s", bundle));
+                // Found the service account. Display state prior to update and after update.
+                System.out.println("Generating report prior to account update:");
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATING, Events.SUCCESS.getDesc(), acc);
                 acc.setBundle(bundle);
-                return true;
+                System.out.println("\nGenerating report after account update:");
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATED, Events.SUCCESS.getDesc(), acc);
             }
         }
         // No service account exists with the passed phone number.
-        System.out.printf(
-                "Failed to find a service account with the phone number %s (Bundle was not updated)%n", phoneNum);
-        return false;
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATED, Events.FAILURE.getDesc(), new Account(null, phoneNum, null));
     }
 
     /**
-     * Gets the service account associated with a phone number.
+     * Get the service account associated with a phone number.
      *
-     * @param phoneNum The phone number used to search for the Account.
-     * @return The Account associated with the phone number if found, null if no service account is found.
+     * @param phoneNum The phone number used to search for the service account.
      */
-    public Account getAccount(String phoneNum) {
+    public void getAccount(String phoneNum) {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
-                System.out.println(acc);
-                return acc;
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc, Events.SUCCESS.getDesc());
+                return;
             }
         }
-        System.out.println("Failed to find an existing service account with the provided phone number.");
-        return null;
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, new Account(null, phoneNum, null), Events.FAILURE.getDesc());
     }
 
+    /**
+     * Get the service accounts associated with a username.
+     *
+     * @param username The username used to search for the service accounts.
+     */
+    public void findAccounts(String username) {
+        for (Account acc : accountList) {
+            if (acc.getPhoneNum().equals(username)) {
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc, Events.ACCOUNT.getDesc());
+            }
+        }
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, new Account(username, null, null), Events.FAILURE.getDesc());
+    }
+
+    /**
+     * Handle the various event from ConcreteReportingService. Any unknown
+     * events are ignored.
+     *
+     * @param evt The event that was received.
+     */
+    @Override
+    public void propertyChange(PropertyChangeEvent evt) {
+        Account acc = (Account) evt.getNewValue();
+        switch (evt.getPropertyName()) {
+            case PRINT_ACCOUNT_ADDED:
+                if (evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+                    System.out.printf("Failed to add a service account for the phone number %s (Used in another service account)%n", acc.getPhoneNum());
+                } else {
+                    System.out.printf("Successfully created a service account for the phone number %s%n", acc.getPhoneNum());
+                    printAccountDetails(acc);
+                }
+                break;
+            case PRINT_ACCOUNT_DELETED:
+                if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
+                    System.out.printf("Successfully removed the service account associated with the phone number %s%n", acc.getPhoneNum());
+                    System.out.println("Deleted account details:");
+                    printAccountDetails(acc);
+                } else {
+                    System.out.printf("No service account with the phone number %s was found%n", acc.getPhoneNum());
+                }
+                break;
+            case PRINT_ACCOUNT_DETAILS:
+                if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
+                    printAccountDetails(acc);
+                } else {
+                    if (acc.getPhoneNum() != null) {
+                        System.out.printf("No service account with the phone number %s was found%n", acc.getPhoneNum());
+                    } else {
+                        System.out.printf("No service account with the username %s was found%n", acc.getUser());
+                    }
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * Generate a report for the given Account.
+     * The AccountManagement class delegates most of the report to the
+     * UserManagement and BundleManagement classes, as it is unaware of
+     * what a User or Bundle is.
+     *
+     * @param acc The Account to be printed.
+     */
+    private void printAccountDetails(Account acc) {
+        System.out.println("\n-----ACCOUNT REPORT-----");
+        System.out.printf("Phone Number: %s%n", acc.getPhoneNum());
+        // Print the user details for the report.
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getUser(), Events.USER.getDesc());
+        // Print the bundle details for the report.
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getBundle(), Events.BUNDLE.getDesc());
+    }
+
+
+    /**
+     * Adds listeners to this class.
+     *
+     * @param pcl a property change listener
+     */
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
+    }
+
+    /**
+     * Removes listeners to this class.
+     *
+     * @param pcl a property change listener
+     */
+    public void removePropertyChangeListener(PropertyChangeListener pcl) {
+        support.removePropertyChangeListener(pcl);
+    }
 }

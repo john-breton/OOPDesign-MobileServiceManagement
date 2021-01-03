@@ -52,19 +52,4 @@ public class Account {
         this.phoneNum = phoneNum;
         this.bundle = bundle;
     }
-
-    /**
-     * Return a formatted String displaying the Account information.
-     * TODO Send out signals so the other services print out information about the user based on the
-     *      username and the bundle information based on the bundle name. Essentially, this will need
-     *      to be completely replaced once the Observer Pattern gets implemented.
-     *
-     * @return A formatted String that displays the User, phone number, and Bundle info for the service account.
-     */
-    @Override
-    public String toString() {
-        String str = "\t\t------ACCOUNT INFO------\n" + String.format("User:\n\t\t%s\n", user) +
-                String.format("Phone Number: %s\n", phoneNum) + String.format("Bundle:\n\t\t%s", bundle);
-        return str;
-    }
 }
