@@ -1,6 +1,7 @@
 package bundlemanagement.preconf;
 
 public abstract class BundleShop {
+
 	/**
 	 * This method will create Bundle at it's related BundleShop.
 	 * 
@@ -16,7 +17,7 @@ public abstract class BundleShop {
 	 * @return Bundle
 	 */
 	public Bundle orderBundle(String type) {
-		Bundle bundle = createBundle();
+		PreconfBundle bundle = createBundle();
 		System.out.println("Making a " + bundle.getName() + "....");
 		bundle.prepare();
 		return bundle;

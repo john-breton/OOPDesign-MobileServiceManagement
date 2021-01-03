@@ -8,8 +8,8 @@ public class BronzeBundleShop extends BundleShop {
 		this.bronzebundlecomponentfactory = new BronzeBundleComponentFactory();
 	}
 
-	protected Bundle createBundle() {
-		Bundle bundle;
+	protected PreconfBundle createBundle() {
+		PreconfBundle bundle;
 		bundle = new PreconfBundle(this.bronzebundlecomponentfactory);
 		bundle.setName(BRONZE_BUNDLE);
 

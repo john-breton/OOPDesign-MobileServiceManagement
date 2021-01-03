@@ -8,8 +8,8 @@ public class SilverBundleShop extends BundleShop {
 		this.silverbundlecomponentfactory = new SilverBundleComponentFactory();
 	}
 
-	protected Bundle createBundle() {
-		Bundle bundle;
+	protected PreconfBundle createBundle() {
+		PreconfBundle bundle;
 		bundle = new PreconfBundle(this.silverbundlecomponentfactory);
 		bundle.setName(SILVER_BUNDLE);
 

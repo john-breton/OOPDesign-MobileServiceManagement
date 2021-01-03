@@ -10,11 +10,6 @@ public abstract class Bundle {
 	MessagingPlan messagingplan;
 	DataPlan dataplan;
 	MonthlyFees monthlyfees;
-
-	/* 
-	 * It will be implemented inside PreconfBundle.
-	 */
-	abstract void prepare();
 	
 	/**
 	 * It will set a name to bundle.

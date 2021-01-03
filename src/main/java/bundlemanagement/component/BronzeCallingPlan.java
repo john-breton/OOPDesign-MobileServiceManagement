@@ -22,14 +22,12 @@ public class BronzeCallingPlan extends BundleDecorator implements CallingPlan {
 	// This method use for PaC side.
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
 		return pacbundle.getDescription() + BRONZE_CALLING_DESCRIPTION + "\n";
 	}
 
 	// This method use for PaC side.
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
 		return pacbundle.cost() + BRONZE_CALLING_PLAN_FEE;
 	}
 
@@ -39,7 +37,6 @@ public class BronzeCallingPlan extends BundleDecorator implements CallingPlan {
 	}
 
 	public int getCallingMinutes() {
-		// TODO Auto-generated method stub
 		return BRONZE_CALLING_MINUTES;
 	}
 
