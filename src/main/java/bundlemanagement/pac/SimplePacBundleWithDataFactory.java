@@ -2,23 +2,29 @@ package bundlemanagement.pac;
 
 import bundlemanagement.component.*;
 import bundlemanagement.preconf.Bundle;
-import bundlemanagement.service.SimpleBundleFactory;
+import bundlemanagement.service.*;
 
 public class SimplePacBundleWithDataFactory implements SimpleBundleFactory {
 
-	public Bundle createBundle(String name) {
+	public Bundle createBundle(BundleOption option) {
 		PaCBundle pac = new BareBonePhoneService();
-		if (name.equals("PacWithPlatinumData")) {
+		switch (option) {
+		case PACWITHPLATINUMDATA:
 			pac = new PlatinumDataPlan(pac);
-		} else if (name.equals("PacWithGoldData")) {
+			break;
+		case PACWITHGOLDDATA:
 			pac = new GoldDataPlan(pac);
-		} else if (name.equals("PacWithSilverData")) {
+			break;
+		case PACWITHSILVERDATA:
 			pac = new SilverDataPlan(pac);
-		} else if (name.equals("PacWithBronzeData")) {
+			break;
+		case PACWITHBRONZEDATA:
 			pac = new BronzeDataPlan(pac);
-		} else {
+			break;
+		default:
 			System.out.println("Sorry, we don't have this data option.");
 		}
+
 		System.out.println("Your Plan:\n" + pac.getDescription() + "total amount $" + pac.cost() + "\n");
 		return pac;
 	}

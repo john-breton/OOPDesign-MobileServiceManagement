@@ -6,15 +6,15 @@ public class PreconfTestDrive {
 
 		// create specific bundle shop.
 		BundleShop goldStore = new GoldBundleShop();
-		Bundle bundle = goldStore.orderBundle("Gold");
+		Bundle bundle = goldStore.orderBundle();
 		System.out.println("we ordered a  " + bundle + "\n");
 
 		BundleShop platinumStore = new PlatinumBundleShop();
-		Bundle bundle1 = platinumStore.orderBundle("platinum");
+		Bundle bundle1 = platinumStore.orderBundle();
 		System.out.println("we ordered a  " + bundle1 + "\n");
 
 		BundleShop bronzeStore = new BronzeBundleShop();
-		Bundle bundle2 = bronzeStore.orderBundle("bronze");
+		Bundle bundle2 = bronzeStore.orderBundle();
 		System.out.println("we ordered a  " + bundle2 + "\n");
 
 	}

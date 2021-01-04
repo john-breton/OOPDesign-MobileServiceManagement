@@ -2,6 +2,7 @@ package bundlemanagement.preconf;
 
 public abstract class BundleShop {
 
+<<<<<<< HEAD
 	/**
 	 * This method will create Bundle at it's related BundleShop.
 	 * 
@@ -17,6 +18,9 @@ public abstract class BundleShop {
 	 * @return Bundle
 	 */
 	public Bundle orderBundle(String type) {
+=======
+	public Bundle orderBundle() {
+>>>>>>> 671558b (Change to switch statement)
 		PreconfBundle bundle = createBundle();
 		System.out.println("Making a " + bundle.getName() + "....");
 		bundle.prepare();
