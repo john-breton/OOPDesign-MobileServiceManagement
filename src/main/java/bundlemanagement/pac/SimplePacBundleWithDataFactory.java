@@ -9,16 +9,16 @@ public class SimplePacBundleWithDataFactory implements SimpleBundleFactory {
 	public Bundle createBundle(BundleOption option) {
 		PaCBundle pac = new BareBonePhoneService();
 		switch (option) {
-		case PACWITHPLATINUMDATA:
+		case PAC_WITH_PLATINUM_DATA:
 			pac = new PlatinumDataPlan(pac);
 			break;
-		case PACWITHGOLDDATA:
+		case PAC_WITH_GOLD_DATA:
 			pac = new GoldDataPlan(pac);
 			break;
-		case PACWITHSILVERDATA:
+		case PAC_WITH_SILVER_DATA:
 			pac = new SilverDataPlan(pac);
 			break;
-		case PACWITHBRONZEDATA:
+		case PAC_WITH_BRONZE_DATA:
 			pac = new BronzeDataPlan(pac);
 			break;
 		default:
