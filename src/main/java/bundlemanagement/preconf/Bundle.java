@@ -7,8 +7,6 @@ public abstract class Bundle {
 	DataPlan dataplan;
 	MonthlyFees monthlyfees;
 
-	// it will call ComponenetBundleFactory
-
 	public void setName(String Name) {
 		this.Name = Name;
 	}

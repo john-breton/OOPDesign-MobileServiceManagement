@@ -9,16 +9,16 @@ public class SimplePacBundleWithCallingFactory implements SimpleBundleFactory {
 		PaCBundle pac = new BareBonePhoneService();
 
 		switch (option) {
-			case PACWITHPLATINUMCALLING:
+			case PAC_WITH_PLATINUM_CALLING:
 				pac = new PlatinumCallingPlan(pac);
 				break;
-			case PACWITHGOLDCALLING:
+			case PAC_WITH_GOLD_CALLING:
 				pac = new GoldCallingPlan(pac);
 				break;
-			case PACWITHSILVERCALLING:
+			case PAC_WITH_SILVER_CALLING:
 				pac = new SilverCallingPlan(pac);
 				break;
-			case PACWITHBRONZECALLING:
+			case PAC_WITH_BRONZE_CALLING:
 				pac = new BronzeCallingPlan(pac);
 				break;
 			default:

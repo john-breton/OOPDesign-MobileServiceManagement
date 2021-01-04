@@ -3,7 +3,7 @@ package bundlemanagement.pac;
 import bundlemanagement.preconf.*;
 
 public abstract class PaCBundle extends Bundle{
-	String description = "Unknown pick and customized bundle";
+	String description = "Unknown plain and customized bundle";
 	int fee = 0;
 
 	public String getDescription() {
