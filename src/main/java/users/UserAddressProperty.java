@@ -11,9 +11,10 @@ import properties.SimplePropertyModifyBehavior;
  *
  */
 public class UserAddressProperty extends PropertyIf<String> {
+	private static final String PROPERTY_USER_ADDRESS = "User Address";
 	
 	public UserAddressProperty(String address) {
-		propertyName = "User Address";
+		propertyName = PROPERTY_USER_ADDRESS;
 		
 		propertyValue = address;
 		setPropertyModifyBehavior(new SimplePropertyModifyBehavior());

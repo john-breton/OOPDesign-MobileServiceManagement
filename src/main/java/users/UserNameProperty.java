@@ -11,9 +11,10 @@ import properties.PropertyIf;
  *
  */
 public class UserNameProperty extends PropertyIf<String> {
+	private static final String PROPERTY_USER_NAME = "User Name";
 	
 	public UserNameProperty(String name) {
-		propertyName = "User Name";
+		propertyName = PROPERTY_USER_NAME;
 		
 		propertyValue = name;
 		setPropertyModifyBehavior(new NoModifyPropertyModifyBehavior());
