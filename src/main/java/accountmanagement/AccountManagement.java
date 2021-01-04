@@ -63,6 +63,7 @@ public class AccountManagement implements PropertyChangeListener {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), acc);
+                return;
             }
         }
 
@@ -122,6 +123,7 @@ public class AccountManagement implements PropertyChangeListener {
                 acc.setBundle(bundle);
                 System.out.println("\nGenerating report after account update:");
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATED, Events.SUCCESS.getDesc(), acc);
+                return;
             }
         }
         // No service account exists with the passed phone number.
@@ -136,7 +138,7 @@ public class AccountManagement implements PropertyChangeListener {
     public void getAccount(String phoneNum) {
         for (Account acc : accountList) {
             if (acc.getPhoneNum().equals(phoneNum)) {
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc, Events.SUCCESS.getDesc());
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc, Events.ACCOUNT.getDesc());
                 return;
             }
         }
@@ -149,12 +151,16 @@ public class AccountManagement implements PropertyChangeListener {
      * @param username The username used to search for the service accounts.
      */
     public void findAccounts(String username) {
+        boolean found = false;
         for (Account acc : accountList) {
-            if (acc.getPhoneNum().equals(username)) {
+            if (acc.getUser().equals(username)) {
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc, Events.ACCOUNT.getDesc());
+                found = true;
             }
         }
-        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, new Account(username, null, null), Events.FAILURE.getDesc());
+        if (!found) {
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, new Account(username, null, null), Events.FAILURE.getDesc());
+        }
     }
 
     /**
@@ -165,6 +171,11 @@ public class AccountManagement implements PropertyChangeListener {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+        // We are casting an Account object, so if we receive an unknown signal, ignore it.
+        if (!evt.getPropertyName().equals(PRINT_ACCOUNT_ADDED) && !evt.getPropertyName().equals(PRINT_ACCOUNT_DELETED) && !evt.getPropertyName().equals(PRINT_ACCOUNT_DETAILS)) {
+            return;
+        }
+
         Account acc = (Account) evt.getNewValue();
         switch (evt.getPropertyName()) {
             case PRINT_ACCOUNT_ADDED:
@@ -215,6 +226,7 @@ public class AccountManagement implements PropertyChangeListener {
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getUser(), Events.USER.getDesc());
         // Print the bundle details for the report.
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getBundle(), Events.BUNDLE.getDesc());
+        System.out.println("");
     }
 
 
