@@ -76,7 +76,6 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
 	 * 
 	 * @param event a command from the ConcreteReportingService
 	 */
-	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		// example
 		if (event.getPropertyName().equals(PRINT_ACCOUNT_DETAILS)) {

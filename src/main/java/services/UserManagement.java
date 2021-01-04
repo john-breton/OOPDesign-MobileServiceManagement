@@ -1,10 +1,12 @@
 package services;
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import ReportingService.ReportToService;
 import properties.PropertyIdEnum;
 import users.UserObjectIf;
 import users.UserManagementFactory;
@@ -12,8 +14,9 @@ import users.UserManagementFactory;
 /**
  * A singleton class used to manage users
  */
-public class UserManagement implements ReportToService {
+public class UserManagement  implements PropertyChangeListener {
 
+	private PropertyChangeSupport support;
 	private static UserManagement uniqueInstance = new UserManagement();
 	private TreeMap<String, UserObjectIf> users;
 	private ManagementFactoryIf<UserObjectIf> userFactory;
@@ -22,6 +25,7 @@ public class UserManagement implements ReportToService {
 	private UserManagement() {
 		users = new TreeMap<String, UserObjectIf>();
 		userFactory = new UserManagementFactory();
+		support = new PropertyChangeSupport(this);
 	}
 
 	public static UserManagement getInstance() {
@@ -106,5 +110,28 @@ public class UserManagement implements ReportToService {
 		}
 		
 		System.out.println("");
+	}
+
+	public void propertyChange(PropertyChangeEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * Adds listeners to this class.
+	 * 
+	 * @param pcl a property change listener
+	 */
+	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		support.addPropertyChangeListener(pcl);
+	}
+
+	/**
+	 * Removes listeners to this class.
+	 * 
+	 * @param pcl a property change listener
+	 */
+	public void removePropertyChangeListener(PropertyChangeListener pcl) {
+		support.removePropertyChangeListener(pcl);
 	}
 }

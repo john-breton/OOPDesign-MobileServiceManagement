@@ -79,7 +79,6 @@ public class ConcreteReportingService implements PropertyChangeListener {
 	 * 
 	 * @param event an event from the management classes indicating the change
 	 */
-	@Override
 	public void propertyChange(PropertyChangeEvent event) {
 		// property should be in format of "ManagementType::DetailType"
 		// e.g. "Account::New"
