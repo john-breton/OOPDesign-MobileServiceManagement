@@ -9,16 +9,16 @@ public class SimplePacBundleWithMessagingFactory implements SimpleBundleFactory 
 	public Bundle createBundle(BundleOption option) {
 		PaCBundle pac = new BareBonePhoneService();
 		switch (option) {
-			case PACWITHPLATINUMMESSAGING:
+			case PAC_WITH_PLATINUM_MESSAGING:
 				pac = new PlatinumMessagingPlan(pac);
 				break;
-			case PACWITHGOLDMESSAGING:
+			case PAC_WITH_GOLD_MESSAGING:
 				pac = new GoldMessagingPlan(pac);
 				break;
-			case PACWITHSILVERMESSAGING:
+			case PAC_WITH_SILVER_MESSAGING:
 				pac = new SilverMessagingPlan(pac);
 				break;
-			case PACWITHBRONZEMESSAGING:
+			case PAC_WITH_BRONZE_MESSAGING:
 				pac = new BronzeMessagingPlan(pac);
 				break;
 			default:

@@ -4,7 +4,7 @@ import bundlemanagement.service.*;
 
 public class SimplePreconfBundleFactory implements SimpleBundleFactory {
 	public Bundle createBundle(BundleOption option) {
-		Bundle bundle = null;
+		Bundle bundle;
 		switch (option) {
 			case PLATINUM:
 				BundleShop platinumStore = new PlatinumBundleShop();
@@ -27,6 +27,7 @@ public class SimplePreconfBundleFactory implements SimpleBundleFactory {
 				System.out.println("we ordered a  " + bundle + "\n");
 				break;
 			default:
+				bundle = null;
 				System.out.println("Sorry, we don't have this calling option.");
 				break;
 		}
