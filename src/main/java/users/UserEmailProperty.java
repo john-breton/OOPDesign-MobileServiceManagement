@@ -1,7 +1,10 @@
 /**
  * 
  */
-package UserService;
+package users;
+
+import properties.EmailPropertyModifyBehavior;
+import properties.PropertyIf;
 
 /**
  * @author edavleu

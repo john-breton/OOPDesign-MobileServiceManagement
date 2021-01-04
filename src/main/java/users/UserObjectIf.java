@@ -1,9 +1,12 @@
 /**
  * 
  */
-package UserService;
+package users;
 
 import java.util.TreeMap;
+
+import properties.PropertyIdEnum;
+import properties.PropertyIf;
 
 /**
  * @author edavleu
