@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 public class BundleManagement {
-	private static BundleManagement uniqueInstance = new BundleManagement();
+	private static final BundleManagement uniqueInstance = new BundleManagement();
 
 	private BundleManagement() {
 	}
@@ -13,39 +13,39 @@ public class BundleManagement {
 		return uniqueInstance;
 	}
 
-	public Bundle addPreconfBundle(String name) {
+	public Bundle addPreconfBundle(BundleOption option) {
 		Bundle bundle;
 		SimpleBundleFactory factory = new SimplePreconfBundleFactory();
-		bundle = factory.createBundle(name);
+		bundle = factory.createBundle(option);
 		return bundle;
 	}
 
-	public Bundle addPlainPacBundle(String name) {
+	public Bundle addPlainPacBundle(BundleOption option) {
 		PaCBundle bundle;
 		bundle = new BareBonePhoneService();
-		bundle.setName(name);
+		bundle.setName("Plain PaC Bundle");
 		System.out.println("Your Plan:\n" + bundle.getDescription() + "total amount $" + bundle.cost() + "\n");
 		return bundle;
 	}
 
-	public Bundle addPacBundleWithCallingOption(String name) {
+	public Bundle addPacBundleWithCallingOption(BundleOption option) {
 		Bundle bundle;
 		SimpleBundleFactory factory = new SimplePacBundleWithCallingFactory();
-		bundle = factory.createBundle(name);
+		bundle = factory.createBundle(option);
 		return bundle;
 	}
 
-	public Bundle addPacBundleWithMessagingOpiton(String name) {
+	public Bundle addPacBundleWithMessagingOpiton(BundleOption option) {
 		Bundle bundle;
 		SimpleBundleFactory factory = new SimplePacBundleWithMessagingFactory();
-		bundle = factory.createBundle(name);
+		bundle = factory.createBundle(option);
 		return bundle;
 	}
 
-	public Bundle addPacBundleWithDataOpiton(String name) {
+	public Bundle addPacBundleWithDataOpiton(BundleOption option) {
 		Bundle bundle;
 		SimpleBundleFactory factory = new SimplePacBundleWithDataFactory();
-		bundle = factory.createBundle(name);
+		bundle = factory.createBundle(option);
 		return bundle;
 	}
 

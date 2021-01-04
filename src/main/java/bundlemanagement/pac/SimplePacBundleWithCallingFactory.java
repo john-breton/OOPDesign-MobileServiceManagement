@@ -1,24 +1,32 @@
 package bundlemanagement.pac;
+
 import bundlemanagement.preconf.*;
 import bundlemanagement.component.*;
-
-import bundlemanagement.service.SimpleBundleFactory;
+import bundlemanagement.service.*;
 
 public class SimplePacBundleWithCallingFactory implements SimpleBundleFactory {
-	public Bundle createBundle(String name) {
+	public Bundle createBundle(BundleOption option) {
 		PaCBundle pac = new BareBonePhoneService();
-		if (name.equals("PacWithPlatinumCalling")) {
-			pac = new PlatinumCallingPlan(pac);
-		} else if (name.equals("PacWithGoldCalling")) {
-			pac = new GoldCallingPlan(pac);
-		} else if (name.equals("PacWithSilverCalling")) {
-			pac = new SilverCallingPlan(pac);
-		} else if (name.equals("PacWithBronzeCalling")) {
-			pac = new BronzeCallingPlan(pac);
-		} else {
-			System.out.println("Sorry, we don't have this calling option.");
+
+		switch (option) {
+			case PACWITHPLATINUMCALLING:
+				pac = new PlatinumCallingPlan(pac);
+				break;
+			case PACWITHGOLDCALLING:
+				pac = new GoldCallingPlan(pac);
+				break;
+			case PACWITHSILVERCALLING:
+				pac = new SilverCallingPlan(pac);
+				break;
+			case PACWITHBRONZECALLING:
+				pac = new BronzeCallingPlan(pac);
+				break;
+			default:
+				System.out.println("Sorry, we don't have this calling option.");
+				break;
 		}
-		System.out.println("Your Plan:\n" + pac.getDescription() + "total amount $" + pac.cost() + "\n");
+
+		System.out.println("Your Plan:\n" + pac.getDescription() + "total amount $" + pac.cost() + "\n");	
 		return pac;
 	}
 }

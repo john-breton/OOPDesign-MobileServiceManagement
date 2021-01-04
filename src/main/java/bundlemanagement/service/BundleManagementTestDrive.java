@@ -6,11 +6,11 @@ public class BundleManagementTestDrive {
 		// TODO Auto-generated method stub
 		BundleManagement bundleManagement = BundleManagement.getBundleManagementInstance();
 
-		bundleManagement.addPreconfBundle("Gold");
-		bundleManagement.addPlainPacBundle("PlainPacBundle");
-		bundleManagement.addPacBundleWithCallingOption("PacWithPlatinumCalling");
-		bundleManagement.addPacBundleWithMessagingOpiton("PacWithGoldMessaging");
-		bundleManagement.addPacBundleWithDataOpiton("PacWithBronzeData");
+		bundleManagement.addPreconfBundle(BundleOption.GOLD);
+		bundleManagement.addPlainPacBundle(BundleOption.PLAINPACBUNDLE);
+		bundleManagement.addPacBundleWithCallingOption(BundleOption.PACWITHPLATINUMCALLING);
+		bundleManagement.addPacBundleWithMessagingOpiton(BundleOption.PACWITHSILVERMESSAGING);
+		bundleManagement.addPacBundleWithDataOpiton(BundleOption.PACWITHBRONZEDATA);
 	}
 
 }
