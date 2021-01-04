@@ -1,7 +1,10 @@
 /**
  * 
  */
-package UserService;
+package users;
+
+import properties.NoModifyPropertyModifyBehavior;
+import properties.PropertyIf;
 
 /**
  * @author edavleu
