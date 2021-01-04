@@ -5,8 +5,8 @@ package mobileservicemanagementapplication;
 
 import java.util.TreeMap;
 
-import UserService.PropertyIdEnum;
-import UserService.UserManagement;
+import properties.PropertyIdEnum;
+import services.UserManagement;
 
 /**
  * @author edavleu

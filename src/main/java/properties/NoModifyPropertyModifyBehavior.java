@@ -1,7 +1,7 @@
 /**
  * 
  */
-package UserService;
+package properties;
 
 /**
  * @author edavleu

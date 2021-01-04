@@ -1,10 +1,13 @@
 /**
  * 
  */
-package UserService;
+package users;
 
 import java.util.Map;
 import java.util.TreeMap;
+
+import properties.PropertyIdEnum;
+import properties.PropertyIf;
 
 /**
  * @author edavleu
@@ -47,7 +50,8 @@ public class UserObject extends UserObjectIf {
 	@Override
 	public String getId() {
 		PropertyIf<String> name = propertyList.get(PropertyIdEnum.USER_NAME);
-		return name.propertyValue.toString();
+//		return name.propertyValue.toString();
+		return name.getValue();
 	}
 
 }
