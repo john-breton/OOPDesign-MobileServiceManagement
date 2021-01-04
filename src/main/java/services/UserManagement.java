@@ -10,6 +10,7 @@ import java.util.TreeMap;
 import properties.PropertyIdEnum;
 import users.UserObjectIf;
 import users.UserManagementFactory;
+import static reportingservice.PropertyNameStrings.*;
 
 /**
  * A singleton class used to manage users
@@ -112,8 +113,28 @@ public class UserManagement  implements PropertyChangeListener {
 		System.out.println("");
 	}
 
-	public void propertyChange(PropertyChangeEvent arg0) {
-		// TODO Auto-generated method stub
+	public void propertyChange(PropertyChangeEvent event) {
+		String currentProperty = event.getPropertyName();
+		Object currentObj = event.getNewValue();
+		
+		if(currentObj instanceof UserObjectIf) {
+			UserObjectIf currentUser = (UserObjectIf) currentObj;
+			switch (currentProperty) {
+			case PRINT_USER_ADDED:
+			break;
+			case PRINT_USER_UPDATING:
+			break;
+			case PRINT_USER_UPDATED:
+			break;
+			case PRINT_USER_DELETED:
+			break;
+			}
+		}
+		else 
+		{
+			//wrong object found, return
+			return;
+		}
 		
 	}
 	

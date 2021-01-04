@@ -27,5 +27,13 @@ public final class PropertyNameStrings {
 	public static final String PRINT_ACCOUNT_DETAILS = "printAccountDetails";
 	public static final String PRINT_USER_DETAILS = "printUserDetails";
 	public static final String PRINT_BUNDLE_DETAILS = "printBundleDetails";
+	
+	//User Service
+	public static final String PRINT_USER_ADDED = "printUserAdded";
+	public static final String PRINT_USER_UPDATING = "printUserUpdating";
+	public static final String PRINT_USER_UPDATED = "printUserUpdated";
+	public static final String PRINT_USER_DELETED = "printUserDeleted";
+
+	
 
 }
