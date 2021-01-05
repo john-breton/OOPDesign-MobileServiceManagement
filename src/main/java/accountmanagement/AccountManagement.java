@@ -172,7 +172,8 @@ public class AccountManagement implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // We are casting an Account object, so if we receive an unknown signal, ignore it.
-        if (!evt.getPropertyName().equals(PRINT_ACCOUNT_ADDED) && !evt.getPropertyName().equals(PRINT_ACCOUNT_DELETED) && !evt.getPropertyName().equals(PRINT_ACCOUNT_DETAILS)) {
+        Object temp = evt.getNewValue();
+        if (!(temp instanceof Account)) {
             return;
         }
 
