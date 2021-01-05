@@ -1,5 +1,7 @@
 package reportingservice;
 
+
+import java.util.TreeMap;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -59,6 +61,7 @@ public class ConcreteReportingService implements PropertyChangeListener {
 	 * @param pcl a property change listener
 	 */
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
+		System.out.println("[REPORT] Added property change listener");
 		support.addPropertyChangeListener(pcl);
 	}
 
@@ -68,6 +71,7 @@ public class ConcreteReportingService implements PropertyChangeListener {
 	 * @param pcl a property change listener
 	 */
 	public void removePropertyChangeListener(PropertyChangeListener pcl) {
+		System.out.println("[REPORT] Removed property change listener");
 		support.removePropertyChangeListener(pcl);
 	}
 
@@ -87,6 +91,8 @@ public class ConcreteReportingService implements PropertyChangeListener {
 		String detailType = property.substring(
 				property.indexOf(PROPERTY_CHANGE_SCOPE_DELIMITER) + PROPERTY_CHANGE_SCOPE_DELIMITER.length());
 
+		System.out.println("Reporting property change");
+		
 		if (managementType.equals(ACCOUNT)) {
 			switch (detailType) {
 			case NEW:
@@ -102,10 +108,17 @@ public class ConcreteReportingService implements PropertyChangeListener {
 		if (managementType.equals(USER)) {
 			switch (detailType) {
 			case NEW:
+				System.out.println("New user added!");
+				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+				break;
 			case UPDATING:
+				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+				break;
 			case UPDATED:
+				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+				break;
 			case DELETE:
-				support.firePropertyChange(PRINT_USER_DETAILS, false, true);
+				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
 				break;
 			default:
 				break;

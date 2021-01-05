@@ -28,4 +28,18 @@ public final class PropertyNameStrings {
 	public static final String PRINT_USER_DETAILS = "printUserDetails";
 	public static final String PRINT_BUNDLE_DETAILS = "printBundleDetails";
 
+	public static final String PRINT_USER_LIST = "printUserList";
+	
+	public static final String PRINT_USER_ADDED = "printUserAdded";
+	public static final String PRINT_USER_DELETED = "printUserDeleted";
+	public static final String PRINT_USER_UPDATING = "printUserUpdating";
+	public static final String PRINT_USER_UPDATED = "printUserUpdateed";
+	
+	public static final String ADD_USER = "addUser";
+	public static final String ADD_MULTIPLE_USERS = "addMultipleUsers";
+	public static final String DELETE_USER = "deleteUser";
+	public static final String DELETE_MULTIPLE_USERS = "deleteMultipleUsers";
+	public static final String UPDATE_USER = "updateUser";
+	
+
 }
