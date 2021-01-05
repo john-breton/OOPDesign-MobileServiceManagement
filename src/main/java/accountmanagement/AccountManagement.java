@@ -66,9 +66,8 @@ public class AccountManagement implements PropertyChangeListener {
 
         // A phoneNum can only be associated with a single Account.
         Set set = accountList.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry acc = (Map.Entry) iter.next();
+        for (Object o : set) {
+            Map.Entry acc = (Map.Entry) o;
             if (acc.getKey().equals(phoneNum)) {
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), acc.getKey());
                 return;
@@ -98,9 +97,8 @@ public class AccountManagement implements PropertyChangeListener {
      */
     public void removeAccount(String phoneNum) {
         Set set = accountList.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry acc = (Map.Entry) iter.next();
+        for (Object value : set) {
+            Map.Entry acc = (Map.Entry) value;
             if (acc.getKey().equals(phoneNum)) {
                 String deletedUser = ((Account) acc.getValue()).getUser();
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), phoneNum);
@@ -108,9 +106,8 @@ public class AccountManagement implements PropertyChangeListener {
                 // Special case, the User the account was associated with is not associated with any other Accounts.
                 // If that's the case, the User must also be deleted (MR 1.9.10)
                 Set setCheck = accountList.entrySet();
-                Iterator iterCheck = setCheck.iterator();
-                while (iterCheck.hasNext()) {
-                    Map.Entry accCheck = (Map.Entry) iterCheck.next();
+                for (Object o : setCheck) {
+                    Map.Entry accCheck = (Map.Entry) o;
                     if (((Account) acc.getValue()).getUser().equals(deletedUser)) {
                         return;
                     }
@@ -130,9 +127,8 @@ public class AccountManagement implements PropertyChangeListener {
      */
     public void updateAccountBundle(String phoneNum, String bundle) {
         Set set = accountList.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry acc = (Map.Entry) iter.next();
+        for (Object o : set) {
+            Map.Entry acc = (Map.Entry) o;
             if (acc.getKey().equals(phoneNum)) {
                 // Found the service account. Display state prior to update and after update.
                 System.out.println("Generating report prior to account update:");
@@ -154,9 +150,8 @@ public class AccountManagement implements PropertyChangeListener {
      */
     public void getAccount(String phoneNum) {
         Set set = accountList.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry acc = (Map.Entry) iter.next();
+        for (Object o : set) {
+            Map.Entry acc = (Map.Entry) o;
             if (acc.getKey().equals(phoneNum)) {
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
                 return;
@@ -173,10 +168,9 @@ public class AccountManagement implements PropertyChangeListener {
     public void findAccounts(String username) {
         boolean found = false;
         Set set = accountList.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry acc = (Map.Entry) iter.next();
-            if (((Account)acc.getValue()).getUser().equals(username)) {
+        for (Object o : set) {
+            Map.Entry acc = (Map.Entry) o;
+            if (((Account) acc.getValue()).getUser().equals(username)) {
                 support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
                 found = true;
             }
@@ -200,21 +194,21 @@ public class AccountManagement implements PropertyChangeListener {
                     System.out.printf("Failed to add a service account for the phone number %s (Used in another service account)%n", evt.getNewValue());
                 } else {
                     System.out.printf("Successfully created a service account for the phone number %s%n", evt.getNewValue());
-                    printAccountDetails(getAccountDetails((String) evt.getNewValue()));
+                    printAccountDetails(Objects.requireNonNull(getAccountDetails((String) evt.getNewValue())));
                 }
                 break;
             case PRINT_ACCOUNT_DELETED:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
                     System.out.printf("Successfully removed the service account associated with the phone number %s%n", evt.getNewValue());
                     System.out.println("Deleted account details:");
-                    printAccountDetails(getAccountDetails((String) evt.getNewValue()));
+                    printAccountDetails(Objects.requireNonNull(getAccountDetails((String) evt.getNewValue())));
                 } else {
                     System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                 }
                 break;
             case PRINT_ACCOUNT_DETAILS:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
-                    printAccountDetails(getAccountDetails((String) evt.getNewValue()));
+                    printAccountDetails(Objects.requireNonNull(getAccountDetails((String) evt.getNewValue())));
                 } else {
                     if (!validatePhoneNum((String) evt.getNewValue())) {
                         System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
@@ -255,9 +249,8 @@ public class AccountManagement implements PropertyChangeListener {
      */
     private Account getAccountDetails(String phoneNum) {
         Set set = accountList.entrySet();
-        Iterator iter = set.iterator();
-        while (iter.hasNext()) {
-            Map.Entry acc = (Map.Entry) iter.next();
+        for (Object o : set) {
+            Map.Entry acc = (Map.Entry) o;
             if (acc.getKey().equals(phoneNum)) {
                 return (Account) acc.getValue();
             }
