@@ -108,7 +108,7 @@ public class AccountManagement implements PropertyChangeListener {
                 Set setCheck = accountList.entrySet();
                 for (Object o : setCheck) {
                     Map.Entry accCheck = (Map.Entry) o;
-                    if (((Account) acc.getValue()).getUser().equals(deletedUser)) {
+                    if (((Account) accCheck.getValue()).getUser().equals(deletedUser)) {
                         return;
                     }
                 }
