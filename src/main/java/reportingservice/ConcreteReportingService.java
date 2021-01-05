@@ -103,11 +103,11 @@ public class ConcreteReportingService implements PropertyChangeListener {
                     }
                     break;
                 case DISPLAY:
-                    if (event.getNewValue().equals(Events.USER.getDesc())) {
+                    if (event.getNewValue().equals(USER)) {
                         support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
-                    } else if (event.getNewValue().equals(Events.BUNDLE.getDesc())) {
+                    } else if (event.getNewValue().equals(BUNDLE)) {
                         support.firePropertyChange(PRINT_BUNDLE_DETAILS, event.getOldValue(), event.getNewValue());
-                    } else if (event.getNewValue().equals(Events.ACCOUNT.getDesc())) {
+                    } else if (event.getNewValue().equals(ACCOUNT)) {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.SUCCESS.getDesc(), event.getOldValue());
                     } else {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.FAILURE.getDesc(), event.getOldValue());

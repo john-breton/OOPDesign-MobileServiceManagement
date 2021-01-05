@@ -12,34 +12,31 @@ public final class PropertyNameStrings {
     // Various Property Change Strings/Notifications
     public static final String PROPERTY_CHANGE_SCOPE_DELIMITER = "::";
 
-    public static final String ACCOUNT = "Account";
-    public static final String USER = "User";
-    public static final String BUNDLE = "Bundle";
+    public static final String ACCOUNT = "ACCOUNT";
+    public static final String USER = "USER";
+    public static final String BUNDLE = "BUNDLE";
 
-    public static final String NEW = "New";
-    public static final String UPDATING = "Updating";
-    public static final String UPDATED = "Updated";
-    public static final String DELETE = "Delete";
-    public static final String DISPLAY = "Display";
+    public static final String NEW = "NEW";
+    public static final String UPDATING = "UPDATING";
+    public static final String UPDATED = "UPDATED";
+    public static final String DELETE = "DELETE";
+    public static final String DISPLAY = "DISPLAY";
 
     // Reporting Service Commands
-    public static final String PRINT_ACCOUNT_DETAILS = "printAccountDetails";
-    public static final String PRINT_ACCOUNT_ADDED = "printAccountAdded";
-    public static final String PRINT_ACCOUNT_DELETED = "printAccountDeleted";
-    public static final String PRINT_USER_DETAILS = "printUserDetails";
-    public static final String DELETE_USER = "deleteUser";
-    public static final String PRINT_BUNDLE_DETAILS = "printBundleDetails";
+    public static final String PRINT_ACCOUNT_DETAILS = "PRINT_ACCOUNT_DETAILS";
+    public static final String PRINT_ACCOUNT_ADDED = "PRINT_ACCOUNT_ADDED";
+    public static final String PRINT_ACCOUNT_DELETED = "PRINT_ACCOUNT_DELETED";
+    public static final String PRINT_USER_DETAILS = "PRINT_USER_DETAILS";
+    public static final String DELETE_USER = "DELETE_USER";
+    public static final String PRINT_BUNDLE_DETAILS = "PRINT_BUNDLE_DETAILS";
 
     /**
      * Enum used to simplify event passing.
      */
     public enum Events {
-        SUCCESS("success"),
-        FAILURE("failure"),
-        SPECIAL("special"),
-        USER("user"),
-        BUNDLE("bundle"),
-        ACCOUNT("account");
+        SUCCESS("SUCCESS"),
+        FAILURE("FAILURE"),
+        SPECIAL("SPECIAL");
 
         private String desc;
 
