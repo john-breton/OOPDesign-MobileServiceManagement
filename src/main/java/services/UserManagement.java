@@ -106,26 +106,58 @@ public class UserManagement  implements PropertyChangeListener {
 	}
 	
 	public void printAllUsers() {
+		System.out.println("Printing All Users");
+		System.out.println("-------------------------------------------------------------------------------");
+
 		for (Map.Entry<String, UserObjectIf> user : users.entrySet()) {
 			System.out.println(user.toString());
 		}
 		
-		System.out.println("");
+		System.out.println("-------------------------------------------------------------------------------");
 	}
 
 	public void propertyChange(PropertyChangeEvent event) {
-		String currentProperty = event.getPropertyName();
-		Object currentObj = event.getNewValue();
+		String currentProperty 	= event.getPropertyName();
+		Object oldObj 	  		= event.getOldValue();
+		Object currentObj 		= event.getNewValue();
 		
 		if(currentObj instanceof UserObjectIf) {
+			UserObjectIf oldUser = null;
+			
+			if (oldObj instanceof UserObjectIf)
+				oldUser = (UserObjectIf) oldObj;
+				
 			UserObjectIf currentUser = (UserObjectIf) currentObj;
 			switch (currentProperty) {
 			case PRINT_USER_ADDED:
+				System.out.println("The User "+ currentUser.getId() + " Added!");
+				printAllUsers();
 			break;
+			
 			case PRINT_USER_UPDATING:
+				System.out.println("Trying to update User "+ currentUser.getId() + " ");
+				
+				if (oldUser != null) {
+					System.out.println("Updating User From: ");
+					oldUser.toString();
+					System.out.println("To:  ");
+				}
+				currentUser.toString();
 			break;
+			
 			case PRINT_USER_UPDATED:
+				System.out.println("User "+ currentUser.getId() + " Updated");
+				
+				if (oldUser != null) {
+					System.out.println("User updated From: ");
+					oldUser.toString();
+					System.out.println("To:  ");
+				}
+				currentUser.toString();
+				
+				printAllUsers();
 			break;
+			
 			case PRINT_USER_DELETED:
 			break;
 			}
