@@ -22,12 +22,16 @@ public final class PropertyNameStrings {
 	public static final String UPDATING = "Updating";
 	public static final String UPDATED = "Updated";
 	public static final String DELETE = "Delete";
+	public static final String LIST = "List";
+
 	
 	// Reporting Service Commands
 	public static final String PRINT_ACCOUNT_DETAILS = "printAccountDetails";
 	public static final String PRINT_USER_DETAILS = "printUserDetails";
 	public static final String PRINT_BUNDLE_DETAILS = "printBundleDetails";
 
+	
+	//User Service
 	public static final String PRINT_USER_LIST = "printUserList";
 	
 	public static final String PRINT_USER_ADDED = "printUserAdded";
@@ -41,5 +45,25 @@ public final class PropertyNameStrings {
 	public static final String DELETE_MULTIPLE_USERS = "deleteMultipleUsers";
 	public static final String UPDATE_USER = "updateUser";
 	
+    /**
+     * Enum used to simplify event passing.
+     */
+    public enum Events {
+        SUCCESS("success"),
+        FAILURE("failure"),
+        SPECIAL("special"),
+        USER("user"),
+        BUNDLE("bundle"),
+        ACCOUNT("account");
 
+        private String desc;
+
+        Events(String desc) {
+            this.desc = desc;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+    }
 }

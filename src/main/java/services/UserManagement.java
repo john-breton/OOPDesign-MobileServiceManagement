@@ -11,6 +11,7 @@ import properties.PropertyIdEnum;
 import users.UserObjectIf;
 import users.UserManagementFactory;
 import reportingservice.PropertyNameStrings;
+import reportingservice.PropertyNameStrings.Events;
 
 /**
  * A singleton class used to manage users
@@ -61,8 +62,6 @@ public class UserManagement  implements PropertyChangeListener {
 		for (String userId : userIds) {
 			// remove the current user from the list
 			deleteUser(userId);
-
-			// TODO also need to remove all related information
 		}
 	}
 
@@ -148,7 +147,7 @@ public class UserManagement  implements PropertyChangeListener {
 		 * 		and the expected type of the value(s) for that/those key(s))
 		 */
 		if (!(evt.getNewValue() instanceof TreeMap<?,?>)) {
-			// TODO: print error?
+			System.out.println("Incorrect user type in UserManagement");
 			return;
 		}
 		TreeMap<String, Object> dict = (TreeMap<String, Object>) evt.getNewValue();
@@ -164,39 +163,119 @@ public class UserManagement  implements PropertyChangeListener {
 			 * 	* Key: "address",	Value type: String,	optional
 			 * 	* Key: "email",		Value type: String,	optional
 			 */
-			userId = (String) dict.get("userId");
-			if (userId == null) {
-				// TODO: print error
-				return;
+			
+			try {
+				userId = (String) dict.get("userId");
+				if (userId == null) {
+					throw new Exception("Error! The user surfoplane is required for add a new user");
+				}
+				
+				String address = (String) dict.get("address");
+				String email = (String) dict.get("email");
+				
+				addUser(userId);
+				TreeMap<PropertyIdEnum, String> newUser = new TreeMap<PropertyIdEnum, String>();
+				newUser.put(PropertyIdEnum.USER_NAME, userId);
+				newUser.put(PropertyIdEnum.USER_ADDRESS, address);
+				newUser.put(PropertyIdEnum.USER_EMAIL, email);
+				modifyUser(userId,newUser);
+				
+				//notify the reporting service
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.NEW, Events.SUCCESS.getDesc(), dict);
+			}catch (Exception ex) {
+				//failed to add new user. notify reporting service
+				System.out.println(ex.getMessage());
+
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.NEW, Events.FAILURE.getDesc(), dict);
 			}
 			
-			String address = (String) dict.get("address");
-			String email = (String) dict.get("email");
-			
-			addUser(userId);
-			
-			// TODO Address and Email
-			
-			TreeMap<String,Object> newDict = new TreeMap<String, Object>();
-			dict.put("userId", userId);
-			
-			System.out.println("User added");
-			
-			support.firePropertyChange(PropertyNameStrings.USER +
-					PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
-					PropertyNameStrings.NEW, new TreeMap<String, Object>(), newDict);
 			break;
 		case PropertyNameStrings.ADD_MULTIPLE_USERS:
 			/*
 			 * TreeMap:
 			 * 	* Key: "users",	Value type: ArrayList<TreeMap> (format as ADD_USER above),	required
 			 */
+			try {
+				Object tempObj = dict.get("users"); 
+				if (!(tempObj instanceof ArrayList<?>)) {
+					throw new Exception("Incorrect user type in UserManagement");
+				}
+				
+				ArrayList<?> tempList = (ArrayList<?>) evt.getNewValue();
+				
+				if (!(tempList.get(0) instanceof TreeMap)) {
+					throw new Exception("Incorrect user type in UserManagement");
+				}
+				ArrayList<TreeMap<String, Object>> userList = (ArrayList<TreeMap<String, Object>>) tempList;
+				
+				//loop through each user in the list
+				for(TreeMap<String, Object> currentUser:userList) {
+					String currentUserId = (String)currentUser.get("userId");
+					String currentAddress = (String)currentUser.get("address");
+					String currentEmail = (String)currentUser.get("email");
+					if (currentUserId == null) {
+						//quit if the user name is not exists
+						throw new Exception("Invalid UserID");
+					}
+					addUser(currentUserId);
+					TreeMap<PropertyIdEnum, String> currentNewUser = new TreeMap<PropertyIdEnum, String>();
+
+					currentNewUser.put(PropertyIdEnum.USER_NAME, currentUserId);
+					
+					if (currentAddress != null) {
+						//skip if its not exist
+						currentNewUser.put(PropertyIdEnum.USER_ADDRESS, currentAddress);
+					}
+					
+					if (currentEmail != null) {
+						//skip if its not exist
+						currentNewUser.put(PropertyIdEnum.USER_EMAIL, currentEmail);
+					}
+					modifyUser(currentUserId,currentNewUser);
+				}
+				//notify the reporting service
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.NEW, Events.SUCCESS.getDesc(), dict);
+			}catch(Exception ex) {
+				//failed to add users
+				System.out.println(ex.getMessage());
+
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.NEW, Events.FAILURE.getDesc(), dict);
+			}
+			
 			break;
 		case PropertyNameStrings.DELETE_USER:
 			/*
 			 * TreeMap:
 			 * 	* Key: "userId",	Value type: String,	required
 			 */
+			try {
+				userId = (String) dict.get("userId");
+				if (userId == null) {
+					throw new Exception("Error! The user surfoplane is required for removing a user");
+				}
+				
+				deleteUser(userId);
+				
+				//notify the reporting service
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.DELETE, Events.SUCCESS.getDesc(), dict);
+			}catch (Exception ex) {
+				System.out.println(ex.getMessage());
+				//failed to add new user. notify reporting service
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.DELETE, Events.FAILURE.getDesc(), dict);
+			}
+			
 			break;
 		case PropertyNameStrings.UPDATE_USER:
 			/*
@@ -205,14 +284,84 @@ public class UserManagement  implements PropertyChangeListener {
 			 * 	* Key: "address",	Value type: String,	optional
 			 * 	* Key: "email",		Value type: String,	optional
 			 */
+			try {
+				userId = (String) dict.get("userId");
+				if (userId == null) {
+					throw new Exception("Error! The user surfoplane is required for add a new user");
+				}
+				
+				String address = (String) dict.get("address");
+				String email = (String) dict.get("email");
+				
+				
+				//printing a message before the update
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.UPDATING, Events.SUCCESS.getDesc(),dict );
+				
+				//create the new user
+				TreeMap<PropertyIdEnum, String> newUser = new TreeMap<PropertyIdEnum, String>();
+				newUser.put(PropertyIdEnum.USER_NAME, userId);
+				newUser.put(PropertyIdEnum.USER_ADDRESS, address);
+				newUser.put(PropertyIdEnum.USER_EMAIL, email);
+				modifyUser(userId,newUser);
+				
+				//notify the reporting service
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.UPDATED, Events.SUCCESS.getDesc(), dict);
+			}catch (Exception ex) {
+				//failed to add new user. notify reporting service
+				System.out.println(ex.getMessage());
+
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.UPDATED, Events.FAILURE.getDesc(), dict);
+			}
+			
 			break;
 		case PropertyNameStrings.DELETE_MULTIPLE_USERS:
 			/*
 			 * TreeMap:
 			 * 	* Key: "userIds",	Value type: ArrayList<String>,	required
 			 */
-			userId = (String) dict.get("userId");
-			deleteUser(userId);
+			
+			try {
+				Object tempObj = dict.get("users"); 
+				if (!(tempObj instanceof ArrayList<?>)) {
+					throw new Exception("Incorrect user type in UserManagement");
+				}
+				
+				ArrayList<?> tempList = (ArrayList<?>) evt.getNewValue();
+				
+				if (!(tempList.get(0) instanceof TreeMap)) {
+					throw new Exception("Incorrect user type in UserManagement");
+				}
+				ArrayList<TreeMap<String, Object>> userList = (ArrayList<TreeMap<String, Object>>) tempList;
+				
+				//loop through each user in the list
+				for(TreeMap<String, Object> currentUser:userList) {
+					String currentUserId = (String)currentUser.get("userId");
+					if (currentUserId == null) {
+						//quit if the user name is not exists
+						throw new Exception("Invalid UserID");
+					}
+					deleteUser(currentUserId);
+				
+				}
+				//notify the reporting service
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.DELETE, Events.SUCCESS.getDesc(), dict);
+			}catch(Exception ex) {
+				//failed to add users
+				System.out.println(ex.getMessage());
+
+				support.firePropertyChange(PropertyNameStrings.USER +
+						PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER +
+						PropertyNameStrings.DELETE, Events.FAILURE.getDesc(), dict);
+			}
+
 			break;
 		case PropertyNameStrings.PRINT_USER_DETAILS:
 			/*
@@ -229,6 +378,80 @@ public class UserManagement  implements PropertyChangeListener {
 			 */
 			printAllUserNames();
 			break;
+		case PropertyNameStrings.PRINT_USER_ADDED:
+			/*
+			 * TreeMap:
+			 * 	* <empty> - no parameters required
+			 */
+			Object currentObj =  dict.get("users");
+			
+			//if its contains the list of users
+			if(currentObj != null && currentObj instanceof ArrayList<?>) {
+				ArrayList<?> currentUserList = (ArrayList<?>)currentObj;
+				if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+
+					System.out.println("Failed to add "+currentUserList.size()+" users.");
+				}else {
+					userId = (String) dict.get("userId");
+					System.out.println(currentUserList.size()+" Users Added!");
+				}
+			}else {
+				//if this is a single user
+				
+				//if the operation failed
+				if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+					userId = (String) dict.get("userId");
+					System.out.println("Failed to add "+ userId + ".");
+				}else {
+					userId = (String) dict.get("userId");
+					System.out.println("The User "+ userId + " Added!");
+				}
+
+			}
+
+			break;
+			
+		case PropertyNameStrings.PRINT_USER_UPDATING:
+			/*
+			 * TreeMap:
+			 * 	* Key: "userId",	Value type: String,	required
+			 */
+			userId = (String) dict.get("userId");
+			System.out.println("Trying to update User "+ userId + " ");
+			printUser(userId);
+		break;
+		
+		case PropertyNameStrings.PRINT_USER_UPDATED:
+			/*
+			 * TreeMap:
+			 * 	* Key: "userId",	Value type: String,	required
+			 */
+			if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+				userId = (String) dict.get("userId");
+				System.out.println("Failed to add user "+ userId + ".");
+			}else {
+				userId = (String) dict.get("userId");
+				System.out.println("User "+ userId + " Updated");
+				printUser(userId);
+			}
+			
+		break;
+		
+		case PropertyNameStrings.PRINT_USER_DELETED:
+			/*
+			 * TreeMap:
+			 * 	* Key: "userId",	Value type: String,	required
+			 */
+			if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+				userId = (String) dict.get("userId");
+				System.out.println("Failed to remove user "+ userId + ".");
+			}else {
+				userId = (String) dict.get("userId");
+				System.out.println("User "+ userId + " Removed");
+			}
+			
+		break;
+		
 		default:
 			break;
 		}

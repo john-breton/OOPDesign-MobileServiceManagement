@@ -108,17 +108,19 @@ public class ConcreteReportingService implements PropertyChangeListener {
 		if (managementType.equals(USER)) {
 			switch (detailType) {
 			case NEW:
-				System.out.println("New user added!");
-				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+                support.firePropertyChange(PRINT_USER_ADDED, event.getOldValue(), event.getNewValue());
 				break;
 			case UPDATING:
-				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+                support.firePropertyChange(PRINT_USER_UPDATING, event.getOldValue(), event.getNewValue());
 				break;
 			case UPDATED:
-				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+                support.firePropertyChange(PRINT_USER_UPDATED, event.getOldValue(), event.getNewValue());
 				break;
 			case DELETE:
-				support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
+                support.firePropertyChange(PRINT_USER_DELETED, event.getOldValue(), event.getNewValue());
+				break;
+			case LIST:
+                support.firePropertyChange(PRINT_USER_LIST, event.getOldValue(), event.getNewValue());
 				break;
 			default:
 				break;
