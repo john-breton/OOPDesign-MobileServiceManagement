@@ -323,7 +323,7 @@ public class UserManagement  implements PropertyChangeListener {
 		case PropertyNameStrings.DELETE_MULTIPLE_USERS:
 			/*
 			 * TreeMap:
-			 * 	* Key: "userIds",	Value type: ArrayList<String>,	required
+			 * 	* Key: "users",	Value type: ArrayList<String>,	required
 			 */
 			
 			try {
@@ -442,13 +442,33 @@ public class UserManagement  implements PropertyChangeListener {
 			 * TreeMap:
 			 * 	* Key: "userId",	Value type: String,	required
 			 */
-			if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
-				userId = (String) dict.get("userId");
-				System.out.println("Failed to remove user "+ userId + ".");
+			
+			Object currentRemovedObj =  dict.get("users");
+			
+			//if its contains the list of users
+			if(currentRemovedObj != null && currentRemovedObj instanceof ArrayList<?>) {
+				ArrayList<?> currentUserList = (ArrayList<?>)currentRemovedObj;
+				if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+
+					System.out.println("Failed to remove "+currentUserList.size()+" users.");
+				}else {
+					userId = (String) dict.get("userId");
+					System.out.println(currentUserList.size()+" Users Removed!");
+				}
 			}else {
-				userId = (String) dict.get("userId");
-				System.out.println("User "+ userId + " Removed");
+				//if this is a single user
+				
+				//if the operation failed
+				if(evt.getOldValue().equals(Events.FAILURE.getDesc())) {
+					userId = (String) dict.get("userId");
+					System.out.println("Failed to remove user "+ userId + ".");
+				}else {
+					userId = (String) dict.get("userId");
+					System.out.println("User "+ userId + " Removed");
+				}
+
 			}
+			
 			
 		break;
 		
