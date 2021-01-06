@@ -19,13 +19,13 @@ public class BronzeDataPlan extends BundleDecorator implements DataPlan {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.getDescription() + BRONZE_DATA_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.cost() + BRONZE_DATA_PLAN_FEE;
 	}
 
@@ -34,7 +34,7 @@ public class BronzeDataPlan extends BundleDecorator implements DataPlan {
 	}
 
 	public int getDataQuantity() {
-		// TODO Auto-generated method stub
+
 		return BRONZE_DATA_QUANTITY;
 	}
 

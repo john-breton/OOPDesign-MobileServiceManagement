@@ -3,12 +3,21 @@ package bundlemanagement.preconf;
 public class PreconfBundle extends Bundle {
 	BundleComponentFactory ComponentFactory;
 
+	/**
+	 * The constructor will set the value for related BundleComponentFactory.
+	 * 
+	 * @param ComponentFactory
+	 */
+
 	public PreconfBundle(BundleComponentFactory ComponentFactory) {
 		this.ComponentFactory = ComponentFactory;
 	}
 
+	/**
+	 * It will prepare prepare component for it's related bundle plan through
+	 * calling proper BundleComponentFactory
+	 */
 	void prepare() {
-		// the prepare method asks factories to create different component of the plan
 		System.out.println("Preparing " + Name);
 		callingplan = ComponentFactory.createCallingPlan();
 		messagingplan = ComponentFactory.createMessagingPlan();

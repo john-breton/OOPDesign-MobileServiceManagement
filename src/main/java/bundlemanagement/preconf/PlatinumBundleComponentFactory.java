@@ -4,23 +4,45 @@ import bundlemanagement.component.*;
 
 public class PlatinumBundleComponentFactory implements BundleComponentFactory {
 
+	/**
+	 * It will return PlatinumCallingPlan
+	 * 
+	 * @return CallingPlan
+	 */
 	public CallingPlan createCallingPlan() {
-		// TODO Auto-generated method stub
+
 		return new PlatinumCallingPlan();
 	}
 
+	/**
+	 * It will return PlatinumMessagingPlan
+	 * 
+	 * @return MessagingPlan
+	 */
+
 	public MessagingPlan createMessagingPlan() {
-		// TODO Auto-generated method stub
+
 		return new PlatinumMessagingPlan();
 	}
 
+	/**
+	 * It will return PlatinumDataPlan
+	 * 
+	 * @return DataPlan
+	 */
+
 	public DataPlan createDataPaln() {
-		// TODO Auto-generated method stub
+
 		return new PlatinumDataPlan();
 	}
 
+	/**
+	 * It will return PlatinumMonthlyFees
+	 * 
+	 * @return MonthlyFees
+	 */
 	public MonthlyFees createMonthlyFees() {
-		// TODO Auto-generated method stub
+
 		return new PlatinumMonthlyFees();
 	}
 

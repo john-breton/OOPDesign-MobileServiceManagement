@@ -3,7 +3,7 @@ package bundlemanagement.preconf;
 public class PreconfTestDrive {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+
 		// create specific bundle shop.
 		BundleShop goldStore = new GoldBundleShop();
 		Bundle bundle = goldStore.orderBundle("Gold");
