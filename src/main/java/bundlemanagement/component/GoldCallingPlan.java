@@ -8,7 +8,7 @@ public class GoldCallingPlan extends BundleDecorator implements CallingPlan {
 	PaCBundle pacbundle;
 	private static final int GOLD_CALLING_MINUTES = Integer.MAX_VALUE;
 	private static final int GOLD_CALLING_PLAN_FEE = 30;
-	private static final String GOLD_CALLING_DESCRIPTION = "Gold: Unlimited Canada wide calling";
+	private static final String GOLD_CALLING_DESCRIPTION = "Calling Plan: Gold - Unlimited Canada wide calling";
 
 	public GoldCallingPlan() {
 	}

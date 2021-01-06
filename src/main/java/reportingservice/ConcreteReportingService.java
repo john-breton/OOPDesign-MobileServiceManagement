@@ -106,7 +106,7 @@ public class ConcreteReportingService implements PropertyChangeListener {
                     if (event.getNewValue().equals(USER)) {
                         support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(), event.getNewValue());
                     } else if (event.getNewValue().equals(BUNDLE)) {
-                        support.firePropertyChange(PRINT_BUNDLE_DETAILS, event.getOldValue(), event.getNewValue());
+                        support.firePropertyChange(PRINT_BUNDLE_DETAILS, event.getOldValue(), Events.SINGLE.getDesc());
                     } else if (event.getNewValue().equals(ACCOUNT)) {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.SUCCESS.getDesc(), event.getOldValue());
                     } else {
@@ -127,8 +127,18 @@ public class ConcreteReportingService implements PropertyChangeListener {
                     break;
             }
         } else if (managementType.equals(BUNDLE)) {
-            if (detailType.equals(NEW)) {
-                support.firePropertyChange(PRINT_BUNDLE_DETAILS, false, true);
+            switch (detailType) {
+	            case NEW:
+	                support.firePropertyChange(PRINT_BUNDLE_ADDED, event.getOldValue(), event.getNewValue());
+	                break;
+	            case DISPLAY:
+	            	if(event.getNewValue().equals(Events.SINGLE.getDesc())) {
+	            		support.firePropertyChange(PRINT_BUNDLE_DETAILS, event.getOldValue(), event.getNewValue());
+	            	}
+	            	
+	            	break;
+	            default:
+	            	break;
             }
         }
     }

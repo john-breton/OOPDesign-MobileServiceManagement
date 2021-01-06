@@ -1,34 +1,41 @@
 package bundlemanagement.preconf;
-
 import bundlemanagement.service.*;
 
-public class SimplePreconfBundleFactory implements SimpleBundleFactory {
-	public Bundle createBundle(BundleOption option) {
-		Bundle bundle;
+
+
+/**
+ * This SimplePreconfBundleFactory creates Preconfigured Bundle
+ * @author enuyhza
+ *
+ */
+public class SimplePreconfBundleFactory{
+	/**
+	 * Create Preconfigured Bundle based on passing parameters
+	 * @param name    Bundle Name
+	 * @param option  Preconfigured Bundle Option
+	 * @return        The Preconfigured Bundle Object
+	 */
+	public PreconfBundle createBundle(String name, BundleOption option) {
+		PreconfBundle bundle;
 		switch (option) {
 			case PLATINUM:
 				BundleShop platinumStore = new PlatinumBundleShop();
-				bundle = platinumStore.orderBundle();
-				System.out.println("we ordered a  " + bundle + "\n");
+				bundle = platinumStore.orderBundle(name);
 				break;
 			case GOLD:
 				BundleShop goldStore = new GoldBundleShop();
-				bundle = goldStore.orderBundle();
-				System.out.println("we ordered a  " + bundle + "\n");
+				bundle = goldStore.orderBundle(name);
 				break;
 			case SILVER:
 				BundleShop silverStore = new SilverBundleShop();
-				bundle = silverStore.orderBundle();
-				System.out.println("we ordered a  " + bundle + "\n");
+				bundle = silverStore.orderBundle(name);
 				break;
 			case BRONZE:
 				BundleShop bronzeStore = new BronzeBundleShop();
-				bundle = bronzeStore.orderBundle();
-				System.out.println("we ordered a  " + bundle + "\n");
+				bundle = bronzeStore.orderBundle(name);
 				break;
 			default:
 				bundle = null;
-				System.out.println("Sorry, we don't have this calling option.");
 				break;
 		}
 		return bundle;

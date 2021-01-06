@@ -8,7 +8,7 @@ public class GoldMessagingPlan extends BundleDecorator implements MessagingPlan 
 	PaCBundle pacbundle;
 	private static final int GOLD_NUMBER_OF_MESSAGES = 10000;
 	private static final int GOLD_MESSAGING_PLAN_FEE = 35;
-	private static final String GOLD_MESSAGING_DESCRIPTION = "Gold: 10k Messages";
+	private static final String GOLD_MESSAGING_DESCRIPTION = "Messaging Plan: Gold - 10k Messages";
 
 	public GoldMessagingPlan() {
 	}

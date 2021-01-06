@@ -8,7 +8,7 @@ public class SilverMessagingPlan extends BundleDecorator implements MessagingPla
 	PaCBundle pacbundle;
 	private static final int SILVER_NUMBER_OF_MESSAGES = 5000;
 	private static final int SILVER_MESSAGING_PLAN_FEE = 25;
-	private static final String SILVER_MESSAGING_DESCRIPTION = "Silver: 5K Messages";
+	private static final String SILVER_MESSAGING_DESCRIPTION = "Messaging Plan: Silver - 5K Messages";
 
 	public SilverMessagingPlan() {
 	}

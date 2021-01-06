@@ -8,7 +8,7 @@ public class SilverCallingPlan extends BundleDecorator implements CallingPlan {
 	PaCBundle pacbundle;
 	private static final int SILVER_CALLING_MINUTES = 100;
 	private static final int SILVER_CALLING_PLAN_FEE = 20;
-	private static final String SILVER_CALLING_DESCRIPTION = "Silver: 100 min free Canada wide calling";
+	private static final String SILVER_CALLING_DESCRIPTION = "Calling Plan: Silver - 100 min free Canada wide calling";
 
 	public SilverCallingPlan() {
 	}

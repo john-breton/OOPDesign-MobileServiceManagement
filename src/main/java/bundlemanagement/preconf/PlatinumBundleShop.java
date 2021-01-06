@@ -1,12 +1,8 @@
 package bundlemanagement.preconf;
 
+import bundlemanagement.service.Bundle;
+
 public class PlatinumBundleShop extends BundleShop {
-
-	/**
-	 * @param PLATINUM_BUNDLE The name for platinum bundle.
-	 */
-	private static final String PLATINUM_BUNDLE = "Platinum Bundle";
-
 	/**
 	 * Create a variable type BundleComponentFactory. It will be later assigned at
 	 * constructor.
@@ -26,12 +22,10 @@ public class PlatinumBundleShop extends BundleShop {
 	 * 
 	 * @return Bundle it will return Bundle(Platinum)
 	 */
-	protected Bundle createBundle() {
-		Bundle bundle;
+	protected PreconfBundle createBundle() {
+		PreconfBundle bundle;
 
 		bundle = new PreconfBundle(this.platinumbundlecomponentfactory);
-		bundle.setName(PLATINUM_BUNDLE);
-
 		return bundle;
 
 	}

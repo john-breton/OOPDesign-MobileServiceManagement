@@ -2,13 +2,12 @@ package bundlemanagement.preconf;
 
 public abstract class BundleShop {
 
-<<<<<<< HEAD
 	/**
 	 * This method will create Bundle at it's related BundleShop.
 	 * 
 	 * @return Bundle
 	 */
-	protected abstract Bundle createBundle();
+	protected abstract PreconfBundle createBundle();
 
 	/**
 	 * This method will create Bundle at it's related BundleShop. This method will
@@ -17,12 +16,11 @@ public abstract class BundleShop {
 	 * @param type the type can be gold, platinum, bronze, and silver
 	 * @return Bundle
 	 */
-	public Bundle orderBundle(String type) {
-=======
-	public Bundle orderBundle() {
->>>>>>> 671558b (Change to switch statement)
+	public PreconfBundle orderBundle(String name) {
+
 		PreconfBundle bundle = createBundle();
-		System.out.println("Making a " + bundle.getName() + "....");
+		bundle.setName(name);
+		//System.out.println("Making a " + bundle.getName() + "....");
 		bundle.prepare();
 		return bundle;
 	}

@@ -8,7 +8,7 @@ public class BronzeCallingPlan extends BundleDecorator implements CallingPlan {
 	PaCBundle pacbundle;
 	private static final int BRONZE_CALLING_MINUTES = 30;
 	private static final int BRONZE_CALLING_PLAN_FEE = 15;
-	private static final String BRONZE_CALLING_DESCRIPTION = "Bronze: 30 min free Canada wide calling";
+	private static final String BRONZE_CALLING_DESCRIPTION = "Calling Plan: Bronze - 30 min free Canada wide calling";
 
 	// This constructor use for Preconfigured Bundle side.
 	public BronzeCallingPlan() {
