@@ -8,7 +8,7 @@ public class GoldDataPlan extends BundleDecorator implements DataPlan {
 	PaCBundle pacbundle;
 	private static final int GOLD_DATA_QUANTITY = 4;
 	private static final int GOLD_DATA_PLAN_FEE = 30;
-	private static final String GOLD_DATA_DESCRIPTION = "Gold: Data Included: 7 GB";
+	private static final String GOLD_DATA_DESCRIPTION = "Data Plan: Gold - Data Included: 7 GB";
 
 	public GoldDataPlan() {
 	}

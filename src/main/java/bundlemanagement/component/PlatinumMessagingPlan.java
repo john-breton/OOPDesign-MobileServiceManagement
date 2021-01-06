@@ -8,7 +8,7 @@ public class PlatinumMessagingPlan extends BundleDecorator implements MessagingP
 	PaCBundle pacbundle;
 	private static final int PLATINUM_NUMBER_OF_MESSAGES = Integer.MAX_VALUE;
 	private static final int PLATINUM_MESSAGING_PLAN_FEE = 45;
-	private static final String PLATINUM_MESSAGING_DESCRIPTION = "Platinum: Unlimited Messages";
+	private static final String PLATINUM_MESSAGING_DESCRIPTION = "Messaging Plan: Platinum - Unlimited Messages";
 
 	public PlatinumMessagingPlan() {
 	}

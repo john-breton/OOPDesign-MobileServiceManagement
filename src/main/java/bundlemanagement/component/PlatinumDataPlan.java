@@ -8,7 +8,7 @@ public class PlatinumDataPlan extends BundleDecorator implements DataPlan {
 	PaCBundle pacbundle;
 	private static final int PLATINUM_DATA_QUANTITY = 10;
 	private static final int PLATINUM_DATA_PLAN_FEE = 40;
-	private static final String PLATINUM_DATA_DESCRIPTION = "Platinum: Data Included: 10 GB";
+	private static final String PLATINUM_DATA_DESCRIPTION = "Data Plan: Platinum - Data Included: 10 GB";
 
 	public PlatinumDataPlan() {
 	}

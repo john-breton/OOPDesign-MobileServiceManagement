@@ -11,7 +11,7 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	 */
 	private static final int PLATINUM_CALLING_MINUTES = Integer.MAX_VALUE;
 	private static final int PLATINUM_CALLING_PLAN_FEE = 40;
-	private static final String PLATINUM_CALLING_DESCRIPTION = "Platinum: Unlimited US & Canada wide calling";
+	private static final String PLATINUM_CALLING_DESCRIPTION = "Calling Plan: Platinum - Unlimited US & Canada wide calling";
 
 	/**
 	 * constructor for preconf side.

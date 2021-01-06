@@ -8,7 +8,7 @@ public class BronzeMessagingPlan extends BundleDecorator implements MessagingPla
 	PaCBundle pacbundle;
 	private static final int BRONZE_NUMBER_OF_MESSAGES = 250;
 	private static final int BRONZE_NESSAGING_PLAN_FEE = 20;
-	private static final String BRONZE_MESSAGING_DESCRIPTION = "Bronze: 250 Messages";
+	private static final String BRONZE_MESSAGING_DESCRIPTION = "Messaging Plan: Bronze - 250 Messages";
 
 	public BronzeMessagingPlan() {
 	}

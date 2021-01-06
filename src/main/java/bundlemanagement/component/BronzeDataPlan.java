@@ -8,7 +8,7 @@ public class BronzeDataPlan extends BundleDecorator implements DataPlan {
 	PaCBundle pacbundle;
 	private static final int BRONZE_DATA_QUANTITY = 2;
 	private static final int BRONZE_DATA_PLAN_FEE = 20;
-	private static final String BRONZE_DATA_DESCRIPTION = "Bronze: Data Included: 2 GB";
+	private static final String BRONZE_DATA_DESCRIPTION = "Data Plan: Bronze - Data Included: 2 GB";
 
 	public BronzeDataPlan() {
 	}

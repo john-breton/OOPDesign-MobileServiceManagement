@@ -5,7 +5,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	private final PaCBundle pacbundle;
 	private static final int ZERO_CALLING_MINUTES = 0;
 	private static final int ZERO_CALLING_PLAN_FEE = 0;
-	private static final String ZERO_CALLING_DESCRIPTION = "Zero: Zero min";
+	private static final String ZERO_CALLING_DESCRIPTION = "Calling Plan: Zero - Zero min";
 
 	public ZeroCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

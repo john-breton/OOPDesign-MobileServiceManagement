@@ -8,7 +8,7 @@ public class SilverDataPlan extends BundleDecorator implements DataPlan {
 	PaCBundle pacbundle;
 	private static final int SILVER_DATA_QUANTITY = 2;
 	private static final int SILVER_DATA_PLAN_FEE = 25;
-	private static final String SILVER_DATA_DESCRIPTION = "Silver: Data Included: 4 GB";
+	private static final String SILVER_DATA_DESCRIPTION = "Data Plan: Silver - Data Included: 4 GB";
 
 	public SilverDataPlan() {
 	}
