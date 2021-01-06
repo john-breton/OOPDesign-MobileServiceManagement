@@ -1,6 +1,9 @@
 package bundlemanagement.pac;
 
 public abstract class PaCBundle {
+	/**
+	 * Assign initial value to PaC bundle.
+	 */
 	String description = "Unknown pick and customized bundle";
 	int fee = 0;
 

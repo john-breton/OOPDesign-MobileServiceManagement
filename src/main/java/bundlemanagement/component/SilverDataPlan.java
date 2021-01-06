@@ -19,13 +19,13 @@ public class SilverDataPlan extends BundleDecorator implements DataPlan {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.getDescription() + SILVER_DATA_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.cost() + SILVER_DATA_PLAN_FEE;
 	}
 
@@ -34,7 +34,7 @@ public class SilverDataPlan extends BundleDecorator implements DataPlan {
 	}
 
 	public int getDataQuantity() {
-		// TODO Auto-generated method stub
+
 		return SILVER_DATA_QUANTITY;
 	}
 

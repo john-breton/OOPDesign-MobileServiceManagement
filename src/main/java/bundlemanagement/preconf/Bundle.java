@@ -1,22 +1,42 @@
 package bundlemanagement.preconf;
 
 public abstract class Bundle {
+	
+	/**
+	 *	Below are components for preconfigured plan.
+	 */
 	String Name;
 	CallingPlan callingplan;
 	MessagingPlan messagingplan;
 	DataPlan dataplan;
 	MonthlyFees monthlyfees;
 
-	// it will call ComponenetBundleFactory
+	/* 
+	 * It will be implemented inside PreconfBundle.
+	 */
 	abstract void prepare();
+	
+	/**
+	 * It will set a name to bundle.
+	 * @param Name
+	 */
 
 	void setName(String Name) {
 		this.Name = Name;
 	}
+	
+	/**
+	 * 
+	 * @return It will return the name of the bundle.
+	 */
 
 	String getName() {
 		return Name;
 	}
+	
+	/*
+	 * It will print out all bundle information.
+	 */
 
 	public String toString() {
 		StringBuffer result = new StringBuffer();

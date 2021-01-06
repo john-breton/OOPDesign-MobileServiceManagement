@@ -13,18 +13,18 @@ public class ZeroDataPlan extends BundleDecorator {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.getDescription() + ZERO_DATA_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.cost() + ZERO_DATA_PLAN_FEE;
 	}
 
 	public int getDataQuantity() {
-		// TODO Auto-generated method stub
+
 		return ZERO_DATA_QUANTITY;
 	}
 

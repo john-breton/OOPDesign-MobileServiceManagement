@@ -13,18 +13,18 @@ public class ZeroMessagingPlan extends BundleDecorator {
 
 	@Override
 	public String getDescription() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.getDescription() + GOLD_MESSAGING_DESCRIPTION + "\n";
 	}
 
 	@Override
 	public int cost() {
-		// TODO Auto-generated method stub
+
 		return pacbundle.cost() + ZERO_MESSAGING_PLAN_FEE;
 	}
 
 	public int getDataQuantity() {
-		// TODO Auto-generated method stub
+
 		return ZERO_NUMBER_OF_MESSAGES;
 	}
 
