@@ -14,7 +14,9 @@ import users.UserObjectIf;
 import users.UserManagementFactory;
 
 /**
- * A singleton class used to manage users
+ * A singleton class used to manage user objects
+ * @author David,Chen
+ * @Version 1.0
  */
 public class UserManagement implements PropertyChangeListener {
 	
@@ -37,17 +39,28 @@ public class UserManagement implements PropertyChangeListener {
 	private TreeMap<String, UserObjectIf> users;
 	private ManagementFactoryIf<UserObjectIf> userFactory;
 
-	// private constructor to make this class singleton
+	/**
+	 * private constructor to make this class singleton
+	 * */ 
 	private UserManagement() {
 		users = new TreeMap<String, UserObjectIf>();
 		userFactory = new UserManagementFactory();
 		support = new PropertyChangeSupport(this);
 	}
-
+	
+	/**
+	 * getInstance method used to get the instance of the current singleton class
+	 * @return UserManagement This returns the singleton instance of UserManagement
+	 * */
 	public static UserManagement getInstance() {
 		return uniqueInstance;
 	}
-
+	
+	/**
+	 * Add a single user by name, it will set the attributes empty string by default
+	 * @param String name(Surfoplance)
+	 * @return nothing
+	 */
 	public void addUser(String name) {
 		if (name == null || name.isBlank()) {
 			support.firePropertyChange(
@@ -63,7 +76,56 @@ public class UserManagement implements PropertyChangeListener {
 				PropertyNameStrings.Events.SUCCESS.getDesc(),
 				name);
 	}
+	
+	/**
+	 * Overloaded Method
+	 * Add a single user by name and filling the parameters to the user object
+	 * @param String name(Surfoplance)
+	 * @param String address
+	 * @param String email address
+	 * @return nothing
+	 */
+	public void addUser(String name, String address, String email) {
+		addUser(name);
+		TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
+		if (address != null)
+			attr.put(PropertyIdEnum.USER_ADDRESS, address);
+		else
+			attr.put(PropertyIdEnum.USER_ADDRESS, "");
+		
+		if (email != null)
+			attr.put(PropertyIdEnum.USER_EMAIL, email);
+		else
+			attr.put(PropertyIdEnum.USER_EMAIL, "");
 
+		modifyUser(name, attr);
+	}
+	
+	/**
+	 * Add a list of users in to the system. 
+	 * the TreeMap has to use PropertyIdEnum as Key
+	 * 
+	 * @param ArrayList<TreeMap<PropertyIdEnum, String>> list of users
+	 * @return nothing
+	 */
+	public void addUsers(ArrayList<TreeMap<PropertyIdEnum, String>> users) {
+		for (TreeMap<PropertyIdEnum, String> currentUser:users) {
+			String currentName = currentUser.get(PropertyIdEnum.USER_NAME);
+			String address = currentUser.get(PropertyIdEnum.USER_ADDRESS);
+			String email = currentUser.get(PropertyIdEnum.USER_EMAIL);
+
+			addUser(currentName,address,email);
+		}
+	}
+	
+	/**
+	 * Modify the User Object by UserName 
+	 * the TreeMap has to use PropertyIdEnum as Key
+	 * 
+	 * @param String userName
+	 * @param TreeMap<PropertyIdEnum, String> userProperties
+	 * @return nothing
+	 */
 	public void modifyUser(String userName, TreeMap<PropertyIdEnum, String> userProperties) {
 		if (!users.containsKey(userName)) {
 			System.out.println("Cannot find user with username: " + userName);
@@ -87,6 +149,12 @@ public class UserManagement implements PropertyChangeListener {
 				userName);
 	}
 
+	/**
+	 * Remove the User Object by UserName 
+	 * 
+	 * @param String userName
+	 * @return nothing
+	 */
 	public void deleteUser(String userId) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
@@ -103,6 +171,12 @@ public class UserManagement implements PropertyChangeListener {
 				userId);
 	}
 
+	/**
+	 * Remove the list of User Objects by UserName 
+	 * 
+	 * @param ArrayList<String> UserNames
+	 * @return nothing
+	 */
 	public void deleteUsers(ArrayList<String> userIds) {
 		for (String userId : userIds) {
 			// remove the current user from the list
@@ -110,6 +184,12 @@ public class UserManagement implements PropertyChangeListener {
 		}
 	}
 
+	/**
+	 * Get the user by its username
+	 * 
+	 * @param String UserName
+	 * @return nothing
+	 */
 	public void getUser(String userId) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
@@ -124,11 +204,22 @@ public class UserManagement implements PropertyChangeListener {
 				PropertyNameStrings.Events.FAILURE.getDesc(),
 				userId);
 	}
-
+	
+	/**
+	 * Used to Config the Factory
+	 * 
+	 * @param ManagementFactoryIf<UserObjectIf> userFactory
+	 * @return nothing
+	 */
 	public void setManagementFactory(ManagementFactoryIf<UserObjectIf> userFactory) {
 		this.userFactory = userFactory;
 	}
 	
+	/**
+	 * printing all users
+	 * 
+	 * @return nothing
+	 */
 	private void printAllUserNames() {
 		/*
 		 * Even though the "users" TreeMap is indexed by the user's name, we explicitly
@@ -140,13 +231,24 @@ public class UserManagement implements PropertyChangeListener {
 			System.out.println(user.getValue().getUserName());
 		}
 	}
-
+	
+	/**
+	 * printing a single user
+	 * 
+	 * @return nothing
+	 */
 	private void printUser(String userId) {
 		UserObjectIf user = users.get(userId);
 
 		System.out.println(user.toString());
 	}
-
+	
+	/**
+	 * this method will be triggered once the event changed.
+	 * @param PropertyChangeEvent evt
+	 * @return nothing
+	 */
+	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
 		String propertyName = evt.getPropertyName();
 		
@@ -261,3 +363,5 @@ public class UserManagement implements PropertyChangeListener {
 		support.removePropertyChangeListener(pcl);
 	}
 }
+
+

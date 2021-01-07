@@ -17,6 +17,9 @@ public class EmailPropertyModifyBehavior extends PropertyModifyBehaviorIf {
 	public <T> T change(T val) {
 		System.out.println("-- Email Property Modify behavior called with " + val);
 		
+		if (val == null || val.toString().equals("")) {
+			return val;
+		}
 		// Validate that <val> is a valid email
 		Matcher m = VALID_EMAIL_REGEX.matcher(val.toString());
 		
