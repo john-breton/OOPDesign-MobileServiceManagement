@@ -36,7 +36,7 @@ import static reportingservice.PropertyNameStrings.*;
 
 public class ReportingService implements PropertyChangeListener {
 
-    private static final ReportingService uniqueInstance = new ReportingService();
+    private static final ReportingService UNIQUE_INSTANCE = new ReportingService();
     private PropertyChangeSupport support;
 
     /**
@@ -50,7 +50,7 @@ public class ReportingService implements PropertyChangeListener {
      * getInstance method to ensure this class is a singleton
      */
     public static ReportingService getInstance() {
-        return uniqueInstance;
+        return UNIQUE_INSTANCE;
     }
 
     /**
