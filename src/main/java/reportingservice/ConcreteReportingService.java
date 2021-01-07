@@ -102,7 +102,6 @@ public class ConcreteReportingService implements PropertyChangeListener {
                     if (event.getOldValue().toString().equals(Events.SPECIAL.getDesc())) {
                         support.firePropertyChange(DELETE_USER, event.getOldValue(), event.getNewValue());
                     } else {
-                    	System.out.println("DAVID: NOT calling delete user");
                         support.firePropertyChange(PRINT_ACCOUNT_DELETED, event.getOldValue(), event.getNewValue());
                     }
                     break;
@@ -115,6 +114,12 @@ public class ConcreteReportingService implements PropertyChangeListener {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.SUCCESS.getDesc(), event.getOldValue());
                     } else {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.FAILURE.getDesc(), event.getOldValue());
+                    }
+                case FIND:
+                    if (event.getOldValue().equals(Events.SUCCESS.getDesc())) {
+                        support.firePropertyChange(GET_ACCOUNT, event.getOldValue(), event.getNewValue());
+                    } else if (event.getOldValue().equals(Events.SPECIAL.getDesc())) {
+                        support.firePropertyChange(FIND_ACCOUNTS, event.getOldValue(), event.getNewValue());
                     }
                 default:
                     break;

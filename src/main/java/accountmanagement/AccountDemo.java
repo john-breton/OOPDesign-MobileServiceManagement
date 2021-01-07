@@ -2,11 +2,13 @@ package accountmanagement;
 
 import reportingservice.ConcreteReportingService;
 
+import java.beans.PropertyChangeSupport;
+
 /**
  * Class used to demonstrate the work done on the AccountManagement class.
  * Will be removed when application is ready for submission.
  */
-public class AccountDemo {
+public class AccountDemo  {
 
     public static void main(String[] args) {
         ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
