@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+import reportingservice.PropertyNameStrings.Events;
+
 import static reportingservice.PropertyNameStrings.*;
 
 /**
@@ -85,7 +87,7 @@ public class ConcreteReportingService implements PropertyChangeListener {
         String managementType = property.substring(0, property.indexOf(PROPERTY_CHANGE_SCOPE_DELIMITER));
         String detailType = property.substring(
                 property.indexOf(PROPERTY_CHANGE_SCOPE_DELIMITER) + PROPERTY_CHANGE_SCOPE_DELIMITER.length());
-
+        
         if (managementType.equals(ACCOUNT)) {
             switch (detailType) {
                 case NEW:
@@ -96,9 +98,11 @@ public class ConcreteReportingService implements PropertyChangeListener {
                     support.firePropertyChange(PRINT_ACCOUNT_DETAILS, event.getOldValue(), event.getNewValue());
                     break;
                 case DELETE:
-                    if (event.getOldValue().equals(Events.SPECIAL.getDesc())) {
+                	// The below check is wild... apparently if we don't convert to string before comparing 'SPECIAL' != 'SPECIAL'
+                    if (event.getOldValue().toString().equals(Events.SPECIAL.getDesc())) {
                         support.firePropertyChange(DELETE_USER, event.getOldValue(), event.getNewValue());
                     } else {
+                    	System.out.println("DAVID: NOT calling delete user");
                         support.firePropertyChange(PRINT_ACCOUNT_DELETED, event.getOldValue(), event.getNewValue());
                     }
                     break;
@@ -118,10 +122,24 @@ public class ConcreteReportingService implements PropertyChangeListener {
         } else if (managementType.equals(USER)) {
             switch (detailType) {
                 case NEW:
+                	support.firePropertyChange(PRINT_USER_ADDED, event.getOldValue(), event.getNewValue());
+                	break;
                 case UPDATING:
+                	support.firePropertyChange(PRINT_USER_UPDATING, event.getOldValue(), event.getNewValue());
+                	break;
                 case UPDATED:
+                	support.firePropertyChange(PRINT_USER_UPDATED, event.getOldValue(), event.getNewValue());
+                	break;
                 case DELETE:
-                    support.firePropertyChange(PRINT_USER_DETAILS, false, true);
+                	support.firePropertyChange(PRINT_USER_DELETED, event.getOldValue(), event.getNewValue());
+                	break;
+                case DISPLAY:
+                	if (event.getNewValue() == null) {
+                        support.firePropertyChange(PRINT_USER_LIST, event.getOldValue(),  event.getNewValue());
+                	}
+                	else {
+                        support.firePropertyChange(PRINT_USER_DETAILS, event.getOldValue(),  event.getNewValue());	
+                	}
                     break;
                 default:
                     break;
