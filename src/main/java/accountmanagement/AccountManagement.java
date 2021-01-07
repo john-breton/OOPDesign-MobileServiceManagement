@@ -217,6 +217,12 @@ public class AccountManagement implements PropertyChangeListener {
                     }
                 }
                 break;
+            case GET_ACCOUNT:
+                getAccount((String) evt.getNewValue());
+                break;
+            case FIND_ACCOUNTS:
+                findAccounts((String) evt.getNewValue());
+                break;
             default:
                 break;
         }

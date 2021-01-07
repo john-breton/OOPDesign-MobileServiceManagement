@@ -2,6 +2,7 @@ package userinterface;
 
 import java.util.Scanner;
 //put imports for management classes here
+import accountmanagement.AccountManagement;
 import reportingservice.ConcreteReportingService;
 //import accountmanagement.AccountManagement;
 
@@ -27,7 +28,7 @@ public class UserInterface {
 
         // UserManagement userService = UserManagement.getInstance();
         // BundleManagement bundleService = BundleManagement.getInstance();
-        // AccountManagement accountService = AccountManagement.getInstance();
+        AccountManagement accountService = AccountManagement.getInstance();
         ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
 
         do {
@@ -150,10 +151,12 @@ public class UserInterface {
                 break;
             case 16:
                 // 16. List Account <phone number>
+                // Fire a signal here (ACCOUNT::FIND, EVENTS.SUCCESS.getDesc(), phoneNum)
 
                 break;
             case 17:
                 // 17. List Accounts <username>
+                // Fire a signal here (ACCOUNT::FIND, EVENTS.SPECIAL.getDesc(), username)
 
                 break;
             case 18:
