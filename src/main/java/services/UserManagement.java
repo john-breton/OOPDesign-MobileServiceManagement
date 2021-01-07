@@ -62,7 +62,7 @@ public class UserManagement implements PropertyChangeListener {
 	 * @return nothing
 	 */
 	public void addUser(String name) {
-		if (name == null || name.isBlank()) {
+		if (name == null || name.isBlank() || users.containsKey(name)) {
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
 					PropertyNameStrings.Events.FAILURE.getDesc(),
@@ -201,7 +201,7 @@ public class UserManagement implements PropertyChangeListener {
 
 		support.firePropertyChange(
 				PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.DISPLAY,
-				PropertyNameStrings.Events.FAILURE.getDesc(),
+				PropertyNameStrings.Events.SUCCESS.getDesc(),
 				userId);
 	}
 	
