@@ -34,6 +34,7 @@ public final class PropertyNameStrings {
     public static final String PRINT_USER_DELETED = "PRINT_USER_DELETED";
     public static final String DELETE_USER = "DELETE_USER";
     public static final String PRINT_BUNDLE_DETAILS = "PRINT_BUNDLE_DETAILS";
+    public static final String PRINT_BUNDLE_ADDED = "PRINT_BUNDLE_ADDED";
 
     /**
      * Enum used to simplify event passing.
@@ -41,7 +42,10 @@ public final class PropertyNameStrings {
     public enum Events {
         SUCCESS("SUCCESS"),
         FAILURE("FAILURE"),
-        SPECIAL("SPECIAL");
+        SPECIAL("SPECIAL"),
+    	PAC("PAC"),//for list all Pac Bundles names
+    	PRECFG("PRECFG"),//for list all preconfigured bundles names
+    	SINGLE("SINGLE");//for print single bundle detail
 
         private String desc;
 
