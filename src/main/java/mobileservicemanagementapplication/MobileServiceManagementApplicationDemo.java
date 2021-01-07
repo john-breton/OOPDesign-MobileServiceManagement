@@ -6,7 +6,7 @@ package mobileservicemanagementapplication;
 import java.util.TreeMap;
 
 import properties.PropertyIdEnum;
-import reportingservice.ConcreteReportingService;
+import reportingservice.ReportingService;
 import services.UserManagement;
 
 /**
@@ -21,7 +21,7 @@ public class MobileServiceManagementApplicationDemo {
 	public static void main(String[] args) {
 //		UserManagementService service = new UserManagementService();
 		UserManagement service = UserManagement.getInstance();
-		ConcreteReportingService reporting = ConcreteReportingService.getInstance();
+		ReportingService reporting = ReportingService.getInstance();
 		UserServiceTestRunner runner = new UserServiceTestRunner();
 		
 		reporting.addPropertyChangeListener(service);

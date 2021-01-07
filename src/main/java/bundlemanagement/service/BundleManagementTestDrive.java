@@ -1,11 +1,11 @@
 package bundlemanagement.service;
 
-import reportingservice.ConcreteReportingService;
+import reportingservice.ReportingService;
 
 public class BundleManagementTestDrive {
 
 	public static void main(String[] args) {
-        ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
+        ReportingService reportingService = ReportingService.getInstance();
 		BundleManagement bundleManagement = BundleManagement.getInstance();
 		
         reportingService.addPropertyChangeListener(bundleManagement);

@@ -1,6 +1,6 @@
 package accountmanagement;
 
-import reportingservice.ConcreteReportingService;
+import reportingservice.ReportingService;
 
 /**
  * Class used to demonstrate the work done on the AccountManagement class.
@@ -9,7 +9,7 @@ import reportingservice.ConcreteReportingService;
 public class AccountDemo {
 
     public static void main(String[] args) {
-        ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
+        ReportingService reportingService = ReportingService.getInstance();
         AccountManagement accManagement = AccountManagement.getInstance();
 
         reportingService.addPropertyChangeListener(accManagement);

@@ -34,22 +34,22 @@ import static reportingservice.PropertyNameStrings.*;
  * @since December 30, 2020
  */
 
-public class ConcreteReportingService implements PropertyChangeListener {
+public class ReportingService implements PropertyChangeListener {
 
-    private static final ConcreteReportingService uniqueInstance = new ConcreteReportingService();
+    private static final ReportingService uniqueInstance = new ReportingService();
     private PropertyChangeSupport support;
 
     /**
      * Constructor for ConcreteReportingService.
      */
-    private ConcreteReportingService() {
+    private ReportingService() {
         support = new PropertyChangeSupport(this);
     }
 
     /**
      * getInstance method to ensure this class is a singleton
      */
-    public static ConcreteReportingService getInstance() {
+    public static ReportingService getInstance() {
         return uniqueInstance;
     }
 

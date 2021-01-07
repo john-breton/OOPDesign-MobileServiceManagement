@@ -19,7 +19,7 @@ public class ReportingTest {
      * @param args
      */
     public static void main(String[] args) {
-        ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
+        ReportingService reportingService = ReportingService.getInstance();
         ManagementReportingServiceTemplate managementService = ManagementReportingServiceTemplate.getInstance();
 
         reportingService.addPropertyChangeListener(managementService);
