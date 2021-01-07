@@ -49,8 +49,11 @@ public class UserObject extends UserObjectIf {
 
 	@Override
 	public String getId() {
+		return getUserName();
+	}
+	
+	public String getUserName() {
 		PropertyIf<String> name = propertyList.get(PropertyIdEnum.USER_NAME);
-//		return name.propertyValue.toString();
 		return name.getValue();
 	}
 

@@ -27,6 +27,11 @@ public final class PropertyNameStrings {
     public static final String PRINT_ACCOUNT_ADDED = "PRINT_ACCOUNT_ADDED";
     public static final String PRINT_ACCOUNT_DELETED = "PRINT_ACCOUNT_DELETED";
     public static final String PRINT_USER_DETAILS = "PRINT_USER_DETAILS";
+    public static final String PRINT_USER_LIST = "PRINT_USER_LIST";
+    public static final String PRINT_USER_ADDED = "PRINT_USER_ADDED";
+    public static final String PRINT_USER_UPDATING = "PRINT_USER_UPDATING";
+    public static final String PRINT_USER_UPDATED = "PRINT_USER_UPDATED";
+    public static final String PRINT_USER_DELETED = "PRINT_USER_DELETED";
     public static final String DELETE_USER = "DELETE_USER";
     public static final String PRINT_BUNDLE_DETAILS = "PRINT_BUNDLE_DETAILS";
 

@@ -6,6 +6,7 @@ package mobileservicemanagementapplication;
 import java.util.TreeMap;
 
 import properties.PropertyIdEnum;
+import reportingservice.ConcreteReportingService;
 import services.UserManagement;
 
 /**
@@ -20,11 +21,23 @@ public class MobileServiceManagementApplicationDemo {
 	public static void main(String[] args) {
 //		UserManagementService service = new UserManagementService();
 		UserManagement service = UserManagement.getInstance();
+		ConcreteReportingService reporting = ConcreteReportingService.getInstance();
+		UserServiceTestRunner runner = new UserServiceTestRunner();
+		
+		reporting.addPropertyChangeListener(service);
+		service.addPropertyChangeListener(reporting);
+		runner.addPropertyChangeListener(service);
+		runner.addPropertyChangeListener(reporting);
+		
+		System.out.println("---------------");
 		
 		service.addUser("David");
+		
+		System.out.println("---------------");
+		
 		service.addUser("John");
 		
-		service.printAllUsers();
+		System.out.println("---------------");
 		
 		TreeMap<PropertyIdEnum, String> vals;
 		
@@ -34,7 +47,7 @@ public class MobileServiceManagementApplicationDemo {
 		
 		service.modifyUser("David", vals);
 		
-		service.printAllUsers();
+		System.out.println("---------------");
 		
 		vals = new TreeMap<PropertyIdEnum, String>();
 		vals.put(PropertyIdEnum.USER_NAME, "Gabriel");
@@ -42,7 +55,23 @@ public class MobileServiceManagementApplicationDemo {
 
 		service.modifyUser("John", vals);
 		
-		service.printAllUsers();
+		System.out.println("---------------");
+		
+		runner.printUser("David");
+		
+		System.out.println("---------------");
+		
+		runner.printUser("John");
+		
+		System.out.println("---------------");
+		
+		runner.deleteUser("John");
+		
+		System.out.println("---------------");
+		
+		runner.printAllUserNames();
+		
+		System.out.println("---------------");
 	}
 
 }
