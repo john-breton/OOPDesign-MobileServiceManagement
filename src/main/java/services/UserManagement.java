@@ -18,14 +18,17 @@ import users.UserManagementFactory;
  */
 public class UserManagement implements PropertyChangeListener {
 	
-	private static final ArrayList<String> USER_MANAGEMENT_EVENTS = new ArrayList<>(
-			List.of(PropertyNameStrings.DELETE_USER,
-					PropertyNameStrings.PRINT_USER_ADDED,
-					PropertyNameStrings.PRINT_USER_DELETED,
-					PropertyNameStrings.PRINT_USER_DETAILS,
-					PropertyNameStrings.PRINT_USER_LIST,
-					PropertyNameStrings.PRINT_USER_UPDATED,
-					PropertyNameStrings.PRINT_USER_UPDATING));
+	private static final ArrayList<String> USER_MANAGEMENT_EVENTS = new ArrayList<String>() {
+		{
+			add(PropertyNameStrings.DELETE_USER);
+			add(PropertyNameStrings.PRINT_USER_ADDED);
+			add(PropertyNameStrings.PRINT_USER_DELETED);
+			add(PropertyNameStrings.PRINT_USER_DETAILS);
+			add(PropertyNameStrings.PRINT_USER_LIST);
+			add(PropertyNameStrings.PRINT_USER_UPDATED);
+			add(PropertyNameStrings.PRINT_USER_UPDATING);
+		}
+	};
 	
 	private static final String USER_ID_KEY = "userId";
 
