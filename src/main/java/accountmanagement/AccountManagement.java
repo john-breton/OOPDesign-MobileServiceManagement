@@ -24,7 +24,7 @@ import static reportingservice.PropertyNameStrings.*;
  */
 public class AccountManagement implements PropertyChangeListener {
     // We will always need an AccountManagement instance, so use eager instantiation.
-    private static final AccountManagement uniqueInstance = new AccountManagement();
+    private static final AccountManagement UNIQUE_INSTANCE = new AccountManagement();
     private final TreeMap<String, Account> accountList;
     private final PropertyChangeSupport support;
     private final Pattern phoneNumPattern = Pattern.compile("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
@@ -44,7 +44,7 @@ public class AccountManagement implements PropertyChangeListener {
      * @return The Singleton instance of the AccountManagement class.
      */
     public static AccountManagement getInstance() {
-        return uniqueInstance;
+        return UNIQUE_INSTANCE;
     }
 
     /**
@@ -267,7 +267,7 @@ public class AccountManagement implements PropertyChangeListener {
      * Will not be called unless the Account is known to exist.
      *
      * @param phoneNum The phone number associated with the service account.
-     * @return The Account object that is associated with the phone number provied.
+     * @return The Account object that is associated with the phone number provided.
      */
     private Account getAccountDetails(String phoneNum) {
         Set set = accountList.entrySet();
