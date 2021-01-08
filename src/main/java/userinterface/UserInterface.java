@@ -330,6 +330,7 @@ public class UserInterface {
                 case "18":
                     // 18. List Monthly Fees <phone>
                     // I don't think there is currently a method that does this by itself
+                    // (ACCOUNT::FIND, EVENTS.SUCCESS.getDesc(), phoneNum)
                     System.out.println("Option currently unsupported");
                     System.out.println("Hit Enter to return to the menu");
                     input.next();
@@ -337,6 +338,7 @@ public class UserInterface {
                 case "19":
                     // 19. List Monthly Fees All Accounts <username>
                     // I don't think there is currently a method that does this by itself
+                    // (ACCOUNT::FIND, EVENTS.SPECIAL.getDesc(), username)
                     System.out.println("Option currently unsupported");
                     System.out.println("Hit Enter to return to the menu");
                     input.next();

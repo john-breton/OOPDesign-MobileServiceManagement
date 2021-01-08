@@ -121,6 +121,12 @@ public class ConcreteReportingService implements PropertyChangeListener {
                     } else if (event.getOldValue().equals(Events.SPECIAL.getDesc())) {
                         support.firePropertyChange(FIND_ACCOUNTS, event.getOldValue(), event.getNewValue());
                     }
+                case LIST:
+                    if (event.getOldValue().equals(Events.SUCCESS.getDesc())) {
+                        support.firePropertyChange(GET_ACCOUNT_FEES, event.getOldValue(), event.getNewValue());
+                    } else if (event.getOldValue().equals(Events.SPECIAL.getDesc())) {
+                        support.firePropertyChange(FIND_ACCOUNTS_FEES, event.getOldValue(), event.getNewValue());
+                    }
                 default:
                     break;
             }

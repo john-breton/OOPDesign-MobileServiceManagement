@@ -8,7 +8,7 @@ import java.beans.PropertyChangeSupport;
  * Class used to demonstrate the work done on the AccountManagement class.
  * Will be removed when application is ready for submission.
  */
-public class AccountDemo  {
+public class AccountDemo {
 
     public static void main(String[] args) {
         ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
@@ -34,11 +34,11 @@ public class AccountDemo  {
         System.out.println("3----------------");
 
         // Find an account by phone number.
-        accManagement.getAccount("555-555-5555");
+        accManagement.getAccount("555-555-5555", true);
         System.out.println("4----------------");
 
         // Display all accounts associated with a username.
-        accManagement.findAccounts("john.breton");
+        accManagement.findAccounts("john.breton", true);
         System.out.println("5----------------\n");
 
         // Remove an Account.
