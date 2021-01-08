@@ -7,7 +7,8 @@ import services.ManagementFactoryIf;
 
 /**
  * UserManagementFactory is a class that extends from ManagementFactoryIf interface
- * and used as Factory to create user object 
+ * and is used as Factory to create user object 
+
  * @author David
  *
  */
