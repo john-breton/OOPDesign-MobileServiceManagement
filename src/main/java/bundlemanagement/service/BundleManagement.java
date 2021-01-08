@@ -120,7 +120,7 @@ public class BundleManagement implements PropertyChangeListener {
 	 */
 	private void printBundleDetails(Bundle bundle) {
 		System.out.println("\n---Bundle Detail---");
-		System.out.printf("Name: %s\n", bundle.getName());
+		System.out.printf("Bundle Name: %s\n", bundle.getName());
 		if (bundle instanceof PaCBundle) {
 			System.out.print(((PaCBundle) bundle).getDescription());
 			System.out.println("Monthly Fee: $" + ((PaCBundle) bundle).cost());
@@ -128,6 +128,16 @@ public class BundleManagement implements PropertyChangeListener {
 			System.out.println((PreconfBundle) bundle);
 		}
 
+	}
+	
+	private void printBundleFees(Bundle bundle) {
+		System.out.println("\n---Monthly Fees---");
+		System.out.printf("Bundle Name: %s\n", bundle.getName());
+		if (bundle instanceof PaCBundle) {
+			System.out.println("Monthly Fee: $" + ((PaCBundle) bundle).cost());
+		} else if (bundle instanceof PreconfBundle) {
+			System.out.println("Monthly Fee: $" + ((PreconfBundle) bundle). getMonthlyFees());
+		}		
 	}
 
 	/**
@@ -195,9 +205,15 @@ public class BundleManagement implements PropertyChangeListener {
 				}
 			} else if (((String) evt.getNewValue()).equals(Events.PAC.getDesc())) {// list all pac bundles names
 				listAllPacBundles();
-			} else if (((String) evt.getNewValue()).equals(Events.PRECFG.getDesc())) {// list all preconfigured bundles
-																						// names
+			} else if (((String) evt.getNewValue()).equals(Events.PRECFG.getDesc())) {// list all preconfigured bundles																					// names
 				listAllPreconfBundles();
+			} else if(((String) evt.getNewValue()).equals(Events.FEES.getDesc())) {//display single bundle's monthly fees
+				Bundle bundle = getBundle((String) evt.getOldValue());
+				if (bundle != null) {
+					printBundleFees(bundle);
+				} else {
+					System.out.printf("No Bundle with the name \"%s\" was found.\n", (String) evt.getOldValue());
+				}				
 			}
 
 			break;
