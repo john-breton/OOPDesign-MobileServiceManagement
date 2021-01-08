@@ -10,7 +10,8 @@ import properties.PropertyIdEnum;
 import properties.PropertyIf;
 
 /**
- * UserObject is a class that extends from UserObjectIf interface
+ * UserObject is a class that extends from the UserObjectIf interface
+
  * It is the Concrete class for user object
  * @author David
  *
