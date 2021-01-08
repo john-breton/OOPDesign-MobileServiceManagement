@@ -1,6 +1,3 @@
-/**
- * 
- */
 package users;
 
 import java.util.Map;

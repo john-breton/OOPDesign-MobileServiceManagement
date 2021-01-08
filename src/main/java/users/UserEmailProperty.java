@@ -1,6 +1,3 @@
-/**
- * 
- */
 package users;
 
 import properties.EmailPropertyModifyBehavior;

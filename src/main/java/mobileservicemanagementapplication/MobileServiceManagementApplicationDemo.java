@@ -1,6 +1,3 @@
-/**
- * 
- */
 package mobileservicemanagementapplication;
 
 import java.util.TreeMap;
