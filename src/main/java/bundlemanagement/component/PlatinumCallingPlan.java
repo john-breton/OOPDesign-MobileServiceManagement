@@ -3,6 +3,13 @@ package bundlemanagement.component;
 import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
+/**
+ * This class implements platinum calling plan for both PaC , and preconf
+ * bundles.
+ * 
+ * @author epahram
+ *
+ */
 public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan {
 
 	PaCBundle pacbundle;
@@ -29,9 +36,9 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	}
 
 	/**
-	 * It will assign description to PaC.
+	 * sets description for platinum calling plan.
 	 * 
-	 * @return PLATINUM_CALLING_DESCRIPTION
+	 * @return String it will return plan description to PaC side.
 	 */
 	@Override
 	public String getDescription() {
@@ -40,9 +47,9 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	}
 
 	/**
-	 * It will use for PaC side.
+	 * sets fee for platinum calling plan.
 	 * 
-	 * @return cost for Platinum Calling plan
+	 * @return it will return plan's cost to PaC side
 	 */
 
 	@Override
@@ -52,19 +59,18 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	}
 
 	/**
-	 * It will use for preconf side.
+	 * sets information for platinum calling plan.
 	 * 
-	 * @return information about platinum preconf bundle.
+	 * @return String information to preconf side.
 	 */
-
 	public String toString() {
 		return "Unlimited US & Canada wide calling";
 	}
 
 	/**
-	 * It will return CallingMinutes to preconf side.
+	 * return minutes for platinum calling plan.
 	 * 
-	 * @return platinum calling minutes
+	 * @return int value of plan cost.
 	 */
 	public int getCallingMinutes() {
 
