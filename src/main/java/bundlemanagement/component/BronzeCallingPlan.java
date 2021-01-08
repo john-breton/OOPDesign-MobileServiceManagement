@@ -62,7 +62,7 @@ public class BronzeCallingPlan extends BundleDecorator implements CallingPlan {
 	}
 
 	/**
-	 * return minutes for bronze calling plan.
+	 * Returns calling time for bronze calling plan.
 	 * 
 	 * @return calling time for bronze calling plan.
 	 */
