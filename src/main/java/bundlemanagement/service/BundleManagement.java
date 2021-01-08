@@ -7,7 +7,21 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 import static reportingservice.PropertyNameStrings.*;
-
+/**
+ * The BundleManagement class is responsible for managing bundles. There are 
+ * two types of service bundles: Preconfigured bundle and PaC(Plain and Choose) bundle.
+ * A bundle is composed with bundle name(unique identifier), calling plan, messaging plan, 
+ * data plan and monthly fee.
+ * <p>
+ * The BundleManagement provides functionality such as add preconfigued bundle and 
+ * add PaC bundle. The newly created bundle will be added and maintained in a bundle list.
+ * <p>
+ * BundleManagment is a Singleton to ensure that only one instance of the BundleManagement
+ * class will exist at any given time.
+ * @author Yangrui Zhu
+ * @version 1.0
+ * @since January 08, 2020
+ */
 
 public class BundleManagement implements PropertyChangeListener {
 	private static final BundleManagement uniqueInstance = new BundleManagement();
@@ -15,18 +29,6 @@ public class BundleManagement implements PropertyChangeListener {
 
 	private final PropertyChangeSupport support;
 
-	/**
-	 * The BundleManagement class is responsible for managing bundles. There are 
-	 * two types of service bundles: Preconfigured bundle and PaC(Plain and Choose) bundle.
-	 * A bundle is composed with bundle name(unique identifier), calling plan, messaging plan, 
-	 * data plan and monthly fee.
-	 * <p>
-	 * The BundleManagement provides functionality such as add preconfigued bundle and 
-	 * add PaC bundle. The newly created bundle will be added and maintained in a bundle list.
-	 * <p>
-	 * BundleManagment is a Singleton to ensure that only one instance of the BundleManagement
-	 * class will exist at any given time.
-	 */
 	/**
 	 * Constructor for the BundleManagement class.
 	 * Required to be private to ensure no more than one
@@ -129,7 +131,10 @@ public class BundleManagement implements PropertyChangeListener {
 		}
 
 	}
-	
+	/**
+	 * Print out the monthly fees of a given bundle
+	 * @param bundle  The bundle to be printed
+	 */		
 	private void printBundleFees(Bundle bundle) {
 		System.out.println("\n---Monthly Fees---");
 		System.out.printf("Bundle Name: %s\n", bundle.getName());
