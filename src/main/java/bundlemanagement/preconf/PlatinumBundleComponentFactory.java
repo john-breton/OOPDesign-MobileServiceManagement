@@ -2,12 +2,22 @@ package bundlemanagement.preconf;
 
 import bundlemanagement.component.*;
 
+/**
+ * This Class implements Platinum Bundle Component Factory.
+ * 
+ * It will return instance of platinum related components to preconfBundle in
+ * order to make platinum preconf plan.
+ * 
+ * @author epahram
+ *
+ */
+
 public class PlatinumBundleComponentFactory implements BundleComponentFactory {
 
 	/**
-	 * It will return PlatinumCallingPlan
+	 * This method return instance of platinum calling plan.
 	 * 
-	 * @return CallingPlan
+	 * @return calling plan to PreconfBundle class to create platinum preconf plan.
 	 */
 	public CallingPlan createCallingPlan() {
 
@@ -15,31 +25,31 @@ public class PlatinumBundleComponentFactory implements BundleComponentFactory {
 	}
 
 	/**
-	 * It will return PlatinumMessagingPlan
+	 * This method return instance of platinum messaging plan.
 	 * 
-	 * @return MessagingPlan
+	 * @return messaging plan to PreconfBundle class to create platinum preconf
+	 *         plan.
 	 */
-
 	public MessagingPlan createMessagingPlan() {
 
 		return new PlatinumMessagingPlan();
 	}
 
 	/**
-	 * It will return PlatinumDataPlan
+	 * This method return instance of platinum data plan.
 	 * 
-	 * @return DataPlan
+	 * @return data plan to PreconfBundle class to create platinum preconf plan.
 	 */
-
-	public DataPlan createDataPaln() {
+	public DataPlan createDataPlan() {
 
 		return new PlatinumDataPlan();
 	}
 
 	/**
-	 * It will return PlatinumMonthlyFees
+	 * This method return instance of platinum monthly fee for platinum preconf
+	 * plan.
 	 * 
-	 * @return MonthlyFees
+	 * @return Monthly fee to PreconfBundle class to create platinum preconf plan.
 	 */
 	public MonthlyFees createMonthlyFees() {
 

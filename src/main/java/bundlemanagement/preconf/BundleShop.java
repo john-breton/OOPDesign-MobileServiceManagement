@@ -1,9 +1,20 @@
 package bundlemanagement.preconf;
 
+/**
+ * This a bundle shop class is an abstract class to four Bronze, Platinum, Gold,
+ * and Silver bundle shops.
+ * 
+ * @author epahram
+ *
+ */
+
 public abstract class BundleShop {
 
 	/**
-	 * This method will create Bundle at it's related BundleShop.
+	 * This method will create Bundle at it's related BundleShop. This will be
+	 * implemented inside BundleShop concrete classes. All inherited concrete
+	 * classes will ask PreconfBundle to provide all bundle needed component for
+	 * them.
 	 * 
 	 * @return Bundle
 	 */
@@ -20,7 +31,7 @@ public abstract class BundleShop {
 
 		PreconfBundle bundle = createBundle();
 		bundle.setName(name);
-		//System.out.println("Making a " + bundle.getName() + "....");
+		// System.out.println("Making a " + bundle.getName() + "....");
 		bundle.prepare();
 		return bundle;
 	}
