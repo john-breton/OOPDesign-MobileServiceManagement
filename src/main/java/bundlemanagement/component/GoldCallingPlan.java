@@ -63,7 +63,7 @@ public class GoldCallingPlan extends BundleDecorator implements CallingPlan {
 	}
 
 	/**
-	 * return minutes for gold calling plan.
+	 * Returns calling time for gold calling plan.
 	 * 
 	 * @return calling time for gold calling plan.
 	 */
