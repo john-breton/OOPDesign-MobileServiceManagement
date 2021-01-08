@@ -1,6 +1,3 @@
-/**
- * 
- */
 package properties;
 
 import java.util.regex.Pattern;
