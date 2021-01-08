@@ -11,7 +11,8 @@ package properties;
 public class NoModifyPropertyModifyBehavior extends PropertyModifyBehaviorIf {
 
 	/**
-	 * Will triggered upon change. return null if no modification detected
+	 * Will trigger upon change. Returns null if no modification is detected
+
 	 * @param T val
 	 * @return T
 	 * */
