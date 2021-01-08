@@ -4,7 +4,8 @@
 package services;
 
 /**
- * An abstract class used as an Interface to for factories
+ * An abstract class used as an Interface for factories
+
  * @author David
  *
  */
