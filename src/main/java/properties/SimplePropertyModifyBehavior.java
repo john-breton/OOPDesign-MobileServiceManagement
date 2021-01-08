@@ -11,7 +11,8 @@ package properties;
 public class SimplePropertyModifyBehavior extends PropertyModifyBehaviorIf {
 	
 	/**
-	 * Will triggered upon change. return null if simple modification detected
+	 * Will trigger upon change. Returns null if simple modification detected
+
 	 * @param T val
 	 * @return T
 	 * */
