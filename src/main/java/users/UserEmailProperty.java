@@ -7,7 +7,8 @@ import properties.EmailPropertyModifyBehavior;
 import properties.PropertyIf;
 
 /**
- * UserEmailProperty is a class that extends from propertyIf interface and holding the email property for user
+ * UserEmailProperty is a class that extends from the propertyIf interface and holds the email property for user
+
  * @author David
  *
  */
