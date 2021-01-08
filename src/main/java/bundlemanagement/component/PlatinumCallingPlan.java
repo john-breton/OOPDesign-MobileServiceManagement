@@ -68,7 +68,7 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	}
 
 	/**
-	 * return minutes for platinum calling plan.
+	 * Returns calling time for platinum calling plan.
 	 * 
 	 * @return calling time for platinum calling plan.
 	 */
