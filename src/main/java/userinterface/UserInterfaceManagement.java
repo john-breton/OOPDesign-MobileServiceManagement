@@ -24,6 +24,10 @@ public class UserInterfaceManagement {
         return uniqueInstance;
     }
 
+    public void listAllUserNames() {
+        support.firePropertyChange(USER + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, Events.SUCCESS.getDesc(), null);
+    }
+
     public void listAccount(String phoneNum) {
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + FIND, Events.SUCCESS.getDesc(), phoneNum);
     }

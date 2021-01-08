@@ -302,10 +302,8 @@ public class UserInterface {
                     break;
                 case "15":
                     // 15. List All Users Names
-                    // There is a printAllUserNames() method in the UserServiceTestRunner, but should the event signal being sent
-                    // in that class be put into UserManagement?
-                    // userService.getUsers();
-                    System.out.println("Option currently unsupported");
+                    System.out.println("Printing all User Names");
+                    userIfService.listAllUserNames();
                     System.out.println("Hit Enter to return to the menu");
                     input.next();
                     break;
