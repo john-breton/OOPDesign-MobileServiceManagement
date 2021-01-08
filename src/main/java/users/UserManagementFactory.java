@@ -16,7 +16,8 @@ public class UserManagementFactory extends ManagementFactoryIf<UserObjectIf> {
 	
 	
 	/**
-	 * it create a new user object by it name/id and return it
+	 * It creates a new user object using the name/id and returns it
+
 	 * @param String name/id of the User
 	 * @return UserObjectIf newly created user object
 	 * */
