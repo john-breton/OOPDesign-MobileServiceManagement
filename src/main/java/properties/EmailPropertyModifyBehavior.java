@@ -16,7 +16,8 @@ public class EmailPropertyModifyBehavior extends PropertyModifyBehaviorIf {
 	private static final Pattern VALID_EMAIL_REGEX = Pattern.compile("[a-zA-Z0-9.-_+]+@[a-zA-Z0-9.-_+]+\\.[a-z]+");
 	
 	/**
-	 * Will triggered upon change. return null if the email address is invalid
+	 * Will trigger upon change. Returns null if the email address is invalid
+
 	 * @param T val
 	 * @return T
 	 * */
