@@ -8,7 +8,8 @@ import properties.PropertyIf;
 
 /**
  * UserNameProperty is a class that extends from PropertyIf interface
- * and used to store the Name property for user object
+ * and is used to store the Name property for user object
+
  * @author David
  *
  */
