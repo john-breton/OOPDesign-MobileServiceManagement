@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements silver messaging plan for theboth PaC and preconf
+ * This class implements silver messaging plan for both the PaC and preconf
  * bundles.
  * 
  * @author epahram
