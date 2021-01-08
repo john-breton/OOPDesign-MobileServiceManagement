@@ -9,7 +9,8 @@ import properties.PropertyIdEnum;
 import properties.PropertyIf;
 
 /**
- * @author edavleu
+ * An abstract class used as an Interface to for User object
+ * @author David
  *
  */
 public abstract class UserObjectIf {

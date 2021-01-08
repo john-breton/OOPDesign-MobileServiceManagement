@@ -7,12 +7,18 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 /**
- * @author edavleu
+ * Used to valid the format of email property. 
+ * @author David
  *
  */
 public class EmailPropertyModifyBehavior extends PropertyModifyBehaviorIf {
 	private static final Pattern VALID_EMAIL_REGEX = Pattern.compile("[a-zA-Z0-9.-_+]+@[a-zA-Z0-9.-_+]+\\.[a-z]+");
-
+	
+	/**
+	 * Will triggered upon change. return null if the email address is invalid
+	 * @param T val
+	 * @return T
+	 * */
 	@Override
 	public <T> T change(T val) {
 		System.out.println("-- Email Property Modify behavior called with " + val);

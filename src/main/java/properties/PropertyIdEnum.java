@@ -4,7 +4,8 @@
 package properties;
 
 /**
- * @author edavleu
+ * Enum for properties of user object 
+ * @author David
  *
  */
 public enum PropertyIdEnum {

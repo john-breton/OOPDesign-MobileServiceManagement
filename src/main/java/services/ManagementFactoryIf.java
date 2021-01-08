@@ -4,7 +4,8 @@
 package services;
 
 /**
- * @author edavleu
+ * An abstract class used as an Interface to for factories
+ * @author David
  *
  */
 public abstract class ManagementFactoryIf<T> {

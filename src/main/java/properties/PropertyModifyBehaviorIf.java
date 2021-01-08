@@ -4,7 +4,8 @@
 package properties;
 
 /**
- * @author edavleu
+ * An abstract class used as an Interface to Behaviors
+ * @author David
  *
  */
 public abstract class PropertyModifyBehaviorIf {
