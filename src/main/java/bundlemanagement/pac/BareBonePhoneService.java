@@ -1,10 +1,10 @@
 package bundlemanagement.pac;
 
 /**
- * This class is responsible to create bare bone phone service for the PaC
+ * This class is responsible for creating bare bone phone service for the PaC
  * bundle. This is the decorate.
  * 
- * @author Ramin Pahlevannejad
+ * @author epahram
  *
  */
 

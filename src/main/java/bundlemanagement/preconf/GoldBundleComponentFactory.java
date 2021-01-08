@@ -38,7 +38,7 @@ public class GoldBundleComponentFactory implements BundleComponentFactory {
 	 * 
 	 * @return data plan to preconf class to create gold preconf plan.
 	 */
-	public DataPlan createDataPaln() {
+	public DataPlan createDataPlan() {
 
 		return new GoldDataPlan();
 	}
@@ -46,7 +46,7 @@ public class GoldBundleComponentFactory implements BundleComponentFactory {
 	/**
 	 * This method return Gold monthly fee for Gold preconf plan.
 	 * 
-	 * @return Bornze Monthly fee to preconf class to create bronze preconf plan.
+	 * @return Gold Monthly fee to preconf class to create bronze preconf plan.
 	 */
 	public MonthlyFees createMonthlyFees() {
 		return new GoldMonthlyFees();

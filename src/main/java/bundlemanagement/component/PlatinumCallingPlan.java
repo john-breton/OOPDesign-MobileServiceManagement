@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements platinum calling plan for both PaC , and preconf
+ * This class implements platinum calling plan for the both PaC and preconf
  * bundles.
  * 
  * @author epahram
@@ -70,7 +70,7 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	/**
 	 * return minutes for platinum calling plan.
 	 * 
-	 * @return int value of plan cost.
+	 * @return calling time for platinum calling plan.
 	 */
 	public int getCallingMinutes() {
 

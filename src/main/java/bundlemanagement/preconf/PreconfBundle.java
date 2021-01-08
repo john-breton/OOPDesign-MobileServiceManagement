@@ -38,7 +38,7 @@ public class PreconfBundle extends Bundle {
 		// System.out.println("Preparing " + getName());
 		callingplan = ComponentFactory.createCallingPlan();
 		messagingplan = ComponentFactory.createMessagingPlan();
-		dataplan = ComponentFactory.createDataPaln();
+		dataplan = ComponentFactory.createDataPlan();
 		monthlyfees = ComponentFactory.createMonthlyFees();
 	}
 
@@ -67,7 +67,6 @@ public class PreconfBundle extends Bundle {
 		}
 		if (monthlyfees != null) {
 			result.append("Monthly Fee: $");
-			result.append("\n");
 			result.append(monthlyfees.monthlyfee());
 
 		}

@@ -39,7 +39,7 @@ public class SilverBundleComponentFactory implements BundleComponentFactory {
 	 * 
 	 * @return data plan to preconf class to create silver preconf plan.
 	 */
-	public DataPlan createDataPaln() {
+	public DataPlan createDataPlan() {
 
 		return new SilverDataPlan();
 	}

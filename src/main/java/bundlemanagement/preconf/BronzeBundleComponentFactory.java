@@ -38,7 +38,7 @@ public class BronzeBundleComponentFactory implements BundleComponentFactory {
 	 * 
 	 * @return data plan to PreconfBundle class to create bronze preconf plan.
 	 */
-	public DataPlan createDataPaln() {
+	public DataPlan createDataPlan() {
 
 		return new BronzeDataPlan();
 	}

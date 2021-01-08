@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements bronze calling plan for both PaC , and preconf bundles.
+ * This class implements bronze calling plan for the both PaC and preconf bundles.
  * 
  * @author epahram
  *
@@ -64,7 +64,7 @@ public class BronzeCallingPlan extends BundleDecorator implements CallingPlan {
 	/**
 	 * return minutes for bronze calling plan.
 	 * 
-	 * @return minutes for bronze calling plan.
+	 * @return calling time for bronze calling plan.
 	 */
 	public int getCallingMinutes() {
 		return BRONZE_CALLING_MINUTES;

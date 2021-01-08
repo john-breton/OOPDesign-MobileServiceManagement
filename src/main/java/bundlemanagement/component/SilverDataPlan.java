@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements silver data plan for both PaC , and preconf bundles.
+ * This class implements silver data plan for theboth PaC and preconf bundles.
  * 
  * @author epahram
  *
@@ -56,7 +56,7 @@ public class SilverDataPlan extends BundleDecorator implements DataPlan {
 	/**
 	 * sets information for silver data plan.
 	 * 
-	 * return String information to preconf side.
+	 * @return String information to preconf side.
 	 */
 	public String toString() {
 		return "2 GB";

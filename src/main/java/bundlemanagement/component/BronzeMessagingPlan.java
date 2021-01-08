@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements bronze messaging plan for both PaC , and preconf
+ * This class implements bronze messaging plan for the both PaC and preconf
  * bundles.
  * 
  * @author epahram

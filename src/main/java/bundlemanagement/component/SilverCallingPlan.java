@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements silver calling plan for both PaC , and preconf bundles.
+ * This class implements silver calling plan for the both PaC and preconf bundles.
  * 
  * @author epahram
  *
@@ -66,7 +66,7 @@ public class SilverCallingPlan extends BundleDecorator implements CallingPlan {
 	/**
 	 * return minutes for silver calling plan.
 	 * 
-	 * @return calling minutes for silver calling plan.
+	 * @return calling time for silver calling plan.
 	 */
 	public int getCallingMinutes() {
 

@@ -13,7 +13,8 @@ public abstract class PaCBundle extends Bundle {
 	int fee = 0;
 
 	/**
-	 * It will set description for each decorator user choose for it's own plan.
+	 * This method returns a description of the plan(s) associated with this PaC
+	 * bundle.
 	 * 
 	 * @return description for all decorator parts of PaC bundle.
 	 * 

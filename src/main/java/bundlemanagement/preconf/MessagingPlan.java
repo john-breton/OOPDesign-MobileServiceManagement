@@ -10,7 +10,7 @@ public interface MessagingPlan {
 	/**
 	 * It will return information about messaging plan class.
 	 * 
-	 * @return CallingPlan information.
+	 * @return Messaging plan information.
 	 */
 	String toString();
 

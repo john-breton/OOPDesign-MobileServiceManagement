@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements gold calling plan for both PaC , and preconf bundles.
+ * This class implements gold calling plan for the both PaC and preconf bundles.
  * 
  * @author epahram
  *
@@ -65,7 +65,7 @@ public class GoldCallingPlan extends BundleDecorator implements CallingPlan {
 	/**
 	 * return minutes for gold calling plan.
 	 * 
-	 * @return minutes for gold calling plan.
+	 * @return calling time for gold calling plan.
 	 */
 	public int getCallingMinutes() {
 

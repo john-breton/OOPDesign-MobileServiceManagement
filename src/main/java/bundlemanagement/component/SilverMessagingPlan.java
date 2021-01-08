@@ -4,7 +4,7 @@ import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements silver messaging plan for both PaC , and preconf
+ * This class implements silver messaging plan for theboth PaC and preconf
  * bundles.
  * 
  * @author epahram
@@ -57,7 +57,7 @@ public class SilverMessagingPlan extends BundleDecorator implements MessagingPla
 	/**
 	 * sets information for silver messaging plan.
 	 * 
-	 * return String information to preconf side.
+	 * @return String information to preconf side.
 	 */
 	public String toString() {
 		return "5K Messages";

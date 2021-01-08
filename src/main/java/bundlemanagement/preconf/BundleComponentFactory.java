@@ -1,7 +1,7 @@
 package bundlemanagement.preconf;
 
 /**
- * This an interface class to create bundle components such as callin plan,
+ * This an interface class to create bundle components such as callingS plan,
  * messaging plan, data plan, and monthly fee.
  * 
  * This class has four children, and each children will create component for
@@ -17,7 +17,7 @@ public interface BundleComponentFactory {
 
 	MessagingPlan createMessagingPlan();
 
-	DataPlan createDataPaln();
+	DataPlan createDataPlan();
 
 	MonthlyFees createMonthlyFees();
 }
