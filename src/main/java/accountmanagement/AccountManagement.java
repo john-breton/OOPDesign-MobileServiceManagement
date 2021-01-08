@@ -157,7 +157,7 @@ public class AccountManagement implements PropertyChangeListener {
                 if (mode) {
                     support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
                 } else {
-                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), BUNDLE);
+                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
                 }
                 return;
             }
@@ -180,7 +180,7 @@ public class AccountManagement implements PropertyChangeListener {
                 if (mode) {
                     support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
                 } else {
-                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), BUNDLE);
+                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
                 }
                 found = true;
             }

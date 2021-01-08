@@ -51,7 +51,8 @@ public final class PropertyNameStrings {
         SPECIAL("SPECIAL"),
     	PAC("PAC"),//for list all Pac Bundles names
     	PRECFG("PRECFG"),//for list all preconfigured bundles names
-    	SINGLE("SINGLE");//for print single bundle detail
+    	SINGLE("SINGLE"),//for print single bundle detail
+        FEES("FEES"); // To print the fees associated with a bundle.
 
         private String desc;
 
