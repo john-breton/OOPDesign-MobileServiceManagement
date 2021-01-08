@@ -64,7 +64,7 @@ public class SilverCallingPlan extends BundleDecorator implements CallingPlan {
 	}
 
 	/**
-	 * return minutes for silver calling plan.
+	 * Returns calling time for silver calling plan.
 	 * 
 	 * @return calling time for silver calling plan.
 	 */
