@@ -55,8 +55,8 @@ public class PreconfBundle extends Bundle {
 		}
 		if (monthlyfees != null) {
 			result.append("Monthly Fee: $");
-			result.append("\n");
 			result.append(monthlyfees.monthlyfee());
+			result.append("\n");
 
 		}
 		/*
