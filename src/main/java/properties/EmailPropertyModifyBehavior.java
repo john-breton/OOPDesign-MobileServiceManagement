@@ -7,7 +7,8 @@ import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
 /**
- * Used to valid the format of email property. 
+ * Used to validate the format of email property. 
+
  * @author David
  *
  */
