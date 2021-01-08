@@ -7,7 +7,8 @@ import properties.NoModifyPropertyModifyBehavior;
 import properties.PropertyIf;
 
 /**
- * UserNameProperty is a class that extends from PropertyIf interface
+ * UserNameProperty is a class that extends from the PropertyIf interface
+
  * and is used to store the Name property for user object
 
  * @author David
