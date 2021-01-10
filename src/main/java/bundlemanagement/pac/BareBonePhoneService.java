@@ -1,5 +1,13 @@
 package bundlemanagement.pac;
 
+/**
+ * This class is responsible for creating the bare bone phone service for the PaC
+ * bundle. This is the decorator.
+ * 
+ * @author epahram
+ *
+ */
+
 public class BareBonePhoneService extends PaCBundle {
 
 	private static final String BARE_BONES_PHONE_SERVICE_DESCRIPTION = "Bare Bone Phone Service\n";
@@ -13,6 +21,11 @@ public class BareBonePhoneService extends PaCBundle {
 		fee = BARE_BONES_PHONE_SERVICE_FEE;
 	}
 
+	/**
+	 * This method set up flat rate for bare bone service.
+	 * 
+	 * @return it will return bare bone phone service fee to PaC Bundle.
+	 */
 	@Override
 	public int cost() {
 		// return fixed flat rate
