@@ -1,6 +1,3 @@
-/**
- * 
- */
 package mobileservicemanagementapplication;
 
 import java.beans.PropertyChangeEvent;

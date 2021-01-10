@@ -1,10 +1,8 @@
-/**
- * 
- */
 package properties;
 
 /**
- * @author edavleu
+ * PropertyIf is an interface for the property
+ * @author David
  *
  */
 public abstract class PropertyIf<T> {
@@ -13,11 +11,18 @@ public abstract class PropertyIf<T> {
 	protected T propertyValue;
 	
 	protected PropertyModifyBehaviorIf propertyModifyBehavior;
-	
+	/**
+	 * Getter for the value of the property
+	 * @return T propertyValue
+	 * */
 	public T getValue() {
 		return propertyValue;
 	}
 	
+	/**
+	 * Setter for the value of the property
+	 * @param T val
+	 * */
 	public void setValue(T val) {
 		T newVal = propertyModifyBehavior.change(val);
 		
@@ -26,6 +31,10 @@ public abstract class PropertyIf<T> {
 		}
 	}
 	
+	/**
+	 * printing detailed information about current property
+	 * @return String the details of current property
+	 * */
 	public String toString() {
 		StringBuffer result = new StringBuffer();
 		result.append(propertyName).append(": ").append(propertyValue);
@@ -33,6 +42,10 @@ public abstract class PropertyIf<T> {
 		return result.toString();
 	}
 	
+	/**
+	 * add modify behavior to current property
+	 * @param PropertyModifyBehaviorIf pmb
+	 * */
 	public void setPropertyModifyBehavior(PropertyModifyBehaviorIf pmb) {
 		propertyModifyBehavior = pmb;
 	}
