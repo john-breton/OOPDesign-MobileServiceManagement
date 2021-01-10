@@ -8,20 +8,21 @@ import java.util.TreeMap;
 import properties.PropertyIdEnum;
 import bundlemanagement.service.BundleOption;
 
-//put imports for management classes here
 import accountmanagement.AccountManagement;
 import services.UserManagement;
 import bundlemanagement.service.BundleManagement;
 import reportingservice.ConcreteReportingService;
 
 /**
+ * Class that implements the user interface used to start
+ * and interact with the system
  * 
  * @author eleugab
- *
  */
 public class UserInterface {
     /**
-     * 
+     * Main method to be run that implements the menu-driven
+     * user interface
      * @param args
      */
     public static void main(String[] args) {
@@ -63,7 +64,7 @@ public class UserInterface {
                     + "8.	Delete Account <phone>\n" 
                     + "9.	Update Account <phone, bundle name>\n"
                     + "10.	Add Preconfigured Bundle <bundle name> \n" 
-                    + "11.	Add Pac Bundle <bundle name> \n"
+                    + "11.	Add Plain Pac Bundle <bundle name> \n"
                     + "12.	Add Pac Bundle With Calling Option <calling plan name>\n"
                     + "13.	Add Pac Bundle With Messaging Option <messaging plan name>\n"
                     + "14.	List User Details <username>\n" 
@@ -312,6 +313,7 @@ public class UserInterface {
                     input.next();
                     break;
                 case "10":
+                    // 10.  Add Preconfigured Bundle <bundle name>
                     back = addPreconfBundle(bundleService, input);
                     if (back.equals("Back")) {
                         break;
@@ -320,7 +322,7 @@ public class UserInterface {
                     input.next();
                     break;
                 case "11":
-                    // 11. Add Pac Bundle <bundle name>
+                    // 11. Add Plain Pac Bundle <bundle name>
                     back = addPlainPacBundle(bundleService, input);
                     if (back.equals("Back")) {
                         break;
@@ -459,6 +461,17 @@ public class UserInterface {
         input.close();
     }
 
+    /**
+     * Method that implements menu option 1 - Add user. Prints a prompt
+     * and waits for user input to pass to the UserManagement instance.
+     * If the user enters "Back", immediately returns such that no users
+     * are created and the option menu is printed again. Otherwise, 
+     * returns the user name of the new user
+     * 
+     * @param userService UserManagement instance 
+     * @param input Scanner instance to get user input
+     * @return String of either the user name or "Back"
+     */
     private static String addUser(UserManagement userService, Scanner input) {
         System.out.println("Please enter a new username, user address, and user email in a comma separated list\n"
                             + "For example: John Doe, 123 Example St, john.doe@example.com\n"
@@ -472,6 +485,18 @@ public class UserInterface {
         return paramArray[0];
     }
 
+    /**
+     * Method that implements menu option 10 - Add preconfigured bundle.
+     * Prints a prompt and waits for user input to pass to the
+     * BundleManagement instance. If the user enters "Back", immediately
+     * returns such that no bundle is created and the option menu is
+     * printed again. Otherwise, returns the bundle name of the new
+     * preconfigured bundle
+     * 
+     * @param bundleService BundleManagement instance 
+     * @param input Scanner instance to get user input
+     * @return String of either the bundle name or "Back"
+     */
     private static String addPreconfBundle(BundleManagement bundleService, Scanner input) {
         System.out.println("Please enter your desired bundle name and one of the following bundle options in a comma separated list\n"
                 + "Available Preconfigured Bundle Options: PLATINUM, GOLD, SILVER, BRONZE\n"
@@ -504,7 +529,19 @@ public class UserInterface {
         bundleService.addPreconfBundle(paramArray[0], bundleOption);
         return paramArray[0];
     }
-    
+
+    /**
+     * Method that implements menu option 11 - Add Plain Pac bundle.
+     * Prints a prompt and waits for user input to pass to the
+     * BundleManagement instance. If the user enters "Back", immediately
+     * returns such that no bundle is created and the option menu is
+     * printed again. Otherwise, returns the bundle name of the new
+     * Plain Pac bundle
+     * 
+     * @param bundleService BundleManagement instance 
+     * @param input Scanner instance to get user input
+     * @return String of either the bundle name or "Back"
+     */
     private static String addPlainPacBundle(BundleManagement bundleService, Scanner input) {
         System.out.println("Please enter your desired plain Pac bundle name\n"
                 + "For example: John's Plain Pac Bundle\n"
@@ -516,7 +553,20 @@ public class UserInterface {
         bundleService.addPlainPacBundle(parameters);
         return parameters;
     }
-    
+
+    /**
+     * Method that implements menu option 12 - Add Pac bundle
+     * with calling plan. Prints a prompt and waits for user
+     * input to pass to the BundleManagement instance. If the
+     * user enters "Back", immediately returns such that no
+     * bundle is created and the option menu is printed again.
+     * Otherwise, returns the bundle name of the new Pac bundle
+     * with calling plan
+     * 
+     * @param bundleService BundleManagement instance 
+     * @param input Scanner instance to get user input
+     * @return String of either the bundle name or "Back"
+     */
     private static String addPacBundleWithCalling(BundleManagement bundleService, Scanner input) {
         System.out.println("Please enter your desired Pac bundle name and one of the following calling plan options in a comma separated list\n"
                 + "Available Calling Plan Options: PLATINUM, GOLD, SILVER, BRONZE\n"
@@ -549,7 +599,20 @@ public class UserInterface {
         bundleService.addPacBundleWithCalling(paramArray[0], callingOption);
         return paramArray[0];
     }
-    
+
+    /**
+     * Method that implements menu option 13 - Add Pac bundle
+     * with messaging plan. Prints a prompt and waits for user
+     * input to pass to the BundleManagement instance. If the
+     * user enters "Back", immediately returns such that no
+     * bundle is created and the option menu is printed again.
+     * Otherwise, returns the bundle name of the new Pac bundle
+     * with messaging plan
+     * 
+     * @param bundleService BundleManagement instance 
+     * @param input Scanner instance to get user input
+     * @return String of either the bundle name or "Back"
+     */
     private static String addPacBundleWithMessaging(BundleManagement bundleService, Scanner input) {
         System.out.println("Please enter your desired Pac bundle name and one of the following messaging plan options in a comma separated list\n"
                 + "Available Messaging Plan Options: PLATINUM, GOLD, SILVER, BRONZE\n"
