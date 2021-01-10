@@ -36,6 +36,14 @@ public class UserInterfaceManagement {
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + FIND, Events.SPECIAL.getDesc(), username);
     }
 
+    public void listMonthlyFeesByPhone(String phoneNum) {
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + LIST, Events.SUCCESS.getDesc(), phoneNum);
+    }
+
+    public void listMonthlyFeesByUser(String username) {
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + LIST, Events.SPECIAL.getDesc(), username);
+    }
+
     public void printBundleDetails(String name) {
         support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, name, Events.SINGLE.getDesc());
     }

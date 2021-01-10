@@ -84,9 +84,17 @@ public class BundleManagement implements PropertyChangeListener {
 
 		SimplePreconfBundleFactory factory = new SimplePreconfBundleFactory();
 		PreconfBundle preconf = factory.createBundle(name, option);
-		bundleList.put(name, preconf);
-		support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
-				preconf.getName());
+		if(preconf != null) {
+		    bundleList.put(name, preconf);
+	        support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
+	                preconf.getName());
+		} else {
+		    System.out.println("Could not create the requested bundle option.");
+		    System.out.printf("%s is not a valid pre-configured bundle!\n", name);
+		    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), name);
+		    return;
+		}
+		
 
 	}
 
