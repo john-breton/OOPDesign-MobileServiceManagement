@@ -7,7 +7,21 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
 import static reportingservice.PropertyNameStrings.*;
-
+/**
+ * The BundleManagement class is responsible for managing bundles. There are 
+ * two types of service bundles: Preconfigured bundle and PaC(Plain and Choose) bundle.
+ * A bundle is composed with bundle name(unique identifier), calling plan, messaging plan, 
+ * data plan and monthly fee.
+ * <p>
+ * The BundleManagement provides functionality such as add preconfigued bundle and 
+ * add PaC bundle. The newly created bundle will be added and maintained in a bundle list.
+ * <p>
+ * BundleManagment is a Singleton to ensure that only one instance of the BundleManagement
+ * class will exist at any given time.
+ * @author Yangrui Zhu
+ * @version 1.0
+ * @since January 08, 2020
+ */
 
 public class BundleManagement implements PropertyChangeListener {
 	private static final BundleManagement UNIQUE_INSTANCE = new BundleManagement();
@@ -15,18 +29,6 @@ public class BundleManagement implements PropertyChangeListener {
 
 	private final PropertyChangeSupport support;
 
-	/**
-	 * The BundleManagement class is responsible for managing bundles. There are 
-	 * two types of service bundles: Preconfigured bundle and PaC(Plain and Choose) bundle.
-	 * A bundle is composed with bundle name(unique identifier), calling plan, messaging plan, 
-	 * data plan and monthly fee.
-	 * <p>
-	 * The BundleManagement provides functionality such as add preconfigued bundle and 
-	 * add PaC bundle. The newly created bundle will be added and maintained in a bundle list.
-	 * <p>
-	 * BundleManagment is a Singleton to ensure that only one instance of the BundleManagement
-	 * class will exist at any given time.
-	 */
 	/**
 	 * Constructor for the BundleManagement class.
 	 * Required to be private to ensure no more than one
@@ -82,9 +84,17 @@ public class BundleManagement implements PropertyChangeListener {
 
 		SimplePreconfBundleFactory factory = new SimplePreconfBundleFactory();
 		PreconfBundle preconf = factory.createBundle(name, option);
-		bundleList.put(name, preconf);
-		support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
-				preconf.getName());
+		if(preconf != null) {
+		    bundleList.put(name, preconf);
+	        support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
+	                preconf.getName());
+		} else {
+		    System.out.println("Could not create the requested bundle option.");
+		    System.out.printf("%s is not a valid pre-configured bundle!\n", name);
+		    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), name);
+		    return;
+		}
+		
 
 	}
 
@@ -120,7 +130,7 @@ public class BundleManagement implements PropertyChangeListener {
 	 */
 	private void printBundleDetails(Bundle bundle) {
 		System.out.println("\n---Bundle Detail---");
-		System.out.printf("Name: %s\n", bundle.getName());
+		System.out.printf("Bundle Name: %s\n", bundle.getName());
 		if (bundle instanceof PaCBundle) {
 			System.out.print(((PaCBundle) bundle).getDescription());
 			System.out.println("Monthly Fee: $" + ((PaCBundle) bundle).cost());
@@ -128,6 +138,19 @@ public class BundleManagement implements PropertyChangeListener {
 			System.out.println((PreconfBundle) bundle);
 		}
 
+	}
+	/**
+	 * Print out the monthly fees of a given bundle
+	 * @param bundle  The bundle to be printed
+	 */		
+	private void printBundleFees(Bundle bundle) {
+		System.out.println("\n---Monthly Fees---");
+		System.out.printf("Bundle Name: %s\n", bundle.getName());
+		if (bundle instanceof PaCBundle) {
+			System.out.println("Monthly Fee: $" + ((PaCBundle) bundle).cost());
+		} else if (bundle instanceof PreconfBundle) {
+			System.out.println("Monthly Fee: $" + ((PreconfBundle) bundle). getMonthlyFees());
+		}		
 	}
 
 	/**
@@ -195,9 +218,15 @@ public class BundleManagement implements PropertyChangeListener {
 				}
 			} else if (((String) evt.getNewValue()).equals(Events.PAC.getDesc())) {// list all pac bundles names
 				listAllPacBundles();
-			} else if (((String) evt.getNewValue()).equals(Events.PRECFG.getDesc())) {// list all preconfigured bundles
-																						// names
+			} else if (((String) evt.getNewValue()).equals(Events.PRECFG.getDesc())) {// list all preconfigured bundles																					// names
 				listAllPreconfBundles();
+			} else if(((String) evt.getNewValue()).equals(Events.FEES.getDesc())) {//display single bundle's monthly fees
+				Bundle bundle = getBundle((String) evt.getOldValue());
+				if (bundle != null) {
+					printBundleFees(bundle);
+				} else {
+					System.out.printf("No Bundle with the name \"%s\" was found.\n", (String) evt.getOldValue());
+				}				
 			}
 
 			break;

@@ -144,16 +144,21 @@ public class AccountManagement implements PropertyChangeListener {
     }
 
     /**
-     * Get the service account associated with a phone number.
+     * Get the service account/fees associated with a phone number.
      *
      * @param phoneNum The phone number used to search for the service account.
+     * @param mode True if this is to display an account, false to display the fees associated with the account.
      */
-    public void getAccount(String phoneNum) {
+    public void getAccount(String phoneNum, boolean mode) {
         Set set = accountList.entrySet();
         for (Object o : set) {
             Map.Entry acc = (Map.Entry) o;
             if (acc.getKey().equals(phoneNum)) {
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
+                if (mode) {
+                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
+                } else {
+                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
+                }
                 return;
             }
         }
@@ -161,17 +166,22 @@ public class AccountManagement implements PropertyChangeListener {
     }
 
     /**
-     * Get the service accounts associated with a username.
+     * Get the service accounts/fees associated with a username.
      *
      * @param username The username used to search for the service accounts.
+     * @param mode True if this is to display an account, false to display the fees associated with the account.
      */
-    public void findAccounts(String username) {
+    public void findAccounts(String username, boolean mode) {
         boolean found = false;
         Set set = accountList.entrySet();
         for (Object o : set) {
             Map.Entry acc = (Map.Entry) o;
             if (((Account) acc.getValue()).getUser().equals(username)) {
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
+                if (mode) {
+                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
+                } else {
+                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
+                }
                 found = true;
             }
         }
@@ -217,6 +227,18 @@ public class AccountManagement implements PropertyChangeListener {
                     }
                 }
                 break;
+            case GET_ACCOUNT:
+                getAccount((String) evt.getNewValue(), true);
+                break;
+            case FIND_ACCOUNTS:
+                findAccounts((String) evt.getNewValue(), true);
+                break;
+            case GET_ACCOUNT_FEES:
+                getAccount((String) evt.getNewValue(), false);
+                break;
+            case FIND_ACCOUNTS_FEES:
+                findAccounts((String) evt.getNewValue(), false);
+                break;
             default:
                 break;
         }
@@ -245,7 +267,7 @@ public class AccountManagement implements PropertyChangeListener {
      * Will not be called unless the Account is known to exist.
      *
      * @param phoneNum The phone number associated with the service account.
-     * @return The Account object that is associated with the phone number provied.
+     * @return The Account object that is associated with the phone number provided.
      */
     private Account getAccountDetails(String phoneNum) {
         Set set = accountList.entrySet();

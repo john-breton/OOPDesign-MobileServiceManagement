@@ -29,6 +29,14 @@ public class PreconfBundle extends Bundle {
 	public PreconfBundle(BundleComponentFactory ComponentFactory) {
 		this.ComponentFactory = ComponentFactory;
 	}
+	/**
+	 * Get monthly fee for Preconfigured Bundle
+	 * 
+	 * @return Monthly fee of this Preconfigured Bundle
+	 */	
+	public int getMonthlyFees() {
+		return monthlyfees.monthlyfee();
+	}
 
 	/**
 	 * It will prepare component for it's related bundle plan through calling proper
@@ -68,6 +76,7 @@ public class PreconfBundle extends Bundle {
 		if (monthlyfees != null) {
 			result.append("Monthly Fee: $");
 			result.append(monthlyfees.monthlyfee());
+			result.append("\n");
 
 		}
 		/*

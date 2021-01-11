@@ -21,11 +21,17 @@ public final class PropertyNameStrings {
     public static final String UPDATED = "UPDATED";
     public static final String DELETE = "DELETE";
     public static final String DISPLAY = "DISPLAY";
+    public static final String FIND = "FIND";
+    public static final String LIST = "LIST";
 
     // Reporting Service Commands
     public static final String PRINT_ACCOUNT_DETAILS = "PRINT_ACCOUNT_DETAILS";
     public static final String PRINT_ACCOUNT_ADDED = "PRINT_ACCOUNT_ADDED";
     public static final String PRINT_ACCOUNT_DELETED = "PRINT_ACCOUNT_DELETED";
+    public static final String GET_ACCOUNT = "GET_ACCOUNT";
+    public static final String FIND_ACCOUNTS = "FIND_ACCOUNTS";
+    public static final String GET_ACCOUNT_FEES = "GET_ACCOUNT_FEES";
+    public static final String FIND_ACCOUNTS_FEES = "FIND_ACCOUNTS_FEES";
     public static final String PRINT_USER_DETAILS = "PRINT_USER_DETAILS";
     public static final String PRINT_USER_LIST = "PRINT_USER_LIST";
     public static final String PRINT_USER_ADDED = "PRINT_USER_ADDED";
@@ -45,7 +51,8 @@ public final class PropertyNameStrings {
         SPECIAL("SPECIAL"),
     	PAC("PAC"),//for list all Pac Bundles names
     	PRECFG("PRECFG"),//for list all preconfigured bundles names
-    	SINGLE("SINGLE");//for print single bundle detail
+    	SINGLE("SINGLE"),//for print single bundle detail
+        FEES("FEES"); // To print the fees associated with a bundle.
 
         private String desc;
 
