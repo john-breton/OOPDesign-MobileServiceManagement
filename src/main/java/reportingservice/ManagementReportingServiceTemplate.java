@@ -11,12 +11,12 @@ import static reportingservice.PropertyNameStrings.*;
  * This is a template for the management classes. It is both an observer and
  * observable.
  * <p>
- * The class listens for commands from the ConcreteReportingService, and will
+ * The class listens for commands from the ReportingService, and will
  * respond by printing out the required information
  * <p>
  * This class adds/removes observers (PropertyChangeListeners) who listen for
  * its commands. For the midterm, the only listener would be the
- * ConcreteReportingService.
+ * ReportingService.
  * <p>
  * In order to use this template, PropertyChangeEvent propertyNames fired from
  * this class must meet the required formatting:
@@ -35,7 +35,7 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
     private final PropertyChangeSupport support;
 
     /**
-     * Constructor for ConcreteReportingService.
+     * Constructor for ReportingService.
      */
     private ManagementReportingServiceTemplate() {
         // add this to your constructor
@@ -69,11 +69,11 @@ public class ManagementReportingServiceTemplate implements PropertyChangeListene
 
     /**
      * This method is called whenever a command is sent out from the
-     * concreteReportingService
+     * ReportingService
      * <p>
      * It will respond by sending out the corresponding command to its listeners
      *
-     * @param event a command from the ConcreteReportingService
+     * @param event a command from the ReportingService
      */
     @Override
     public void propertyChange(PropertyChangeEvent event) {

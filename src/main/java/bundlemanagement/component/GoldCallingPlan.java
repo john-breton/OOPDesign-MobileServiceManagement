@@ -25,7 +25,7 @@ public class GoldCallingPlan extends BundleDecorator implements CallingPlan {
 	/**
 	 * Constructor for PaC side
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle to be associated with this object
 	 */
 	public GoldCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

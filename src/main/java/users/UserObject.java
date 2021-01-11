@@ -17,7 +17,7 @@ public class UserObject extends UserObjectIf {
 
 	/**
 	 * Constructor for creating the user object
-	 * @param String name/id
+	 * @param name The user name of the user.
 	 * */
 	public UserObject(String name) {
 		propertyList = new TreeMap<PropertyIdEnum, PropertyIf>();
@@ -28,8 +28,7 @@ public class UserObject extends UserObjectIf {
 	
 	/**
 	 * used to modify any property of the user object
-	 * @param TreeMap<PropertyIdEnum, String> the list of all properties you wish to modify
-	 * @return Nothing
+	 * @param vals the list of all properties you wish to modify
 	 * */
 	public void modifyProperties(TreeMap<PropertyIdEnum, String> vals) {
 		for (Map.Entry<PropertyIdEnum, String> entry : vals.entrySet()) {

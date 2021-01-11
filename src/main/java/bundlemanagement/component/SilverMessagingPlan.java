@@ -26,7 +26,7 @@ public class SilverMessagingPlan extends BundleDecorator implements MessagingPla
 	/**
 	 * Constructor for PaC side
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle that will be associated with this Object
 	 */
 	public SilverMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

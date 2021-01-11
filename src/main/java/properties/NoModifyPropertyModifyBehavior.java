@@ -9,9 +9,9 @@ public class NoModifyPropertyModifyBehavior extends PropertyModifyBehaviorIf {
 
 	/**
 	 * Will trigger upon change. Returns null if no modification is detected
-
-	 * @param T val
-	 * @return T
+	 *
+	 * @param val The T value
+	 * @return null if there is no modification, T otherwise.
 	 * */
 	@Override
 	public <T> T change(T val) {

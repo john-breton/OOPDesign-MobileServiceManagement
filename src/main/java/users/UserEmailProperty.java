@@ -14,8 +14,7 @@ public class UserEmailProperty extends PropertyIf<String> {
 	
 	/**
 	 * Constructor for creating the user email property
-	 * @param String address value
-	 * @return Nothing
+	 * @param email The email for the user.
 	 * */
 	public UserEmailProperty(String email) {
 		propertyName = PROPERTY_USER_EMAIL;

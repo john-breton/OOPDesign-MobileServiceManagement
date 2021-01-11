@@ -13,7 +13,7 @@ public class UserAddressProperty extends PropertyIf<String> {
 	
 	/**
 	 * Constructor for creating the user address property
-	 * @param String address value
+	 * @param address The user address to be associated with the property
 	 * */
 	public UserAddressProperty(String address) {
 		propertyName = PROPERTY_USER_ADDRESS;

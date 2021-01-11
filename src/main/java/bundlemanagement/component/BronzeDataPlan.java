@@ -26,7 +26,7 @@ public class BronzeDataPlan extends BundleDecorator implements DataPlan {
 	/**
 	 * Constructor for PaC side
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle to be associated with this object
 	 */
 	public BronzeDataPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

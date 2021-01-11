@@ -14,9 +14,9 @@ public class EmailPropertyModifyBehavior extends PropertyModifyBehaviorIf {
 	
 	/**
 	 * Will trigger upon change. Returns null if the email address is invalid
-
-	 * @param T val
-	 * @return T
+	 *
+	 * @param val The T value
+	 * @return null if the email address is invalid, T otherwise.
 	 * */
 	@Override
 	public <T> T change(T val) {

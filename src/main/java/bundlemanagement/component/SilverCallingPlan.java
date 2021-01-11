@@ -26,7 +26,7 @@ public class SilverCallingPlan extends BundleDecorator implements CallingPlan {
 	/**
 	 * Constructor for PaC side
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle to be associated with this object
 	 */
 	public SilverCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

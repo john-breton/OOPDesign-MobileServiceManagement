@@ -4,7 +4,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -16,7 +15,7 @@ import users.UserManagementFactory;
 /**
  * A singleton class used to manage user objects
  * @author David,Chen
- * @Version 1.0
+ * @version 1.0
  */
 public class UserManagement implements PropertyChangeListener {
 	
@@ -58,8 +57,7 @@ public class UserManagement implements PropertyChangeListener {
 	
 	/**
 	 * Add a single user by name, it will set the attributes empty string by default
-	 * @param String name(Surfoplance)
-	 * @return nothing
+	 * @param name (Surfoplane) The user name of the user to be added
 	 */
 	public void addUser(String name) {
 		if (name == null || name.isBlank() || users.containsKey(name)) {
@@ -80,10 +78,9 @@ public class UserManagement implements PropertyChangeListener {
 	/**
 	 * Overloaded Method
 	 * Add a single user by name and filling the parameters to the user object
-	 * @param String name(Surfoplance)
-	 * @param String address
-	 * @param String email address
-	 * @return nothing
+	 * @param name (Surfoplance) The username for the user.
+	 * @param address The address for the user.
+	 * @param email address The email for the user.
 	 */
 	public void addUser(String name, String address, String email) {
 		addUser(name);
@@ -105,8 +102,7 @@ public class UserManagement implements PropertyChangeListener {
 	 * Add a list of users in to the system. 
 	 * the TreeMap has to use PropertyIdEnum as Key
 	 * 
-	 * @param ArrayList<TreeMap<PropertyIdEnum, String>> list of users
-	 * @return nothing
+	 * @param users The list of users
 	 */
 	public void addUsers(ArrayList<TreeMap<PropertyIdEnum, String>> users) {
 		for (TreeMap<PropertyIdEnum, String> currentUser:users) {
@@ -122,9 +118,8 @@ public class UserManagement implements PropertyChangeListener {
 	 * Modify the User Object by UserName 
 	 * the TreeMap has to use PropertyIdEnum as Key
 	 * 
-	 * @param String userName
-	 * @param TreeMap<PropertyIdEnum, String> userProperties
-	 * @return nothing
+	 * @param userName The user name of the user.
+	 * @param userProperties The properties that will be used to modify the user.
 	 */
 	public void modifyUser(String userName, TreeMap<PropertyIdEnum, String> userProperties) {
 		if (!users.containsKey(userName)) {
@@ -152,8 +147,7 @@ public class UserManagement implements PropertyChangeListener {
 	/**
 	 * Remove the User Object by UserName 
 	 * 
-	 * @param String userName
-	 * @return nothing
+	 * @param userId The user name for the user to be deleted.
 	 */
 	public void deleteUser(String userId) {
 		if (!users.containsKey(userId)) {
@@ -174,8 +168,7 @@ public class UserManagement implements PropertyChangeListener {
 	/**
 	 * Remove the list of User Objects by UserName 
 	 * 
-	 * @param ArrayList<String> UserNames
-	 * @return nothing
+	 * @param userIds The usernames for the users to be deleted.
 	 */
 	public void deleteUsers(ArrayList<String> userIds) {
 		for (String userId : userIds) {
@@ -187,8 +180,7 @@ public class UserManagement implements PropertyChangeListener {
 	/**
 	 * Get the user by its username
 	 * 
-	 * @param String UserName
-	 * @return nothing
+	 * @param userId The user name for the user that is being looked for.
 	 */
 	public void getUser(String userId) {
 		if (!users.containsKey(userId)) {
@@ -208,8 +200,7 @@ public class UserManagement implements PropertyChangeListener {
 	/**
 	 * Used to Config the Factory
 	 * 
-	 * @param ManagementFactoryIf<UserObjectIf> userFactory
-	 * @return nothing
+	 * @param userFactory The Factory that is being set.
 	 */
 	public void setManagementFactory(ManagementFactoryIf<UserObjectIf> userFactory) {
 		this.userFactory = userFactory;
@@ -217,8 +208,6 @@ public class UserManagement implements PropertyChangeListener {
 	
 	/**
 	 * printing all users
-	 * 
-	 * @return nothing
 	 */
 	private void printAllUserNames() {
 		/*
@@ -234,8 +223,6 @@ public class UserManagement implements PropertyChangeListener {
 	
 	/**
 	 * printing a single user
-	 * 
-	 * @return nothing
 	 */
 	private void printUser(String userId) {
 		UserObjectIf user = users.get(userId);
@@ -245,8 +232,7 @@ public class UserManagement implements PropertyChangeListener {
 	
 	/**
 	 * this method will be triggered once the event changed.
-	 * @param PropertyChangeEvent evt
-	 * @return nothing
+	 * @param evt The event that was received.
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {

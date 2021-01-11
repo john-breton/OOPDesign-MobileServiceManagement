@@ -3,7 +3,7 @@ package mobileservicemanagementapplication;
 import java.util.TreeMap;
 
 import properties.PropertyIdEnum;
-import reportingservice.ConcreteReportingService;
+import reportingservice.ReportingService;
 import services.UserManagement;
 
 /**
@@ -13,12 +13,14 @@ import services.UserManagement;
 public class MobileServiceManagementApplicationDemo {
 
 	/**
-	 * @param args
+	 * Entry-point to test The UserManagement service.
+	 *
+	 * @param args The command line arguments passed during program initialization
 	 */
 	public static void main(String[] args) {
 //		UserManagementService service = new UserManagementService();
 		UserManagement service = UserManagement.getInstance();
-		ConcreteReportingService reporting = ConcreteReportingService.getInstance();
+		ReportingService reporting = ReportingService.getInstance();
 		UserServiceTestRunner runner = new UserServiceTestRunner();
 		
 		reporting.addPropertyChangeListener(service);

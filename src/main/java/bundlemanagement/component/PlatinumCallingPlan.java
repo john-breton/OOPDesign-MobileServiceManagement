@@ -29,7 +29,7 @@ public class PlatinumCallingPlan extends BundleDecorator implements CallingPlan 
 	/**
 	 * constructor for PaC side.
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle to be associated with this object
 	 */
 	public PlatinumCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

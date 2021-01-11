@@ -1,7 +1,7 @@
 package reportingservice;
 
 /**
- * This is just a simple test to check that the ConcreteReportingService and
+ * This is just a simple test to check that the ReportingService and
  * ManagementReportingServiceTemplate are working properly
  *
  * @author Matthew Siu
@@ -16,7 +16,7 @@ public class ReportingTest {
      * creating new account
      * Here's some important information!
      *
-     * @param args
+     * @param args The command-line arguments passed during program execution.
      */
     public static void main(String[] args) {
         ReportingService reportingService = ReportingService.getInstance();

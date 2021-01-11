@@ -26,7 +26,7 @@ public class GoldMessagingPlan extends BundleDecorator implements MessagingPlan 
 	/**
 	 * Constructor for PaC side
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle to be associated with this object
 	 */
 	public GoldMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

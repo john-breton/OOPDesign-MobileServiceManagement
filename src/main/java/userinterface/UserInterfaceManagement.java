@@ -5,8 +5,6 @@ import static reportingservice.PropertyNameStrings.*;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import reportingservice.PropertyNameStrings.Events;
-
 /**
  * This class is simply responsible for firing PropertyChangeEvents to
  * ReportingService such that it will send events to the relevant

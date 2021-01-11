@@ -11,7 +11,7 @@ import bundlemanagement.service.BundleOption;
 import accountmanagement.AccountManagement;
 import services.UserManagement;
 import bundlemanagement.service.BundleManagement;
-import reportingservice.ConcreteReportingService;
+import reportingservice.ReportingService;
 
 /**
  * Class that implements the user interface used to start
@@ -23,7 +23,7 @@ public class UserInterface {
     /**
      * Main method to be run that implements the menu-driven
      * user interface
-     * @param args
+     * @param args The command-line arguments passed during program execution
      */
     public static void main(String[] args) {
         System.out.println("Welcome!");
@@ -41,7 +41,7 @@ public class UserInterface {
         BundleManagement bundleService = BundleManagement.getInstance();
         AccountManagement accountService = AccountManagement.getInstance();
         UserInterfaceManagement userIfService = UserInterfaceManagement.getInstance();
-        ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
+        ReportingService reportingService = ReportingService.getInstance();
 
         reportingService.addPropertyChangeListener(userService);
         reportingService.addPropertyChangeListener(bundleService);
