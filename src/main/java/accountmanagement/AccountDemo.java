@@ -1,6 +1,6 @@
 package accountmanagement;
 
-import reportingservice.ConcreteReportingService;
+import reportingservice.ReportingService;
 
 import java.beans.PropertyChangeSupport;
 
@@ -11,7 +11,7 @@ import java.beans.PropertyChangeSupport;
 public class AccountDemo {
 
     public static void main(String[] args) {
-        ConcreteReportingService reportingService = ConcreteReportingService.getInstance();
+        ReportingService reportingService = ReportingService.getInstance();
         AccountManagement accManagement = AccountManagement.getInstance();
 
         reportingService.addPropertyChangeListener(accManagement);

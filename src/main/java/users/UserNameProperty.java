@@ -1,13 +1,14 @@
-/**
- * 
- */
 package users;
 
 import properties.NoModifyPropertyModifyBehavior;
 import properties.PropertyIf;
 
 /**
- * @author edavleu
+ * UserNameProperty is a class that extends from the PropertyIf interface
+
+ * and is used to store the Name property for user object
+
+ * @author David
  *
  */
 public class UserNameProperty extends PropertyIf<String> {

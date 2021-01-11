@@ -35,7 +35,7 @@ public class UserManagement implements PropertyChangeListener {
 	private static final String USER_ID_KEY = "userId";
 
 	private PropertyChangeSupport support;
-	private static UserManagement uniqueInstance = new UserManagement();
+	private static UserManagement UNIQUE_INSTANCE = new UserManagement();
 	private TreeMap<String, UserObjectIf> users;
 	private ManagementFactoryIf<UserObjectIf> userFactory;
 
@@ -53,7 +53,7 @@ public class UserManagement implements PropertyChangeListener {
 	 * @return UserManagement This returns the singleton instance of UserManagement
 	 * */
 	public static UserManagement getInstance() {
-		return uniqueInstance;
+		return UNIQUE_INSTANCE;
 	}
 	
 	/**

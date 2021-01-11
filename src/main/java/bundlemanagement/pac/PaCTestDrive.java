@@ -2,6 +2,12 @@ package bundlemanagement.pac;
 
 import bundlemanagement.component.*;
 
+/**
+ * Test Drive for PaC bundle. It can be deleted at future.
+ * 
+ * @author epahram
+ *
+ */
 public class PaCTestDrive {
 
 	public static void main(String[] args) {

@@ -1,16 +1,20 @@
 package bundlemanagement.preconf;
 
-import bundlemanagement.service.Bundle;
+/**
+ * This class will receive order to create platinum preconf Bundle. It will then
+ * ask Preconf Bundle to create all needed component for preconf platinum bundle
+ * plan.
+ * 
+ * @author epahram
+ *
+ */
 
 public class PlatinumBundleShop extends BundleShop {
-	/**
-	 * Create a variable type BundleComponentFactory. It will be later assigned at
-	 * constructor.
-	 */
+
 	private BundleComponentFactory platinumbundlecomponentfactory;
 
 	/**
-	 * Constructor to set the BundleComponentFactory
+	 * constructor set up BundleComponentFactory to PlatinumBundleComponentFactory.
 	 */
 
 	public PlatinumBundleShop() {
@@ -18,9 +22,10 @@ public class PlatinumBundleShop extends BundleShop {
 	}
 
 	/**
-	 * It will ask Bundle to create PreconfBundle type Platinum.
+	 * This method asks preconfBundle class to create related calling plan,
+	 * messaging plan,data plan, and monthly fee for platinum preconf plan.
 	 * 
-	 * @return Bundle it will return Bundle(Platinum)
+	 * @return Bundle
 	 */
 	protected PreconfBundle createBundle() {
 		PreconfBundle bundle;

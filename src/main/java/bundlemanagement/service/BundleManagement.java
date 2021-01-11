@@ -24,7 +24,7 @@ import static reportingservice.PropertyNameStrings.*;
  */
 
 public class BundleManagement implements PropertyChangeListener {
-	private static final BundleManagement uniqueInstance = new BundleManagement();
+	private static final BundleManagement UNIQUE_INSTANCE = new BundleManagement();
 	private final HashMap<String, Bundle> bundleList;
 
 	private final PropertyChangeSupport support;
@@ -44,7 +44,7 @@ public class BundleManagement implements PropertyChangeListener {
 	 * @return The Singleton instance of the BundleManagement
 	 */
 	public static BundleManagement getInstance() {
-		return uniqueInstance;
+		return UNIQUE_INSTANCE;
 	}
 
 	/**
