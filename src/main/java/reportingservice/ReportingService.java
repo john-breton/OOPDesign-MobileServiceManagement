@@ -4,8 +4,6 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-import reportingservice.PropertyNameStrings.Events;
-
 import static reportingservice.PropertyNameStrings.*;
 
 /**
@@ -40,7 +38,7 @@ public class ReportingService implements PropertyChangeListener {
     private PropertyChangeSupport support;
 
     /**
-     * Constructor for ConcreteReportingService.
+     * Constructor for ReportingService.
      */
     private ReportingService() {
         support = new PropertyChangeSupport(this);

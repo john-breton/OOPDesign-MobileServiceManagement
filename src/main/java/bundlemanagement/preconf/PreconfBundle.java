@@ -23,7 +23,7 @@ public class PreconfBundle extends Bundle {
 	/**
 	 * The constructor will set the value for related BundleComponentFactory.
 	 * 
-	 * @param ComponentFactory
+	 * @param ComponentFactory The BundleComponentFactory associated with this Object
 	 */
 
 	public PreconfBundle(BundleComponentFactory ComponentFactory) {

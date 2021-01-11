@@ -21,7 +21,7 @@ public abstract class PropertyIf<T> {
 	
 	/**
 	 * Setter for the value of the property
-	 * @param T val
+	 * @param val The value to be set to T
 	 * */
 	public void setValue(T val) {
 		T newVal = propertyModifyBehavior.change(val);
@@ -44,7 +44,7 @@ public abstract class PropertyIf<T> {
 	
 	/**
 	 * add modify behavior to current property
-	 * @param PropertyModifyBehaviorIf pmb
+	 * @param pmb The propertyModifyBehaviour to be associated with the current Object
 	 * */
 	public void setPropertyModifyBehavior(PropertyModifyBehaviorIf pmb) {
 		propertyModifyBehavior = pmb;

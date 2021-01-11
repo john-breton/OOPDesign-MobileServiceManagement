@@ -2,8 +2,6 @@ package accountmanagement;
 
 import reportingservice.ReportingService;
 
-import java.beans.PropertyChangeSupport;
-
 /**
  * Class used to demonstrate the work done on the AccountManagement class.
  * Will be removed when application is ready for submission.

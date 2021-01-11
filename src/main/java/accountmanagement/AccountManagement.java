@@ -191,7 +191,7 @@ public class AccountManagement implements PropertyChangeListener {
     }
 
     /**
-     * Handle the various event from ConcreteReportingService. Any unknown
+     * Handle the various event from ReportingService. Any unknown
      * events are ignored.
      *
      * @param evt The event that was received.

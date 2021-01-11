@@ -10,8 +10,8 @@ public class SimplePropertyModifyBehavior extends PropertyModifyBehaviorIf {
 	/**
 	 * Will trigger upon change. Returns null if simple modification detected
 
-	 * @param T val
-	 * @return T
+	 * @param val The value to be added.
+	 * @return null if a simple modification is detected, T otherwise
 	 * */
 	@Override
 	public <T> T change(T val) {

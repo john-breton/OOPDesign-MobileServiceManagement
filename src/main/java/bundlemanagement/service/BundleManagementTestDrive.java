@@ -28,8 +28,8 @@ public class BundleManagementTestDrive {
 
 }
 
-/**Test output:
- * ---Bundle Detail---
+/*Test output:
+  ---Bundle Detail---
 Name: Yangrui's Bundle
 Calling Plan: Unlimited Canada wide calling
 Messaging Plan: 10K Messages

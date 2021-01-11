@@ -16,7 +16,7 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	/**
 	 * Setup constructor
 	 * 
-	 * @param pacbundle
+	 * @param pacbundle The PaC bundle to be associated with this object
 	 */
 	public ZeroMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;

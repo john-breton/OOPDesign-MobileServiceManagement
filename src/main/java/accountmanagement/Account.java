@@ -10,7 +10,7 @@ import lombok.Setter;
  * account. These service accounts are managed by the AccountManagement class.
  */
 public class Account {
-    /**
+    /*
      * Gets the username identifier for this Account.
      *
      * @return The username for this Account.
@@ -18,7 +18,7 @@ public class Account {
     @Getter
     private final String user;
 
-    /**
+    /*
      * Gets the phone number for this Account.
      *
      * @return The phone number for this Account, as a String.
@@ -26,7 +26,7 @@ public class Account {
     @Getter
     private final String phoneNum;
 
-    /**
+    /*
      * --GETTER--
      * Gets the bundle name identifier for this Account.
      *

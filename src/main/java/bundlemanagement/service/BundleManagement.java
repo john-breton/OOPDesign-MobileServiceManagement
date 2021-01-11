@@ -92,7 +92,6 @@ public class BundleManagement implements PropertyChangeListener {
 		    System.out.println("Could not create the requested bundle option.");
 		    System.out.printf("%s is not a valid pre-configured bundle!\n", name);
 		    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), name);
-		    return;
 		}
 		
 
@@ -191,9 +190,9 @@ public class BundleManagement implements PropertyChangeListener {
 	}
 
 	/**
-	 *Handle the various event from ConcreteReportingService. Any unknown
+	 *Handle the various event from ReportingService. Any unknown
      * events are ignored.
-     * @param evt an event from ConcreteReportingService indicating the change
+     * @param evt an event from ReportingService indicating the change
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {

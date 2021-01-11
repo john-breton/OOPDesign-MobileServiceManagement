@@ -24,7 +24,7 @@ public abstract class BundleShop {
 	 * This method will create Bundle at it's related BundleShop. This method will
 	 * ask Bundle to prepare related component for bundle.
 	 * 
-	 * @param type the type can be gold, platinum, bronze, and silver
+	 * @param name The type can be gold, platinum, bronze, and silver
 	 * @return Bundle
 	 */
 	public PreconfBundle orderBundle(String name) {

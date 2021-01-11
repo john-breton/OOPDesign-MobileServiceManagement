@@ -1,7 +1,5 @@
 package bundlemanagement.preconf;
 
-import bundlemanagement.service.Bundle;
-
 public class PreconfTestDrive {
 
 	public static void main(String[] args) {
