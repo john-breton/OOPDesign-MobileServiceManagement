@@ -1,5 +1,10 @@
 package bundlemanagement.pac;
 
+import java.math.BigDecimal;
+
+import bundlemanagement.preconf.BundleFees;
+import bundlemanagement.preconf.BundleNames;
+
 /**
  * This class implements Zero calling plan for PaC bundle.
  * 
@@ -9,9 +14,6 @@ package bundlemanagement.pac;
 public class ZeroCallingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
-	private static final int ZERO_CALLING_MINUTES = 0;
-	private static final int ZERO_CALLING_PLAN_FEE = 0;
-	private static final String ZERO_CALLING_DESCRIPTION = "Calling Plan: Zero - Zero min";
 
 	/**
 	 * Setup constructor
@@ -30,7 +32,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + ZERO_CALLING_DESCRIPTION + "\n";
+		return pacbundle.getDescription() + BundleNames.PACWITHZEROCALLINGPLAN.getBundleNames() + "\n";
 	}
 
 	/**
@@ -39,9 +41,9 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 * @return cost integer value to PaC side.
 	 */
 	@Override
-	public int cost() {
+	public BigDecimal cost() {
 
-		return pacbundle.cost() + ZERO_CALLING_PLAN_FEE;
+		return pacbundle.cost().add(BundleFees.PaCWithCallingOptionFees.get(BundleNames.PACWITHZEROCALLINGPLAN));
 	}
 
 	/**
@@ -49,9 +51,9 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 * 
 	 * @return calling minutes time to PaC bundle.
 	 */
-	public int getCallingMinutes() {
+	public BigDecimal getCallingMinutes() {
 
-		return ZERO_CALLING_MINUTES;
+		return BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PACWITHZEROCALLINGPLAN);
 	}
 
 }

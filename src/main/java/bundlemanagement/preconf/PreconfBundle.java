@@ -1,5 +1,7 @@
 package bundlemanagement.preconf;
 
+import java.math.BigDecimal;
+
 import bundlemanagement.service.Bundle;
 
 /**
@@ -14,28 +16,35 @@ import bundlemanagement.service.Bundle;
  *
  */
 public class PreconfBundle extends Bundle {
-	CallingPlan callingplan;
-	MessagingPlan messagingplan;
-	DataPlan dataplan;
-	MonthlyFees monthlyfees;
+	/**
+	 * This attribute could go to Bundle class as well, so this way you don't need
+	 * to use simple factory on top(Ista's comment).
+	 */
+	BundleNames bundlename;
+	CallingPlanOptions callingplan;
+	MessagingPlanOptions messagingplan;
+	DataPlanOptions dataplan;
+	BigDecimal monthlyfees;
 	BundleComponentFactory ComponentFactory;
 
 	/**
 	 * The constructor will set the value for related BundleComponentFactory.
 	 * 
-	 * @param ComponentFactory The BundleComponentFactory associated with this Object
+	 * @param ComponentFactory The BundleComponentFactory associated with this
+	 *                         Object
 	 */
 
 	public PreconfBundle(BundleComponentFactory ComponentFactory) {
 		this.ComponentFactory = ComponentFactory;
 	}
+
 	/**
 	 * Get monthly fee for Preconfigured Bundle
 	 * 
 	 * @return Monthly fee of this Preconfigured Bundle
-	 */	
-	public int getMonthlyFees() {
-		return monthlyfees.monthlyfee();
+	 */
+	public BigDecimal getMonthlyFees() {
+		return monthlyfees;
 	}
 
 	/**
@@ -44,6 +53,7 @@ public class PreconfBundle extends Bundle {
 	 */
 	void prepare() {
 		// System.out.println("Preparing " + getName());
+		bundlename = ComponentFactory.createBundleNames();
 		callingplan = ComponentFactory.createCallingPlan();
 		messagingplan = ComponentFactory.createMessagingPlan();
 		dataplan = ComponentFactory.createDataPlan();
@@ -58,24 +68,29 @@ public class PreconfBundle extends Bundle {
 	public String toString() {
 		StringBuffer result = new StringBuffer();
 		// result.append("------ " + getName() + " ------\n");
+		if (bundlename != null) {
+			result.append("Official Bundle Name: ");
+			result.append(bundlename.getBundleNames());
+			result.append("\n");
+		}
 		if (callingplan != null) {
 			result.append("Calling Plan: ");
-			result.append(callingplan);
+			result.append(callingplan.getCallingPlanOptionsDesription());
 			result.append("\n");
 		}
 		if (messagingplan != null) {
 			result.append("Messaging Plan: ");
-			result.append(messagingplan);
+			result.append(messagingplan.getdMessagingPlanOptionsDesription());
 			result.append("\n");
 		}
 		if (dataplan != null) {
 			result.append("Data Plan: ");
-			result.append(dataplan);
+			result.append(dataplan.getdDataPlanOptionsDesription());
 			result.append("\n");
 		}
 		if (monthlyfees != null) {
 			result.append("Monthly Fee: $");
-			result.append(monthlyfees.monthlyfee());
+			result.append(monthlyfees);
 			result.append("\n");
 
 		}

@@ -1,26 +1,32 @@
 package bundlemanagement.pac;
-import bundlemanagement.component.*;
+
 import bundlemanagement.service.BundleOption;
 
 /**
  * This SimplePaCBundleFactory class will create the PaC Bundle.
+ * 
  * @author enuyhza
  *
  */
 public class SimplePaCBundleFactory {
 	/**
 	 * Create PaC Bundle based on the passing parameters
-	 * @param name The name for the PaC bundle
-	 * @param callingOption The calling option for the PaC bundle (PLATINUM, GOLD, SILVER, or BRONZE)
-	 * @param messagingOption The messaging option for the PaC bundle (PLATINUM, GOLD, SILVER, or BRONZE)
-	 * @param dataOption The data option for the PaC bundle (PLATINUM, GOLD, SILVER, or BRONZE)
+	 * 
+	 * @param name            The name for the PaC bundle
+	 * @param callingOption   The calling option for the PaC bundle (PLATINUM, GOLD,
+	 *                        SILVER, or BRONZE)
+	 * @param messagingOption The messaging option for the PaC bundle (PLATINUM,
+	 *                        GOLD, SILVER, or BRONZE)
+	 * @param dataOption      The data option for the PaC bundle (PLATINUM, GOLD,
+	 *                        SILVER, or BRONZE)
 	 * @return The pac bundle object
 	 */
-	public PaCBundle createBundle(String name, BundleOption callingOption, BundleOption messagingOption, BundleOption dataOption) {
+	public PaCBundle createBundle(String name, BundleOption callingOption, BundleOption messagingOption,
+			BundleOption dataOption) {
 		PaCBundle pac = new BareBonePhoneService();
-		
-		if(callingOption != null) {
-			switch(callingOption) {
+
+		if (callingOption != null) {
+			switch (callingOption) {
 			case PLATINUM:
 				pac = new PlatinumCallingPlan(pac);
 				break;
@@ -38,8 +44,8 @@ public class SimplePaCBundleFactory {
 				break;
 			}
 		}
-		if(messagingOption != null) {
-			switch(messagingOption) {
+		if (messagingOption != null) {
+			switch (messagingOption) {
 			case PLATINUM:
 				pac = new PlatinumMessagingPlan(pac);
 				break;
@@ -55,10 +61,10 @@ public class SimplePaCBundleFactory {
 			case ZERO:
 				pac = new ZeroMessagingPlan(pac);
 				break;
-			}		
+			}
 		}
-		if(dataOption != null) {
-			switch(dataOption) {
+		if (dataOption != null) {
+			switch (dataOption) {
 			case PLATINUM:
 				pac = new PlatinumDataPlan(pac);
 				break;
@@ -74,11 +80,11 @@ public class SimplePaCBundleFactory {
 			case ZERO:
 				pac = new ZeroDataPlan(pac);
 				break;
-			}		
+			}
 		}
 		pac.setName(name);
 		return pac;
-		
+
 	}
 
 }

@@ -1,20 +1,19 @@
-package bundlemanagement.component;
+package bundlemanagement.pac;
+
+import java.math.BigDecimal;
 
 import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements platinum data plan for the both PaC and preconf bundles.
+ * This class implements platinum data plan for the PaC bundle.
  * 
  * @author epahram
  *
  */
-public class PlatinumDataPlan extends BundleDecorator implements DataPlan {
+public class PlatinumDataPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
-	private static final int PLATINUM_DATA_QUANTITY = 10;
-	private static final int PLATINUM_DATA_PLAN_FEE = 40;
-	private static final String PLATINUM_DATA_DESCRIPTION = "Data Plan: Platinum - Data Included: 10 GB";
 
 	/**
 	 * Constructor for preconf side
@@ -39,7 +38,7 @@ public class PlatinumDataPlan extends BundleDecorator implements DataPlan {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + PLATINUM_DATA_DESCRIPTION + "\n";
+		return pacbundle.getDescription() + BundleNames.PACWITHPLATINUMDATAPLAN.getBundleNames() + "\n";
 	}
 
 	/**
@@ -48,18 +47,9 @@ public class PlatinumDataPlan extends BundleDecorator implements DataPlan {
 	 * @return it will return plan's cost to PaC side
 	 */
 	@Override
-	public int cost() {
+	public BigDecimal cost() {
 
-		return pacbundle.cost() + PLATINUM_DATA_PLAN_FEE;
-	}
-
-	/**
-	 * sets information for platinum data plan.
-	 * 
-	 * @return String information to preconf side.
-	 */
-	public String toString() {
-		return "10 GB";
+		return pacbundle.cost().add(BundleFees.PaCWithDataOptionFees.get(BundleNames.PACWITHPLATINUMDATAPLAN));
 	}
 
 	/**
@@ -67,8 +57,8 @@ public class PlatinumDataPlan extends BundleDecorator implements DataPlan {
 	 * 
 	 * @return data quantity for platinum plan.
 	 */
-	public int getDataQuantity() {
+	public BigDecimal getDataQuantity() {
 
-		return PLATINUM_DATA_QUANTITY;
+		return BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PACWITHPLATINUMDATAPLAN);
 	}
 }
