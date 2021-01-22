@@ -7,7 +7,11 @@ import java.util.TreeMap;
 
 import properties.PropertyIdEnum;
 import users.UserObjectIf;
-
+/**
+ * This is an abstract class for the UserManagement class
+ * @author esiumat
+ *
+ */
 public abstract class UserManagement_Abstract implements PropertyChangeListener {
 	
 	/**
@@ -57,7 +61,6 @@ public abstract class UserManagement_Abstract implements PropertyChangeListener 
 	 */
 	public abstract void deleteUsers(ArrayList<String> userIds);
 	
-	
 	/**
 	 * Get the user by its username
 	 * 
@@ -91,6 +94,6 @@ public abstract class UserManagement_Abstract implements PropertyChangeListener 
 	 *
 	 * @param pcl a property change listener
 	 */
-	public abstract void removePropertyChangeListener(PropertyChangeListener pcl) ;
+	public abstract void removePropertyChangeListener(PropertyChangeListener pcl);
 	
 }

@@ -80,7 +80,6 @@ public abstract class AccountManagement_Abstract implements PropertyChangeListen
 	 *
 	 * @param pcl a property change listener
 	 */
-	public abstract void removePropertyChangeListener(PropertyChangeListener pcl) ;
-	
+	public abstract void removePropertyChangeListener(PropertyChangeListener pcl);
 	
 }

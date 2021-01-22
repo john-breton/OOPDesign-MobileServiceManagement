@@ -2,7 +2,11 @@ package bundlemanagement.service;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
+/**
+ * This is an abstract class for the Bundlemanagement class
+ * @author esiumat
+ *
+ */
 public abstract class BundleManagement_Abstract implements PropertyChangeListener{
 
 	/**
@@ -65,8 +69,6 @@ public abstract class BundleManagement_Abstract implements PropertyChangeListene
 	 *
 	 * @param pcl a property change listener
 	 */
-	public abstract void removePropertyChangeListener(PropertyChangeListener pcl) ;
-	
-	
+	public abstract void removePropertyChangeListener(PropertyChangeListener pcl);
 	
 }

@@ -2,10 +2,13 @@ package reportingservice;
 
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-
+/**
+ * This is an abstract class for the ReportingService class
+ * @author esiumat
+ *
+ */
 public abstract class ReportingService_Abstract implements PropertyChangeListener{
 
-	
 	/**
      * Adds listeners to this class.
      *
