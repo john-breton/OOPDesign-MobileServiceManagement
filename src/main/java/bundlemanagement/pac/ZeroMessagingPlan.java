@@ -1,5 +1,10 @@
 package bundlemanagement.pac;
 
+import java.math.BigDecimal;
+
+import bundlemanagement.preconf.BundleFees;
+import bundlemanagement.preconf.BundleNames;
+
 /**
  * This class implements Zero messaging plan for PaC bundle.
  * 
@@ -9,9 +14,6 @@ package bundlemanagement.pac;
 public class ZeroMessagingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
-	private static final int ZERO_NUMBER_OF_MESSAGES = 0;
-	private static final int ZERO_MESSAGING_PLAN_FEE = 0;
-	private static final String ZERO_MESSAGING_DESCRIPTION = "Messaging Plan: Zero - Zero Messages";
 
 	/**
 	 * Setup constructor
@@ -31,28 +33,28 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + ZERO_MESSAGING_DESCRIPTION + "\n";
+		return pacbundle.getDescription() + BundleNames.PACWITHZEROMESSAGINGPLAN.getBundleNames() + "\n";
 	}
 
 	/**
 	 * Sets fee for zero messaging plan.
 	 * 
-	 * @return cost integer value to PaC side.
+	 * @return cost value to PaC side.
 	 */
 	@Override
-	public int cost() {
+	public BigDecimal cost() {
 
-		return pacbundle.cost() + ZERO_MESSAGING_PLAN_FEE;
+		return pacbundle.cost().add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHZEROMESSAGINGPLAN));
 	}
 
 	/**
-	 * Sets minutes for PaC bundle.
+	 * return number of messages for zero messaging plan.
 	 * 
 	 * @return number of messages to PaC bundle.
 	 */
-	public int getNumberOfMessages() {
+	public BigDecimal getNumberOfMessages() {
 
-		return ZERO_NUMBER_OF_MESSAGES;
+		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages.get(BundleNames.PACWITHZEROMESSAGINGPLAN);
 	}
 
 }

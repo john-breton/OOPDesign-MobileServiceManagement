@@ -129,8 +129,9 @@ public class BundleManagement extends AbstractBundleManagement {
 	 */
 	private void printBundleDetails(Bundle bundle) {
 		System.out.println("\n---Bundle Detail---");
-		System.out.printf("Bundle Name: %s\n", bundle.getName());
+		System.out.printf("User's choice Bundle Name: %s\n", bundle.getName());
 		if (bundle instanceof PaCBundle) {
+			System.out.println("Official Bundle Name: Pick and Choose Bundle");
 			System.out.print(((PaCBundle) bundle).getDescription());
 			System.out.println("Monthly Fee: $" + ((PaCBundle) bundle).cost());
 		} else if (bundle instanceof PreconfBundle) {

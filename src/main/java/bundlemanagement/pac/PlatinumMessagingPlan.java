@@ -1,27 +1,19 @@
-package bundlemanagement.component;
+package bundlemanagement.pac;
+
+import java.math.BigDecimal;
 
 import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
 
 /**
- * This class implements platinum messaging plan for the both PaC and preconf
- * bundles.
+ * This class implements platinum messaging plan for the PaC bundle.
  * 
  * @author epahram
  *
  */
-public class PlatinumMessagingPlan extends BundleDecorator implements MessagingPlan {
+public class PlatinumMessagingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
-	private static final int PLATINUM_NUMBER_OF_MESSAGES = Integer.MAX_VALUE;
-	private static final int PLATINUM_MESSAGING_PLAN_FEE = 45;
-	private static final String PLATINUM_MESSAGING_DESCRIPTION = "Messaging Plan: Platinum - Unlimited Messages";
-
-	/**
-	 * Constructor for preconf side
-	 */
-	public PlatinumMessagingPlan() {
-	}
 
 	/**
 	 * Constructor for PaC side
@@ -40,7 +32,7 @@ public class PlatinumMessagingPlan extends BundleDecorator implements MessagingP
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + PLATINUM_MESSAGING_DESCRIPTION + "\n";
+		return pacbundle.getDescription() + BundleNames.PACWITHPLATINUMMESSAGINGPLAN.getBundleNames() + "\n";
 	}
 
 	/**
@@ -49,9 +41,10 @@ public class PlatinumMessagingPlan extends BundleDecorator implements MessagingP
 	 * @return it will return plan's cost to PaC side
 	 */
 	@Override
-	public int cost() {
+	public BigDecimal cost() {
 
-		return pacbundle.cost() + PLATINUM_MESSAGING_PLAN_FEE;
+		return pacbundle.cost()
+				.add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHPLATINUMMESSAGINGPLAN));
 	}
 
 	/**
@@ -66,11 +59,12 @@ public class PlatinumMessagingPlan extends BundleDecorator implements MessagingP
 	/**
 	 * return number of messages for platinum messaging plan.
 	 * 
-	 * @return int value of number of messages for platinum plan.
+	 * @return value of number of messages for platinum plan.
 	 */
-	public int getNumberOfMessages() {
+	public BigDecimal getNumberOfMessages() {
 
-		return PLATINUM_NUMBER_OF_MESSAGES;
+		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
+				.get(BundleNames.PACWITHPLATINUMMESSAGINGPLAN);
 	}
 
 }

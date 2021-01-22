@@ -1,6 +1,6 @@
 package bundlemanagement.preconf;
 
-import bundlemanagement.component.*;
+import java.math.BigDecimal;
 
 /**
  * This Class implements Gold Bundle Component Factory.
@@ -14,42 +14,53 @@ import bundlemanagement.component.*;
 public class GoldBundleComponentFactory implements BundleComponentFactory {
 
 	/**
-	 * This method return instance of Gold Calling Plan.
+	 * This method returns gold calling plan from CallingPlanOptions enum class.
 	 * 
-	 * @return calling plan to preconf class to create gold preconf plan.
+	 * @return Gold calling plan to PreconfBundle class to create Gold preconf plan.
 	 */
-	public CallingPlan createCallingPlan() {
+	public CallingPlanOptions createCallingPlan() {
 
-		return new GoldCallingPlan();
+		return CallingPlanOptions.GOLD;
 	}
 
 	/**
-	 * This method return instance of Gold Messaging Plan.
+	 * This method returns gold messaging plan from MessagingPlanOptions enum class.
 	 * 
-	 * @return messaging plan to preconf class to create gold preconf plan.
+	 * @return Gold messaging plan to PreconfBundle class to create gold preconf
+	 *         plan.
 	 */
-	public MessagingPlan createMessagingPlan() {
+	public MessagingPlanOptions createMessagingPlan() {
 
-		return new GoldMessagingPlan();
+		return MessagingPlanOptions.GOLD;
 	}
 
 	/**
-	 * This method return instance Gold Data Plan.
+	 * This method returns gold data plan from DataPlanOptions enum class.
 	 * 
-	 * @return data plan to preconf class to create gold preconf plan.
+	 * @return Gold data plan to PreconfBundle class to create gold preconf plan.
 	 */
-	public DataPlan createDataPlan() {
+	public DataPlanOptions createDataPlan() {
 
-		return new GoldDataPlan();
+		return DataPlanOptions.GOLD;
 	}
 
 	/**
-	 * This method return Gold monthly fee for Gold preconf plan.
+	 * This method returns gold monthly fee for gold preconf plan.
 	 * 
-	 * @return Gold Monthly fee to preconf class to create bronze preconf plan.
+	 * @return Monthly fee to PreconfBundle class to create gold preconf plan.
 	 */
-	public MonthlyFees createMonthlyFees() {
-		return new GoldMonthlyFees();
+	// Ista's comment: use Double or Bigdecimal(read about it!!!)
+	public BigDecimal createMonthlyFees() {
+		return BundleFees.preconfFees.get(BundleNames.GOLD);
+	}
+
+	/**
+	 * This method returns the name for preconf gold plan.
+	 * 
+	 * @return Monthly fee to PreconfBundle class to create gold preconf plan.
+	 */
+	public BundleNames createBundleNames() {
+		return BundleNames.GOLD;
 	}
 
 }

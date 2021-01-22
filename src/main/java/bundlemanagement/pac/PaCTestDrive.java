@@ -1,7 +1,5 @@
 package bundlemanagement.pac;
 
-import bundlemanagement.component.*;
-
 /**
  * Test Drive for PaC bundle. It can be deleted at future.
  * 
