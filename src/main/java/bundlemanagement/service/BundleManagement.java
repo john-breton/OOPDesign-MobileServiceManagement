@@ -23,7 +23,7 @@ import static reportingservice.PropertyNameStrings.*;
  * @since January 08, 2020
  */
 
-public class BundleManagement implements PropertyChangeListener {
+public class BundleManagement extends BundleManagement_Abstract {
 	private static final BundleManagement UNIQUE_INSTANCE = new BundleManagement();
 	private final HashMap<String, Bundle> bundleList;
 
