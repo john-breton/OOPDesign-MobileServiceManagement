@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
 
-import properties.PropertyIdEnum;
 import reportingservice.PropertyNameStrings;
-import users.UserObjectIf;
-import users.UserManagementFactory;
+import usermanagement.properties.PropertyIdEnum;
+import usermanagement.users.UserManagementFactory;
+import usermanagement.users.UserObjectIf;
 
 /**
  * A singleton class used to manage user objects

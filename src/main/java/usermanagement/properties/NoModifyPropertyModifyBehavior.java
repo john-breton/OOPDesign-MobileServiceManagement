@@ -1,4 +1,4 @@
-package properties;
+package usermanagement.properties;
 
 /**
  * Used to print the message if no modify behavior happened. 

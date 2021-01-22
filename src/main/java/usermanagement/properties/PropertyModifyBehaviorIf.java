@@ -1,4 +1,4 @@
-package properties;
+package usermanagement.properties;
 
 /**
  * An abstract class used as an Interface to Behaviors

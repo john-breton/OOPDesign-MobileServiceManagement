@@ -1,10 +1,10 @@
-package mobileservicemanagementapplication;
+package usermanagement.mobileservicemanagementapplication;
 
 import java.util.TreeMap;
 
-import properties.PropertyIdEnum;
 import reportingservice.ReportingService;
 import services.UserManagement;
+import usermanagement.properties.PropertyIdEnum;
 
 /**
  * @author edavleu

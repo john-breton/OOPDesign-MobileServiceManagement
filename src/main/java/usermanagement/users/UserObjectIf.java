@@ -1,9 +1,9 @@
-package users;
+package usermanagement.users;
 
 import java.util.TreeMap;
 
-import properties.PropertyIdEnum;
-import properties.PropertyIf;
+import usermanagement.properties.PropertyIdEnum;
+import usermanagement.properties.PropertyIf;
 
 /**
  * An abstract class used as an Interface to for User object

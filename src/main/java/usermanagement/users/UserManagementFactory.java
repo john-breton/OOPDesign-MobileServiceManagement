@@ -1,4 +1,4 @@
-package users;
+package usermanagement.users;
 
 import services.ManagementFactoryIf;
 

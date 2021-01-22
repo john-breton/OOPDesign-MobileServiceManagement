@@ -1,4 +1,4 @@
-package mobileservicemanagementapplication;
+package usermanagement.mobileservicemanagementapplication;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

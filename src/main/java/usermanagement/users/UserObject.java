@@ -1,10 +1,10 @@
-package users;
+package usermanagement.users;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-import properties.PropertyIdEnum;
-import properties.PropertyIf;
+import usermanagement.properties.PropertyIdEnum;
+import usermanagement.properties.PropertyIf;
 
 /**
  * UserObject is a class that extends from the UserObjectIf interface

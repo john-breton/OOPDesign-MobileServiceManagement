@@ -1,7 +1,7 @@
-package users;
+package usermanagement.users;
 
-import properties.PropertyIf;
-import properties.SimplePropertyModifyBehavior;
+import usermanagement.properties.PropertyIf;
+import usermanagement.properties.SimplePropertyModifyBehavior;
 
 /**
  * UserAddressProperty is a class that extends from propertyIf interface and holding the address property

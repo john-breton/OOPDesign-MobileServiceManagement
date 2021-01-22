@@ -1,7 +1,7 @@
-package users;
+package usermanagement.users;
 
-import properties.EmailPropertyModifyBehavior;
-import properties.PropertyIf;
+import usermanagement.properties.EmailPropertyModifyBehavior;
+import usermanagement.properties.PropertyIf;
 
 /**
  * UserEmailProperty is a class that extends from the propertyIf interface and holds the email property for user

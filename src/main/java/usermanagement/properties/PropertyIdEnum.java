@@ -1,4 +1,4 @@
-package properties;
+package usermanagement.properties;
 
 /**
  * Enum for properties of user object 

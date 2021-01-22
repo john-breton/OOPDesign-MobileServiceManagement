@@ -1,7 +1,7 @@
-package users;
+package usermanagement.users;
 
-import properties.NoModifyPropertyModifyBehavior;
-import properties.PropertyIf;
+import usermanagement.properties.NoModifyPropertyModifyBehavior;
+import usermanagement.properties.PropertyIf;
 
 /**
  * UserNameProperty is a class that extends from the PropertyIf interface

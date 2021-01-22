@@ -5,11 +5,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.TreeMap;
 
-import properties.PropertyIdEnum;
 import bundlemanagement.service.BundleOption;
 
 import accountmanagement.AccountManagement;
 import services.UserManagement;
+import usermanagement.properties.PropertyIdEnum;
 import bundlemanagement.service.BundleManagement;
 import reportingservice.ReportingService;
 

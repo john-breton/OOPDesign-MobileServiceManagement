@@ -1,4 +1,4 @@
-package properties;
+package usermanagement.properties;
 
 /**
  * PropertyIf is an interface for the property
