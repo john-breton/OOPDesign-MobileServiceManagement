@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
  * @author esiumat
  *
  */
-public abstract class ReportingService_Abstract implements PropertyChangeListener{
+public abstract class AbstractReportingService implements PropertyChangeListener{
 
 	/**
      * Adds listeners to this class.

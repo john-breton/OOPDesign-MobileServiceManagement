@@ -8,7 +8,7 @@ import java.beans.PropertyChangeListener;
  * @author esiumat
  *
  */
-public abstract class AccountManagement_Abstract implements PropertyChangeListener {
+public abstract class AbstractAccountManagement implements PropertyChangeListener {
 	
     /**
      * Add a new service account based on the passed in parameters. This

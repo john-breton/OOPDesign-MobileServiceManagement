@@ -22,7 +22,7 @@ import static reportingservice.PropertyNameStrings.*;
  * exist at any given time. This is to prevent data corruption once it comes
  * to multiple admins making use of the AccountManagement service.
  */
-public class AccountManagement extends AccountManagement_Abstract {
+public class AccountManagement extends AbstractAccountManagement {
     // We will always need an AccountManagement instance, so use eager instantiation.
     private static final AccountManagement UNIQUE_INSTANCE = new AccountManagement();
     private final TreeMap<String, Account> accountList;

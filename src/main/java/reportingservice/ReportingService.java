@@ -32,7 +32,7 @@ import static reportingservice.PropertyNameStrings.*;
  * @since December 30, 2020
  */
 
-public class ReportingService extends ReportingService_Abstract {
+public class ReportingService extends AbstractReportingService {
 
     private static final ReportingService UNIQUE_INSTANCE = new ReportingService();
     private PropertyChangeSupport support;

@@ -7,7 +7,7 @@ import java.beans.PropertyChangeListener;
  * @author esiumat
  *
  */
-public abstract class BundleManagement_Abstract implements PropertyChangeListener{
+public abstract class AbstractBundleManagement implements PropertyChangeListener{
 
 	/**
 	 * Create a new PaC Bundle based on the passing parameter. The name is required

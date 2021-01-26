@@ -23,7 +23,7 @@ import static reportingservice.PropertyNameStrings.*;
  * @since January 08, 2020
  */
 
-public class BundleManagement extends BundleManagement_Abstract {
+public class BundleManagement extends AbstractBundleManagement {
 	private static final BundleManagement UNIQUE_INSTANCE = new BundleManagement();
 	private final HashMap<String, Bundle> bundleList;
 

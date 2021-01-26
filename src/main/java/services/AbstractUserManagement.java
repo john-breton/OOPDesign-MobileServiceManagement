@@ -12,7 +12,7 @@ import users.UserObjectIf;
  * @author esiumat
  *
  */
-public abstract class UserManagement_Abstract implements PropertyChangeListener {
+public abstract class AbstractUserManagement implements PropertyChangeListener {
 	
 	/**
 	 * Add a single user by name, it will set the attributes empty string by default
