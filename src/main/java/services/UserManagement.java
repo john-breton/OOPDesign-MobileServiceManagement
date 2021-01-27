@@ -43,7 +43,7 @@ public class UserManagement extends AbstractUserManagement {
 	 * */ 
 	private UserManagement() {
 		users = new TreeMap<String, UserObjectIf>();
-		userFactory = new UserManagementFactory();
+		setManagementFactory(new UserManagementFactory());
 		support = new PropertyChangeSupport(this);
 	}
 	
@@ -59,7 +59,7 @@ public class UserManagement extends AbstractUserManagement {
 	 * Add a single user by name, it will set the attributes empty string by default
 	 * @param name (Surfoplane) The user name of the user to be added
 	 */
-	public void addUser(String name) {
+	private void addUser(String name) {
 		if (name == null || name.isBlank() || users.containsKey(name)) {
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
@@ -76,12 +76,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Overloaded Method
-	 * Add a single user by name and filling the parameters to the user object
-	 * @param name (Surfoplance) The username for the user.
-	 * @param address The address for the user.
-	 * @param email address The email for the user.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void addUser(String name, String address, String email) {
 		addUser(name);
 		TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
@@ -99,11 +96,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Add a list of users in to the system. 
-	 * the TreeMap has to use PropertyIdEnum as Key
-	 * 
-	 * @param users The list of users
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void addUsers(ArrayList<TreeMap<PropertyIdEnum, String>> users) {
 		for (TreeMap<PropertyIdEnum, String> currentUser:users) {
 			String currentName = currentUser.get(PropertyIdEnum.USER_NAME);
@@ -115,12 +110,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Modify the User Object by UserName 
-	 * the TreeMap has to use PropertyIdEnum as Key
-	 * 
-	 * @param userName The user name of the user.
-	 * @param userProperties The properties that will be used to modify the user.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void modifyUser(String userName, TreeMap<PropertyIdEnum, String> userProperties) {
 		if (!users.containsKey(userName)) {
 			System.out.println("Cannot find user with username: " + userName);
@@ -145,11 +137,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Remove the User Object by UserName 
-	 * 
-	 * @param userId The user name for the user to be deleted.
-	 * @param successState Events.SUCCESS normally, Events.SPECIAL to avoid a feedback loop when deleting accounts.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void deleteUser(String userId, String successState) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
@@ -167,10 +157,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Remove the list of User Objects by UserName 
-	 * 
-	 * @param userIds The usernames for the users to be deleted.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void deleteUsers(ArrayList<String> userIds) {
 		for (String userId : userIds) {
 			// remove the current user from the list
@@ -179,10 +168,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Get the user by its username
-	 * 
-	 * @param userId The user name for the user that is being looked for.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void getUser(String userId) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
@@ -199,10 +187,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Used to Config the Factory
-	 * 
-	 * @param userFactory The Factory that is being set.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setManagementFactory(ManagementFactoryIf<UserObjectIf> userFactory) {
 		this.userFactory = userFactory;
 	}
@@ -232,8 +219,7 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * this method will be triggered once the event changed.
-	 * @param evt The event that was received.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -333,19 +319,17 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Adds listeners to this class.
-	 * 
-	 * @param pcl a property change listener
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
 
 	/**
-	 * Removes listeners to this class.
-	 * 
-	 * @param pcl a property change listener
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void removePropertyChangeListener(PropertyChangeListener pcl) {
 		support.removePropertyChangeListener(pcl);
 	}
