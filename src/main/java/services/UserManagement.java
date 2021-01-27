@@ -6,6 +6,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import properties.PropertyIdEnum;
 import reportingservice.PropertyNameStrings;
@@ -35,14 +36,14 @@ public class UserManagement extends AbstractUserManagement {
 
 	private PropertyChangeSupport support;
 	private static UserManagement UNIQUE_INSTANCE = new UserManagement();
-	private TreeMap<String, UserObjectIf> users;
+	private volatile ConcurrentHashMap<String, UserObjectIf> users;
 	private ManagementFactoryIf<UserObjectIf> userFactory;
 
 	/**
 	 * private constructor to make this class singleton
 	 * */ 
 	private UserManagement() {
-		users = new TreeMap<String, UserObjectIf>();
+		users = new ConcurrentHashMap<String, UserObjectIf>();
 		setManagementFactory(new UserManagementFactory());
 		support = new PropertyChangeSupport(this);
 	}
@@ -80,19 +81,32 @@ public class UserManagement extends AbstractUserManagement {
 	 */
 	@Override
 	public void addUser(String name, String address, String email) {
-		addUser(name);
-		TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
-		if (address != null)
-			attr.put(PropertyIdEnum.USER_ADDRESS, address);
-		else
-			attr.put(PropertyIdEnum.USER_ADDRESS, "");
 		
-		if (email != null)
-			attr.put(PropertyIdEnum.USER_EMAIL, email);
-		else
-			attr.put(PropertyIdEnum.USER_EMAIL, "");
+		//check if the user exists
+		if (!users.containsKey(name)) {
+			addUser(name);
+			TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
+			if (address != null)
+				attr.put(PropertyIdEnum.USER_ADDRESS, address);
+			else
+				attr.put(PropertyIdEnum.USER_ADDRESS, "");
+			
+			if (email != null)
+				attr.put(PropertyIdEnum.USER_EMAIL, email);
+			else
+				attr.put(PropertyIdEnum.USER_EMAIL, "");
 
-		modifyUser(name, attr);
+			modifyUser(name, attr);
+			
+		}else {
+			System.out.println("User Exists! : " + name);
+			support.firePropertyChange(
+					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+					PropertyNameStrings.Events.FAILURE.getDesc(),
+					name);
+			
+		}
+		
 	}
 	
 	/**
