@@ -1,9 +1,11 @@
 package mobileservicemanagementapplication;
 
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 import properties.PropertyIdEnum;
 import reportingservice.ReportingService;
+import services.UserManagementIf;
 import services.UserManagement;
 
 /**
@@ -19,7 +21,7 @@ public class MobileServiceManagementApplicationDemo {
 	 */
 	public static void main(String[] args) {
 //		UserManagementService service = new UserManagementService();
-		UserManagement service = UserManagement.getInstance();
+		UserManagementIf service = UserManagement.getInstance();
 		ReportingService reporting = ReportingService.getInstance();
 		UserServiceTestRunner runner = new UserServiceTestRunner();
 		
@@ -29,20 +31,40 @@ public class MobileServiceManagementApplicationDemo {
 		runner.addPropertyChangeListener(reporting);
 		
 		System.out.println("---------------");
-		
-		service.addUser("David");
-		
+		System.out.println("Test Add User");
 		System.out.println("---------------");
 		
-		service.addUser("John");
+		service.addUser("David", "124 Main St.", "valid.email@gmail.com");
 		
+		System.out.println("---------------");
+		System.out.println("Test Add Users");
+		System.out.println("---------------");
+		
+		ArrayList<TreeMap<PropertyIdEnum, String>> users = new ArrayList<TreeMap<PropertyIdEnum, String>>();
+		
+		TreeMap<PropertyIdEnum, String> userOne = new TreeMap<PropertyIdEnum, String>();
+		userOne.put(PropertyIdEnum.USER_NAME, "John");
+		userOne.put(PropertyIdEnum.USER_ADDRESS, "321 Main St.");
+		userOne.put(PropertyIdEnum.USER_EMAIL, "john@gmail.com");
+		
+		TreeMap<PropertyIdEnum, String> userTwo = new TreeMap<PropertyIdEnum, String>();
+		userTwo.put(PropertyIdEnum.USER_NAME, "Gabriel");
+		userTwo.put(PropertyIdEnum.USER_ADDRESS, "159 Main St.");
+		userOne.put(PropertyIdEnum.USER_EMAIL, "gabe@gmail.com");
+		
+		users.add(userOne);
+		users.add(userTwo);
+		service.addUsers(users);
+		
+		System.out.println("---------------");
+		System.out.println("Test Modify Users");
 		System.out.println("---------------");
 		
 		TreeMap<PropertyIdEnum, String> vals;
 		
 		vals = new TreeMap<PropertyIdEnum, String>();
 		vals.put(PropertyIdEnum.USER_ADDRESS, "123 Main St.");
-		vals.put(PropertyIdEnum.USER_EMAIL, "valid.email@gmail.com");
+		vals.put(PropertyIdEnum.USER_EMAIL, "also.valid.email@gmail.com");
 		
 		service.modifyUser("David", vals);
 		
@@ -55,17 +77,37 @@ public class MobileServiceManagementApplicationDemo {
 		service.modifyUser("John", vals);
 		
 		System.out.println("---------------");
-		
-		runner.printUser("David");
-		
+		System.out.println("Test Get User");
 		System.out.println("---------------");
 		
-		runner.printUser("John");
+		service.getUser("David");
+		service.getUser("John");
+		service.getUser("Gabriel");
+		service.getUser("Steve");
 		
 		System.out.println("---------------");
+		System.out.println("Print all users");
+		System.out.println("---------------");
 		
-		runner.deleteUser("John");
+		runner.printAllUserNames();
 		
+		System.out.println("---------------");
+		System.out.println("Test Delete User");
+		System.out.println("---------------");
+		
+		service.deleteUser("John");
+		
+		System.out.println("---------------");
+		System.out.println("Test Delete Users");
+		System.out.println("---------------");
+		
+		ArrayList<String> deleteUsers = new ArrayList<String>();
+		deleteUsers.add("Gabriel");
+		deleteUsers.add("David");
+		service.deleteUsers(deleteUsers);
+		
+		System.out.println("---------------");
+		System.out.println("Print all users");
 		System.out.println("---------------");
 		
 		runner.printAllUserNames();
