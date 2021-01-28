@@ -83,7 +83,8 @@ public class UserManagement extends AbstractUserManagement {
 	public void addUser(String name, String address, String email) {
 		
 		//check if the user exists
-		if (!users.containsKey(name)) {
+		if (!users.containsKey(name)) 
+		{
 			addUser(name);
 			TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
 			if (address != null)
@@ -98,7 +99,9 @@ public class UserManagement extends AbstractUserManagement {
 
 			modifyUser(name, attr);
 			
-		}else {
+		}
+		else 
+		{
 			System.out.println("User Exists! : " + name);
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
