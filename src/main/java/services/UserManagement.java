@@ -17,7 +17,7 @@ import users.UserManagementFactory;
  * @author David,Chen
  * @version 1.0
  */
-public class UserManagement implements PropertyChangeListener {
+public class UserManagement extends AbstractUserManagement {
 	
 	private static final ArrayList<String> USER_MANAGEMENT_EVENTS = new ArrayList<String>() {
 		{
