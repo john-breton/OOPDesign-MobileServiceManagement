@@ -9,7 +9,7 @@ public enum DataPlanOptions {
 	GOLD("Gold Data Plan", "4 GB"),
 	SILVER("Silver Data Plan", "2 GB"),
 	BRONZE("Bronze Data Plan", "1 GB"),
-	Zero("Zero Data Plan", "0 GB");
+	ZERO("Zero Data Plan", "0 GB");
 
 	/**
 	 * The dataPlanOptionDescription will store the description for related
@@ -25,7 +25,7 @@ public enum DataPlanOptions {
 	 * @param type  it will store the related plan description into
 	 *              dataPlanOptionDescription.
 	 */
-	private DataPlanOptions(String name, String type) {
+	DataPlanOptions(String name, String type) {
 		this.name = name;
 		this.dataPlanOptionDescription = type;
 	}

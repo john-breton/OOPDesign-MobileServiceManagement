@@ -14,7 +14,7 @@ public class GoldCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
 	private final BigDecimal goldCallingFee;
-	private final BigDecimal goldCallingMinuetes;
+	private final BigDecimal goldCallingMinutes;
 	private final String description;
 
 	/**
@@ -25,7 +25,7 @@ public class GoldCallingPlan extends BundleDecorator {
 	public GoldCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
 		this.goldCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_GOLD_CALLING_PLAN);
-		this.goldCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_GOLD_CALLING_PLAN);
+		this.goldCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_GOLD_CALLING_PLAN);
 		this.description = BundleNames.PAC_WITH_GOLD_CALLING_PLAN.getBundleDescription();
 	}
 
@@ -58,7 +58,7 @@ public class GoldCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return goldCallingMinuetes;
+		return goldCallingMinutes;
 	}
 
 }

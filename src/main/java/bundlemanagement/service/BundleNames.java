@@ -50,7 +50,8 @@ public enum BundleNames {
 	PAC_WITH_OUT_DATA_PLAN("PaC without Data", "PaC Data Plan: Not Choose");	
 	
 	/**
-	 * The bundle name will store the string description of bundles.
+	 * The bundlename will store the name of bundles
+	 * The bundleDescription will store the string description of bundles.
 	 */
 	private String bundlename;
 	private String bundleDescription;
@@ -58,10 +59,10 @@ public enum BundleNames {
 	/**
 	 * enum constructor. It will set the bundle name and bundle description
 	 * 
-	 * @param bundlename
-	 * @param desc
+	 * @param bundlename It will store the string name of the bundle plan 
+	 * @param desc       The description of the bundle plan
 	 */
-	private BundleNames(String bundlename, String desc) {
+	BundleNames(String bundlename, String desc) {
 		this.bundlename = bundlename;
 		this.bundleDescription = desc;
 	}

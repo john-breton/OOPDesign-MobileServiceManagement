@@ -2,7 +2,7 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleNames;
 import bundlemanagement.service.BundleNames;
 
 /**

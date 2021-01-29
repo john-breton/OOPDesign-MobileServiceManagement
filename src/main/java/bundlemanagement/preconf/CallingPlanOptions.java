@@ -23,7 +23,7 @@ public enum CallingPlanOptions {
 	 * @param name  it will store the name of the calling plan
 	 * @param type  it will store the related plan description into callingPlanOptionDescription.
 	 */
-	private CallingPlanOptions(String name, String type) 
+	CallingPlanOptions(String name, String type) 
 	{
 		this.name = name;
 		this.callingPlanOptionDescription=type;

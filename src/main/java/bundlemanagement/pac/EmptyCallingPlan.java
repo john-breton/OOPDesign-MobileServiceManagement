@@ -15,7 +15,7 @@ import bundlemanagement.service.BundleNames;
 public class EmptyCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
-	private final BigDecimal emptyCallingMinuetes;
+	private final BigDecimal emptyCallingMinutes;
 	private final String description;
 	
 
@@ -26,7 +26,7 @@ public class EmptyCallingPlan extends BundleDecorator {
 	 */
 	public EmptyCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
-		this.emptyCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_OUT_CALLING_PLAN);
+		this.emptyCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_OUT_CALLING_PLAN);
 		this.description = BundleNames.PAC_WITH_OUT_CALLING_PLAN.getBundleDescription();
 	}
 
@@ -59,6 +59,6 @@ public class EmptyCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return emptyCallingMinuetes;
+		return emptyCallingMinutes;
 	}
 }

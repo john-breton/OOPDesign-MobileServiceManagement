@@ -17,7 +17,7 @@ public class BronzeCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
 	private final BigDecimal bronzeCallingFee;
-	private final BigDecimal bronzeCallingMinuetes;
+	private final BigDecimal bronzeCallingMinutes;
 	private final String description;
 
 	/**
@@ -28,7 +28,7 @@ public class BronzeCallingPlan extends BundleDecorator {
 	public BronzeCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
 		this.bronzeCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_BRONZE_CALLING_PLAN);
-		this.bronzeCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_BRONZE_CALLING_PLAN);
+		this.bronzeCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_BRONZE_CALLING_PLAN);
 		this.description = BundleNames.PAC_WITH_BRONZE_CALLING_PLAN.getBundleDescription();
 	}
 
@@ -60,7 +60,7 @@ public class BronzeCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return bronzeCallingMinuetes;
+		return bronzeCallingMinutes;
 	}
 
 }

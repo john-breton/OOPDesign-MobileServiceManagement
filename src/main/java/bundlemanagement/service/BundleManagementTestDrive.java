@@ -62,7 +62,7 @@ public class BundleManagementTestDrive {
 			---Bundle Detail---
 			Bundle Name: Plain Pick and Choose Bundle
 			Bare Bone Phone Service
-			PaC Calling Plan: Not Choose
+			PaC Calling Plan: Not Choose  <---required by Ista. Show customer did not choose this plan option
 			PaC Messaging Plan: Not Choose
 			PaC Data Plan: Not Choose
 			Monthly Fee: $10*/

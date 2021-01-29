@@ -25,7 +25,7 @@ public enum MessagingPlanOptions {
 	 * @param type it will store the related plan description into
 	 *             messagingPlanOptionDescription.
 	 */
-	private MessagingPlanOptions(String name, String type) {
+	MessagingPlanOptions(String name, String type) {
 		this.name = name;
 		this.messagingPlanOptionDescription = type;
 	}

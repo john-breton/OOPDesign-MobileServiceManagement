@@ -15,7 +15,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
 	private final BigDecimal zeroCallingFee;
-	private final BigDecimal zeroCallingMinuetes;
+	private final BigDecimal zeroCallingMinutes;
 	private final String description;
 
 	/**
@@ -26,7 +26,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	public ZeroCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
 		this.zeroCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
-		this.zeroCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
+		this.zeroCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
 		this.description = BundleNames.PAC_WITH_ZERO_CALLING_PLAN.getBundleDescription();
 	}
 
@@ -59,7 +59,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return zeroCallingMinuetes;
+		return zeroCallingMinutes;
 	}
 
 }

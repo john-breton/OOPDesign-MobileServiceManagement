@@ -16,7 +16,7 @@ public class SilverCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
 	private final BigDecimal silverCallingFee;
-	private final BigDecimal silverCallingMinuetes;
+	private final BigDecimal silverCallingMinutes;
 	private final String description;
 
 	/**
@@ -27,7 +27,7 @@ public class SilverCallingPlan extends BundleDecorator {
 	public SilverCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
 		this.silverCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_SILVER_CALLING_PLAN);
-		this.silverCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_SILVER_CALLING_PLAN);
+		this.silverCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_SILVER_CALLING_PLAN);
 		this.description = BundleNames.PAC_WITH_SILVER_CALLING_PLAN.getBundleDescription();
 	}
 
@@ -60,7 +60,7 @@ public class SilverCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return silverCallingMinuetes;
+		return silverCallingMinutes;
 	}
 
 }

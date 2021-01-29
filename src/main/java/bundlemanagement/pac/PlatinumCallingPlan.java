@@ -15,7 +15,7 @@ public class PlatinumCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
 	private final BigDecimal platinumCallingFee;
-	private final BigDecimal platinumCallingMinuetes;
+	private final BigDecimal platinumCallingMinutes;
 	private final String description;
 
 	/**
@@ -26,7 +26,7 @@ public class PlatinumCallingPlan extends BundleDecorator {
 	public PlatinumCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
 		this.platinumCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN);
-		this.platinumCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN);
+		this.platinumCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN);
 		this.description = BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN.getBundleDescription();
 	}
 
@@ -60,7 +60,7 @@ public class PlatinumCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return platinumCallingMinuetes;
+		return platinumCallingMinutes;
 	}
 
 }

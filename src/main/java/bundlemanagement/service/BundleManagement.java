@@ -1,7 +1,5 @@
 package bundlemanagement.service;
 
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
 import reportingservice.PropertyNameStrings.Events;
 
 import java.beans.PropertyChangeEvent;
@@ -10,9 +8,11 @@ import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.concurrent.*;
 
-import accountmanagement.Account;
-
+import bundlemanagement.pac.*;
+import bundlemanagement.preconf.*;
+import reportingservice.PropertyNameStrings.Events;
 import static reportingservice.PropertyNameStrings.*;
+
 
 /**
  * The BundleManagement class is responsible for managing bundles. There are two
@@ -92,31 +92,31 @@ public class BundleManagement extends AbstractBundleManagement {
 	 *                   BRONZE
 	 */
 	public void addPreconfBundle(String bundleName) {
-		BundleNames option = convertBundleToEnum(bundleName);
-		if (option == null) {
+		BundleNames name = convertBundleToEnum(bundleName);
+		if (name == null) {
 			return;
 		}
-		if (option != BundleNames.PLATINUM && option != BundleNames.GOLD && option != BundleNames.SILVER
-				&& option != BundleNames.BRONZE) {
+		if (name != BundleNames.PLATINUM && name != BundleNames.GOLD && name != BundleNames.SILVER
+				&& name != BundleNames.BRONZE) {
 			System.out.println(
 					"Sorry, we only take order for \"PLATINUM\", \"GOLD\", \"SILVER\", \"BRONZE\" Preconfigured Bundle in this option");
 			return;
 		}
 		if (bundleList.containsKey(option)) {
 			support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
-					option);
+					name);
 			return;
 		}
 
 		SimplePreconfBundleFactory factory = new SimplePreconfBundleFactory();
-		PreconfBundle preconf = factory.createBundle(option);
+		PreconfBundle preconf = factory.createBundle(name);
 		if (preconf != null) {
-			bundleList.put(option, preconf);
+			bundleList.put(name, preconf);
 			support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
-					option);
+					name);
 		} else {
 			support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(),
-					option);
+					name);
 		}
 
 	}
@@ -124,20 +124,20 @@ public class BundleManagement extends AbstractBundleManagement {
 	/**
 	 * Create a Plain Pick And Choose Bundle with only Bare Bone Phone Service
 	 * 
-	 * @param name Bundle Name(unique identifier), only takes name PLAINPACBUNDLE
+	 * @param bundleName Bundle Name(unique identifier), only takes name PLAINPACBUNDLE
 	 */
 	public void addPlainPacBundle(String bundleName) {
-		BundleNames option = convertBundleToEnum(bundleName);
-		if (option != BundleNames.PLAIN_PAC_BUNDLE) {
+		BundleNames name = convertBundleToEnum(bundleName);
+		if (name != BundleNames.PLAIN_PAC_BUNDLE) {
 			System.out.println("Sorry, we only take order for \"PLAINPACBUNDLE\" in this option");
 			return;
 		}
-		if (bundleList.containsKey(option)) {
+		if (bundleList.containsKey(name)) {
 			support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
-					option);
+					name);
 			return;
 		}
-		addPaCBundle(option, BundleOption.NONE, BundleOption.NONE, BundleOption.NONE);
+		addPaCBundle(name, BundleOption.NONE, BundleOption.NONE, BundleOption.NONE);
 	}
 
 	/**
