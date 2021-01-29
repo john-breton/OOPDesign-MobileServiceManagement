@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements platinum messaging plan for the PaC bundle.
@@ -14,6 +14,9 @@ import bundlemanagement.preconf.*;
 public class PlatinumMessagingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal platinumMessagingFee;
+	private final BigDecimal platinumMessagingNums;
+	private final String description;
 
 	/**
 	 * Constructor for PaC side
@@ -22,6 +25,10 @@ public class PlatinumMessagingPlan extends BundleDecorator {
 	 */
 	public PlatinumMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.platinumMessagingFee = BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PAC_WITH_PLATINUM_MESSAGING_PLAN);
+		this.platinumMessagingNums = BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
+				.get(BundleNames.PAC_WITH_PLATINUM_MESSAGING_PLAN);
+		this.description = BundleNames.PAC_WITH_PLATINUM_MESSAGING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +39,7 @@ public class PlatinumMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHPLATINUMMESSAGINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,8 +50,7 @@ public class PlatinumMessagingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost()
-				.add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHPLATINUMMESSAGINGPLAN));
+		return pacbundle.cost().add(platinumMessagingFee);
 	}
 
 	/**
@@ -63,8 +69,7 @@ public class PlatinumMessagingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getNumberOfMessages() {
 
-		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
-				.get(BundleNames.PACWITHPLATINUMMESSAGINGPLAN);
+		return platinumMessagingNums;
 	}
 
 }

@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.preconf.BundleFees;
-import bundlemanagement.preconf.BundleNames;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements Zero data plan for PaC bundle.
@@ -14,6 +14,9 @@ import bundlemanagement.preconf.BundleNames;
 public class ZeroDataPlan extends BundleDecorator {
 
 	final PaCBundle pacbundle;
+	private final BigDecimal zeroDataFee;
+	private final BigDecimal zeroDataQuant;
+	private final String description;
 
 	/**
 	 * Setup constructor
@@ -22,6 +25,9 @@ public class ZeroDataPlan extends BundleDecorator {
 	 */
 	public ZeroDataPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.zeroDataFee = BundleFees.PaCWithDataOptionFees.get(BundleNames.PAC_WITH_ZERO_DATA_PLAN);
+		this.zeroDataQuant = BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PAC_WITH_ZERO_DATA_PLAN);
+		this.description = BundleNames.PAC_WITH_ZERO_DATA_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +38,7 @@ public class ZeroDataPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHZERODATAPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +49,7 @@ public class ZeroDataPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithDataOptionFees.get(BundleNames.PACWITHZERODATAPLAN));
+		return pacbundle.cost().add(zeroDataFee);
 	}
 
 	/**
@@ -53,7 +59,7 @@ public class ZeroDataPlan extends BundleDecorator {
 	 */
 	public BigDecimal getDataQuantity() {
 
-		return BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PACWITHZERODATAPLAN);
+		return zeroDataQuant;
 	}
 
 }

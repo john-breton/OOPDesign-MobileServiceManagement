@@ -2,6 +2,9 @@ package bundlemanagement.preconf;
 
 import java.math.BigDecimal;
 
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
+
 /**
  * This Class implements Gold Bundle Component Factory.
  * 

@@ -1,9 +1,8 @@
 package bundlemanagement.pac;
 
 import java.math.BigDecimal;
-
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements bronze messaging plan for the PaC Bundle.
@@ -14,6 +13,9 @@ import bundlemanagement.preconf.*;
 public class BronzeMessagingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal bronzeMessagingFee;
+	private final BigDecimal bronzeMessagingNums;
+	private final String description;
 
 	/**
 	 * Constructor for PaC side
@@ -22,6 +24,9 @@ public class BronzeMessagingPlan extends BundleDecorator {
 	 */
 	public BronzeMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.bronzeMessagingFee = BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PAC_WITH_BRONZE_MESSAGING_PLAN);
+		this.bronzeMessagingNums = BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages.get(BundleNames.PAC_WITH_BRONZE_MESSAGING_PLAN);
+		this.description = BundleNames.PAC_WITH_BRONZE_MESSAGING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +37,7 @@ public class BronzeMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHBRONZEMESSAGINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +48,7 @@ public class BronzeMessagingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHBRONZEMESSAGINGPLAN));
+		return pacbundle.cost().add(bronzeMessagingFee);
 	}
 
 
@@ -54,7 +59,7 @@ public class BronzeMessagingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getNumberOfMessages() {
 
-		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages.get(BundleNames.PACWITHBRONZEMESSAGINGPLAN);
+		return bronzeMessagingNums;
 	}
 
 }

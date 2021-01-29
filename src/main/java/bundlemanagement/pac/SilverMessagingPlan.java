@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements silver messaging plan for the PaC bundle.
@@ -14,6 +14,10 @@ import bundlemanagement.preconf.*;
 public class SilverMessagingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal silverMessagingFee;
+	private final BigDecimal silverMessagingNums;
+	private final String description;
+
 
 	/**
 	 * Constructor for PaC side
@@ -22,6 +26,10 @@ public class SilverMessagingPlan extends BundleDecorator {
 	 */
 	public SilverMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.silverMessagingFee = BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PAC_WITH_SILVER_MESSAGING_PLAN);
+		this.silverMessagingNums = BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
+				.get(BundleNames.PAC_WITH_SILVER_MESSAGING_PLAN);
+		this.description = BundleNames.PAC_WITH_SILVER_MESSAGING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +40,7 @@ public class SilverMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHSILVERMESSAGINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +51,7 @@ public class SilverMessagingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHSILVERMESSAGINGPLAN));
+		return pacbundle.cost().add(silverMessagingFee);
 	}
 
 	/**
@@ -53,8 +61,7 @@ public class SilverMessagingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getNumberOfMessages() {
 
-		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
-				.get(BundleNames.PACWITHSILVERMESSAGINGPLAN);
+		return silverMessagingNums;
 	}
 
 }

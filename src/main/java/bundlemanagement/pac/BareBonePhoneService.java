@@ -3,6 +3,7 @@ package bundlemanagement.pac;
 import java.math.BigDecimal;
 
 import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class is responsible for creating the bare bone phone service for the
@@ -14,15 +15,13 @@ import bundlemanagement.preconf.*;
 
 public class BareBonePhoneService extends PaCBundle {
 
-	// private static final String BARE_BONES_PHONE_SERVICE_DESCRIPTION = "Bare Bone
-	// Phone Service\n";
 	private static final BigDecimal BARE_BONES_PHONE_SERVICE_FEE = new BigDecimal(10);
 
 	/**
 	 * The constructor will assign value to barebone phone services.
 	 */
 	public BareBonePhoneService() {
-		description = BundleNames.PACWITHBAREBONEPHONESERVICE.getBundleNames() + "\n";
+		description = BundleNames.PLAIN_PAC_BUNDLE.getBundleDescription() + "\n";
 		fee = BARE_BONES_PHONE_SERVICE_FEE;
 	}
 

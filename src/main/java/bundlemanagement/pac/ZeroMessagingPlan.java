@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.preconf.BundleFees;
-import bundlemanagement.preconf.BundleNames;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements Zero messaging plan for PaC bundle.
@@ -14,6 +14,9 @@ import bundlemanagement.preconf.BundleNames;
 public class ZeroMessagingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
+	private final BigDecimal zeroMessagingFee;
+	private final BigDecimal zeroMessagingNums;
+	private final String description;
 
 	/**
 	 * Setup constructor
@@ -22,6 +25,9 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	 */
 	public ZeroMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.zeroMessagingFee = BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PAC_WITH_OUT_MESSAGING_PLAN);
+		this.zeroMessagingNums = BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages.get(BundleNames.PAC_WITH_OUT_MESSAGING_PLAN);
+		this.description = BundleNames.PAC_WITH_OUT_MESSAGING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -33,7 +39,7 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHZEROMESSAGINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -44,7 +50,7 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHZEROMESSAGINGPLAN));
+		return pacbundle.cost().add(zeroMessagingFee);
 	}
 
 	/**
@@ -54,7 +60,7 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getNumberOfMessages() {
 
-		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages.get(BundleNames.PACWITHZEROMESSAGINGPLAN);
+		return zeroMessagingNums;
 	}
 
 }

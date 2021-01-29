@@ -2,6 +2,8 @@ package bundlemanagement.preconf;
 
 import java.math.BigDecimal;
 
+import bundlemanagement.service.BundleNames;
+
 /**
  * This an interface class to create bundle components such as callingS plan,
  * messaging plan, data plan, and monthly fee.

@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements silver data plan for the PaC bundle.
@@ -13,7 +13,10 @@ import bundlemanagement.preconf.*;
  */
 public class SilverDataPlan extends BundleDecorator {
 
-	PaCBundle pacbundle;
+	PaCBundle pacbundle;	
+	private final BigDecimal silverDataFee;
+	private final BigDecimal silverDataQuant;
+	private final String description;
 
 	/**
 	 * Constructor for PaC side
@@ -22,6 +25,9 @@ public class SilverDataPlan extends BundleDecorator {
 	 */
 	public SilverDataPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.silverDataFee = BundleFees.PaCWithDataOptionFees.get(BundleNames.PAC_WITH_SILVER_DATA_PLAN);
+		this.silverDataQuant = BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PAC_WITH_SILVER_DATA_PLAN);
+		this.description = BundleNames.PAC_WITH_SILVER_DATA_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +38,7 @@ public class SilverDataPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHSILVERDATAPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +49,7 @@ public class SilverDataPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithDataOptionFees.get(BundleNames.PACWITHSILVERDATAPLAN));
+		return pacbundle.cost().add(silverDataFee);
 	}
 
 	/**
@@ -53,7 +59,7 @@ public class SilverDataPlan extends BundleDecorator {
 	 */
 	public BigDecimal getDataQuantity() {
 
-		return BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PACWITHSILVERDATAPLAN);
+		return silverDataQuant;
 	}
 
 }

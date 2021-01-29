@@ -1,9 +1,8 @@
 package bundlemanagement.pac;
 
 import java.math.BigDecimal;
-
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements gold data plan for the PaC bundle.
@@ -14,6 +13,9 @@ import bundlemanagement.preconf.*;
 public class GoldDataPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal goldDataFee;
+	private final BigDecimal goldDataQuant;
+	private final String description;
 
 	/**
 	 * Constructor for PaC side
@@ -22,6 +24,9 @@ public class GoldDataPlan extends BundleDecorator {
 	 */
 	public GoldDataPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.goldDataFee = BundleFees.PaCWithDataOptionFees.get(BundleNames.PAC_WITH_GOLD_DATA_PLAN);
+		this.goldDataQuant = BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PAC_WITH_GOLD_DATA_PLAN);
+		this.description = BundleNames.PAC_WITH_GOLD_DATA_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +37,7 @@ public class GoldDataPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHGOLDDATAPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +48,7 @@ public class GoldDataPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithDataOptionFees.get(BundleNames.PACWITHGOLDDATAPLAN));
+		return pacbundle.cost().add(goldDataFee);
 	}
 
 	/**
@@ -53,7 +58,7 @@ public class GoldDataPlan extends BundleDecorator {
 	 */
 	public BigDecimal getDataQuantity() {
 
-		return BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PACWITHGOLDDATAPLAN);
+		return goldDataQuant;
 	}
 
 }

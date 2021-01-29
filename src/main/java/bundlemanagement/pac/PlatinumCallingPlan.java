@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements platinum calling plan for the PaC bundle.
@@ -14,6 +14,9 @@ import bundlemanagement.preconf.*;
 public class PlatinumCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal platinumCallingFee;
+	private final BigDecimal platinumCallingMinuetes;
+	private final String description;
 
 	/**
 	 * constructor for PaC side.
@@ -22,6 +25,9 @@ public class PlatinumCallingPlan extends BundleDecorator {
 	 */
 	public PlatinumCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.platinumCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN);
+		this.platinumCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN);
+		this.description = BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +38,7 @@ public class PlatinumCallingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHPLATINUMCALLINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -44,7 +50,7 @@ public class PlatinumCallingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithCallingOptionFees.get(BundleNames.PACWITHPLATINUMCALLINGPLAN));
+		return pacbundle.cost().add(platinumCallingFee);
 	}
 
 	/**
@@ -54,7 +60,7 @@ public class PlatinumCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PACWITHPLATINUMCALLINGPLAN);
+		return platinumCallingMinuetes;
 	}
 
 }

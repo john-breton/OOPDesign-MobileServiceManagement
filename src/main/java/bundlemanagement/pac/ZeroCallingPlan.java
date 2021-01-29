@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.preconf.BundleFees;
-import bundlemanagement.preconf.BundleNames;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements Zero calling plan for PaC bundle.
@@ -14,6 +14,9 @@ import bundlemanagement.preconf.BundleNames;
 public class ZeroCallingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
+	private final BigDecimal zeroCallingFee;
+	private final BigDecimal zeroCallingMinuetes;
+	private final String description;
 
 	/**
 	 * Setup constructor
@@ -22,6 +25,9 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 */
 	public ZeroCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.zeroCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
+		this.zeroCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
+		this.description = BundleNames.PAC_WITH_ZERO_CALLING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +38,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHZEROCALLINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +49,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithCallingOptionFees.get(BundleNames.PACWITHZEROCALLINGPLAN));
+		return pacbundle.cost().add(zeroCallingFee);
 	}
 
 	/**
@@ -53,7 +59,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PACWITHZEROCALLINGPLAN);
+		return zeroCallingMinuetes;
 	}
 
 }

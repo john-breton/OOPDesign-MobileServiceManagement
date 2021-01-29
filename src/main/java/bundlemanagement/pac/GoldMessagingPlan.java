@@ -1,9 +1,8 @@
 package bundlemanagement.pac;
 
 import java.math.BigDecimal;
-
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements gold messaging plan for the PaC Bundle.
@@ -15,6 +14,8 @@ import bundlemanagement.preconf.*;
 public class GoldMessagingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal goldMessagingFee;
+	private final BigDecimal goldMessagingNums;
 
 	/**
 	 * Constructor for PaC side
@@ -23,6 +24,9 @@ public class GoldMessagingPlan extends BundleDecorator {
 	 */
 	public GoldMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.goldMessagingFee = BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PAC_WITH_GOLD_MESSAGING_PLAN);
+		this.goldMessagingNums = BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
+				.get(BundleNames.PAC_WITH_GOLD_MESSAGING_PLAN);
 	}
 
 	/**
@@ -33,7 +37,7 @@ public class GoldMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHGOLDMESSAGINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + BundleNames.PAC_WITH_GOLD_MESSAGING_PLAN.getBundleDescription() + "\n";
 	}
 
 	/**
@@ -44,7 +48,7 @@ public class GoldMessagingPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PACWITHGOLDMESSAGINGPLAN));
+		return pacbundle.cost().add(goldMessagingFee);
 	}
 
 	/**
@@ -54,8 +58,7 @@ public class GoldMessagingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getNumberOfMessages() {
 
-		return BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages
-				.get(BundleNames.PACWITHGOLDMESSAGINGPLAN);
+		return goldMessagingNums;
 	}
 
 }

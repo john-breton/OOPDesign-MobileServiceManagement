@@ -2,8 +2,8 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements platinum data plan for the PaC bundle.
@@ -14,12 +14,9 @@ import bundlemanagement.preconf.*;
 public class PlatinumDataPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
-
-	/**
-	 * Constructor for preconf side
-	 */
-	public PlatinumDataPlan() {
-	}
+	private final BigDecimal platinumDataFee;
+	private final BigDecimal platinumDataQuant;
+	private final String description;
 
 	/**
 	 * Constructor for PaC side
@@ -28,6 +25,9 @@ public class PlatinumDataPlan extends BundleDecorator {
 	 */
 	public PlatinumDataPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.platinumDataFee = BundleFees.PaCWithDataOptionFees.get(BundleNames.PAC_WITH_PLATINUM_DATA_PLAN);
+		this.platinumDataQuant = BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PAC_WITH_PLATINUM_DATA_PLAN);
+		this.description = BundleNames.PAC_WITH_PLATINUM_DATA_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class PlatinumDataPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHPLATINUMDATAPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class PlatinumDataPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithDataOptionFees.get(BundleNames.PACWITHPLATINUMDATAPLAN));
+		return pacbundle.cost().add(platinumDataFee);
 	}
 
 	/**
@@ -59,6 +59,6 @@ public class PlatinumDataPlan extends BundleDecorator {
 	 */
 	public BigDecimal getDataQuantity() {
 
-		return BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PACWITHPLATINUMDATAPLAN);
+		return platinumDataQuant;
 	}
 }

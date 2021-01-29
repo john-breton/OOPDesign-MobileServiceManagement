@@ -20,7 +20,6 @@ public class PreconfBundle extends Bundle {
 	 * This attribute could go to Bundle class as well, so this way you don't need
 	 * to use simple factory on top(Ista's comment).
 	 */
-	BundleNames bundlename;
 	CallingPlanOptions callingplan;
 	MessagingPlanOptions messagingplan;
 	DataPlanOptions dataplan;
@@ -43,7 +42,7 @@ public class PreconfBundle extends Bundle {
 	 * 
 	 * @return Monthly fee of this Preconfigured Bundle
 	 */
-	public BigDecimal getMonthlyFees() {
+	public BigDecimal cost() {
 		return monthlyfees;
 	}
 
@@ -52,8 +51,7 @@ public class PreconfBundle extends Bundle {
 	 * BundleComponentFactory. It can be PlatinumBundleComponentFactory, or ...
 	 */
 	void prepare() {
-		// System.out.println("Preparing " + getName());
-		bundlename = ComponentFactory.createBundleNames();
+		setName(ComponentFactory.createBundleNames());
 		callingplan = ComponentFactory.createCallingPlan();
 		messagingplan = ComponentFactory.createMessagingPlan();
 		dataplan = ComponentFactory.createDataPlan();
@@ -67,12 +65,6 @@ public class PreconfBundle extends Bundle {
 	 */
 	public String toString() {
 		StringBuffer result = new StringBuffer();
-		// result.append("------ " + getName() + " ------\n");
-		if (bundlename != null) {
-			result.append("Official Bundle Name: ");
-			result.append(bundlename.getBundleNames());
-			result.append("\n");
-		}
 		if (callingplan != null) {
 			result.append("Calling Plan: ");
 			result.append(callingplan.getCallingPlanOptionsDesription());
@@ -94,19 +86,6 @@ public class PreconfBundle extends Bundle {
 			result.append("\n");
 
 		}
-		/*
-		 * if (callingplan != null) { if (callingplan.getCallingMinutes() !=
-		 * Integer.MAX_VALUE) { result.append("\nCalling time: ");
-		 * result.append(callingplan.getCallingMinutes()); } else {
-		 * result.append("\nCalling time: "); result.append("unlimited"); } }
-		 * 
-		 * if (messagingplan != null) { if (messagingplan.getNumberOfMessages() !=
-		 * Integer.MAX_VALUE) { result.append("\nNumber of messages: ");
-		 * result.append(messagingplan.getNumberOfMessages()); } else {
-		 * result.append("\nNumber of messages: "); result.append("unlimited"); } } if
-		 * (dataplan != null) { result.append("\nData Quantity: ");
-		 * result.append(dataplan.getDataQuantity()); }
-		 */
 
 		return result.toString();
 	}

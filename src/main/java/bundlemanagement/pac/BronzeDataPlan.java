@@ -1,9 +1,8 @@
 package bundlemanagement.pac;
 
 import java.math.BigDecimal;
-
-import bundlemanagement.pac.*;
-import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements bronze data plan for the PaC bundle.
@@ -15,6 +14,10 @@ import bundlemanagement.preconf.*;
 public class BronzeDataPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal bronzeDataFee;
+	private final BigDecimal bronzeDataQuant;
+	private final String description;
+	
 
 	/**
 	 * Constructor for PaC side
@@ -23,6 +26,9 @@ public class BronzeDataPlan extends BundleDecorator {
 	 */
 	public BronzeDataPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.bronzeDataFee = BundleFees.PaCWithDataOptionFees.get(BundleNames.PAC_WITH_BRONZE_DATA_PLAN);
+		this.bronzeDataQuant = BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PAC_WITH_BRONZE_DATA_PLAN);
+		this.description = BundleNames.PAC_WITH_BRONZE_DATA_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -33,7 +39,7 @@ public class BronzeDataPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + BundleNames.PACWITHBRONZEDATAPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -44,7 +50,7 @@ public class BronzeDataPlan extends BundleDecorator {
 	@Override
 	public BigDecimal cost() {
 
-		return pacbundle.cost().add(BundleFees.PaCWithDataOptionFees.get(BundleNames.PACWITHBRONZEDATAPLAN));
+		return pacbundle.cost().add(bronzeDataFee);
 	}
 
 	/**
@@ -54,6 +60,6 @@ public class BronzeDataPlan extends BundleDecorator {
 	 */
 	public BigDecimal getDataQuantity() {
 
-		return BundleNumericalValues.PaCWithDataOptionDataQuantity.get(BundleNames.PACWITHBRONZEDATAPLAN);
+		return bronzeDataQuant;
 	}
 }

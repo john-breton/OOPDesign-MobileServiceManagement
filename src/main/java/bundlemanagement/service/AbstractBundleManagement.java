@@ -10,44 +10,39 @@ import java.beans.PropertyChangeListener;
 public abstract class AbstractBundleManagement implements PropertyChangeListener{
 
 	/**
-	 * Create a new PaC Bundle based on the passing parameter. The name is required
-	 * to be unique as it is the unique identifier of a bundle. Any option that is not needed
-	 * can take a null as an input. A Bare Bone Phone Service will be add to the bundle automatically.
+	 * Create a new Preconfigured Bundle based on the passing parameters.
 	 * 
-	 * @param name             Bundle Name(unique identifier)
-	 * @param CallingOption    Calling Options: PLATINUM, GOLD, SILVER, BRONZE, ZERO. Put null if not needed
-	 * @param MessagingOption  Messaging Options: PLATINUM, GOLD, SILVER, BRONZE, ZERO. Put null if not needed
-	 * @param DataOption       Data Options: PLATINUM, GOLD, SILVER, BRONZE, ZERO. Put null if not needed
+	 * @param bundleName Preconfigured Bundle Name options:PLATINUM, GOLD, SILVER,
+	 *                   BRONZE
 	 */
-	public abstract void addPaCBundle(String name, BundleOption CallingOption, BundleOption MessagingOption,
-			BundleOption DataOption);
-	/**
-	 * Create a new Preconfigured Bundle based on the passing parameters. The name is required
-	 * to be unique as it is the unique identifier of a bundle.
-	 * @param name     Bundle Name(unique identifier)
-	 * @param option   Preconfigured Bundle options:PLATINUM, GOLD, SILVER, BRONZE
-	 */
-	public abstract void addPreconfBundle(String name, BundleOption option);
+	public abstract void addPreconfBundle(String bundleName);
 	
 	/**
 	 * Create a Plain Pick And Choose Bundle with only Bare Bone Phone Service
-	 * @param name  Bundle Name(unique identifier)
+	 * 
+	 * @param name Bundle Name(unique identifier), only takes name PLAINPACBUNDLE
 	 */
-	public abstract void addPlainPacBundle(String name);
+	public abstract void addPlainPacBundle(String bundleName);
 	
 	/**
 	 * Create a PaC Bundle with only Calling option
-	 * @param name            Bundle Name(unique identifier)
-	 * @param callingOption   Calling Options: PLATINUM, GOLD, SILVER, BRONZE, ZERO. Put null if not needed
+	 * 
+	 * @param bundleName Customer input Bundle Name (non case-sensitive), only
+	 *                   accept: PaCWithPlatinumCalling, PaCWithGoldCalling,
+	 *                   PaCWithSilverCalling, PaCWithBronzeCalling,
+	 *                   PaCWithZeroCalling
 	 */
-	public abstract void addPacBundleWithCalling(String name, BundleOption callingOption);
+	public abstract void addPacBundleWithCalling(String bundleName);
 	
 	/**
 	 * Create a PaC Bundle with only Messaging option
-	 * @param name             Bundle Name(unique identifier)
-	 * @param messagingOption  Messaging Options: PLATINUM, GOLD, SILVER, BRONZE, ZERO. Put null if not needed
+	 * 
+	 * @param bundleName Customer input Bundle Name (non case-sensitive), only
+	 *                   accept: PaCWithPlatinumMessaging, PaCWithGoldMessaging,
+	 *                   PaCWithSilverMessaging, PaCWithBronzeMessaging,
+	 *                   PaCWithZeroMessaging
 	 */
-	public abstract void addPacBundleWithMessaging(String name, BundleOption messagingOption);
+	public abstract void addPacBundleWithMessaging(String name);
 	
 	/**
 	 *Handle the various event from ReportingService. Any unknown

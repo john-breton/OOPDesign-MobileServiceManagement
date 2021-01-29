@@ -1,4 +1,4 @@
-package bundlemanagement.preconf;
+package bundlemanagement.service;
 
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -45,11 +45,11 @@ public class BundleFees {
 	 * Import fee for PaC bundle with different calling plan options.
 	 */
 	static {
-		PaCWithCallingOptionFees.put(BundleNames.PACWITHPLATINUMCALLINGPLAN, new BigDecimal(40));
-		PaCWithCallingOptionFees.put(BundleNames.PACWITHGOLDCALLINGPLAN, new BigDecimal(30));
-		PaCWithCallingOptionFees.put(BundleNames.PACWITHSILVERCALLINGPLAN, new BigDecimal(20));
-		PaCWithCallingOptionFees.put(BundleNames.PACWITHBRONZECALLINGPLAN, new BigDecimal(15));
-		PaCWithCallingOptionFees.put(BundleNames.PACWITHZEROCALLINGPLAN, new BigDecimal(0));
+		PaCWithCallingOptionFees.put(BundleNames.PAC_WITH_PLATINUM_CALLING_PLAN, new BigDecimal(40));
+		PaCWithCallingOptionFees.put(BundleNames.PAC_WITH_GOLD_CALLING_PLAN, new BigDecimal(30));
+		PaCWithCallingOptionFees.put(BundleNames.PAC_WITH_SILVER_CALLING_PLAN, new BigDecimal(20));
+		PaCWithCallingOptionFees.put(BundleNames.PAC_WITH_BRONZE_CALLING_PLAN, new BigDecimal(15));
+		PaCWithCallingOptionFees.put(BundleNames.PAC_WITH_ZERO_CALLING_PLAN, new BigDecimal(0));
 
 		// Make map unmodifiable(read-only) by user.
 		PaCWithCallingOptionFees = Collections.unmodifiableMap(PaCWithCallingOptionFees);
@@ -67,11 +67,11 @@ public class BundleFees {
 	 * Import fee for PaC bundle with different data plan options.
 	 */
 	static {
-		PaCWithDataOptionFees.put(BundleNames.PACWITHPLATINUMDATAPLAN, new BigDecimal(40));
-		PaCWithDataOptionFees.put(BundleNames.PACWITHGOLDDATAPLAN, new BigDecimal(30));
-		PaCWithDataOptionFees.put(BundleNames.PACWITHSILVERDATAPLAN, new BigDecimal(25));
-		PaCWithDataOptionFees.put(BundleNames.PACWITHBRONZEDATAPLAN, new BigDecimal(20));
-		PaCWithDataOptionFees.put(BundleNames.PACWITHZERODATAPLAN, new BigDecimal(0));
+		PaCWithDataOptionFees.put(BundleNames.PAC_WITH_PLATINUM_DATA_PLAN, new BigDecimal(40));
+		PaCWithDataOptionFees.put(BundleNames.PAC_WITH_GOLD_DATA_PLAN, new BigDecimal(30));
+		PaCWithDataOptionFees.put(BundleNames.PAC_WITH_SILVER_DATA_PLAN, new BigDecimal(25));
+		PaCWithDataOptionFees.put(BundleNames.PAC_WITH_BRONZE_DATA_PLAN, new BigDecimal(20));
+		PaCWithDataOptionFees.put(BundleNames.PAC_WITH_ZERO_DATA_PLAN, new BigDecimal(0));
 
 		// Make map unmodifiable(read-only) by user.
 		PaCWithDataOptionFees = Collections.unmodifiableMap(PaCWithDataOptionFees);
@@ -89,11 +89,11 @@ public class BundleFees {
 	 * Import fee for PaC bundle with different massaging plan options.
 	 */
 	static {
-		PaCWithMessagingOptionFees.put(BundleNames.PACWITHPLATINUMMESSAGINGPLAN, new BigDecimal(45));
-		PaCWithMessagingOptionFees.put(BundleNames.PACWITHGOLDMESSAGINGPLAN, new BigDecimal(35));
-		PaCWithMessagingOptionFees.put(BundleNames.PACWITHSILVERMESSAGINGPLAN, new BigDecimal(25));
-		PaCWithMessagingOptionFees.put(BundleNames.PACWITHBRONZEMESSAGINGPLAN, new BigDecimal(20));
-		PaCWithMessagingOptionFees.put(BundleNames.PACWITHZEROMESSAGINGPLAN, new BigDecimal(0));
+		PaCWithMessagingOptionFees.put(BundleNames.PAC_WITH_PLATINUM_MESSAGING_PLAN, new BigDecimal(45));
+		PaCWithMessagingOptionFees.put(BundleNames.PAC_WITH_GOLD_MESSAGING_PLAN, new BigDecimal(35));
+		PaCWithMessagingOptionFees.put(BundleNames.PAC_WITH_SILVER_MESSAGING_PLAN, new BigDecimal(25));
+		PaCWithMessagingOptionFees.put(BundleNames.PAC_WITH_BRONZE_MESSAGING_PLAN, new BigDecimal(20));
+		PaCWithMessagingOptionFees.put(BundleNames.PAC_WITH_ZERO_MESSAGING_PLAN, new BigDecimal(0));
 
 		// Make map unmodifiable(read-only) by user.
 		PaCWithMessagingOptionFees = Collections.unmodifiableMap(PaCWithMessagingOptionFees);

@@ -2,8 +2,9 @@ package bundlemanagement.pac;
 
 import java.math.BigDecimal;
 
-import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This class implements bronze calling plan for the PaC Bunlde.
@@ -15,6 +16,9 @@ import bundlemanagement.preconf.*;
 public class BronzeCallingPlan extends BundleDecorator {
 
 	PaCBundle pacbundle;
+	private final BigDecimal bronzeCallingFee;
+	private final BigDecimal bronzeCallingMinuetes;
+	private final String description;
 
 	/**
 	 * Constructor for PaC side
@@ -23,6 +27,9 @@ public class BronzeCallingPlan extends BundleDecorator {
 	 */
 	public BronzeCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.bronzeCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_BRONZE_CALLING_PLAN);
+		this.bronzeCallingMinuetes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_BRONZE_CALLING_PLAN);
+		this.description = BundleNames.PAC_WITH_BRONZE_CALLING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -32,7 +39,7 @@ public class BronzeCallingPlan extends BundleDecorator {
 	 */
 	@Override
 	public String getDescription() {
-		return pacbundle.getDescription() + BundleNames.PACWITHBRONZECALLINGPLAN.getBundleNames() + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -43,7 +50,7 @@ public class BronzeCallingPlan extends BundleDecorator {
 
 	@Override
 	public BigDecimal cost() {
-		return pacbundle.cost().add(BundleFees.PaCWithCallingOptionFees.get(BundleNames.PACWITHBRONZECALLINGPLAN));
+		return pacbundle.cost().add(bronzeCallingFee);
 	}
 
 	/**
@@ -53,7 +60,7 @@ public class BronzeCallingPlan extends BundleDecorator {
 	 */
 	public BigDecimal getCallingMinutes() {
 
-		return BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PACWITHBRONZECALLINGPLAN);
+		return bronzeCallingMinuetes;
 	}
 
 }

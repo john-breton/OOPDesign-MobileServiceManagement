@@ -27,10 +27,9 @@ public abstract class BundleShop {
 	 * @param name The type can be gold, platinum, bronze, and silver
 	 * @return Bundle
 	 */
-	public PreconfBundle orderBundle(String name) {
+	public PreconfBundle orderBundle() {
 
 		PreconfBundle bundle = createBundle();
-		bundle.setName(name);
 		// System.out.println("Making a " + bundle.getName() + "....");
 		bundle.prepare();
 		return bundle;

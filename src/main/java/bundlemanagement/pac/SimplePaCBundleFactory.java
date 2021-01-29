@@ -1,5 +1,6 @@
 package bundlemanagement.pac;
 
+import bundlemanagement.service.BundleNames;
 import bundlemanagement.service.BundleOption;
 
 /**
@@ -21,7 +22,7 @@ public class SimplePaCBundleFactory {
 	 *                        SILVER, or BRONZE)
 	 * @return The pac bundle object
 	 */
-	public PaCBundle createBundle(String name, BundleOption callingOption, BundleOption messagingOption,
+	public PaCBundle createBundle(BundleNames name, BundleOption callingOption, BundleOption messagingOption,
 			BundleOption dataOption) {
 		PaCBundle pac = new BareBonePhoneService();
 
@@ -42,8 +43,12 @@ public class SimplePaCBundleFactory {
 			case ZERO:
 				pac = new ZeroCallingPlan(pac);
 				break;
+			case NONE:
+				pac = new EmptyCallingPlan(pac);
+				break;
 			}
 		}
+		
 		if (messagingOption != null) {
 			switch (messagingOption) {
 			case PLATINUM:
@@ -61,8 +66,11 @@ public class SimplePaCBundleFactory {
 			case ZERO:
 				pac = new ZeroMessagingPlan(pac);
 				break;
+			case NONE:
+				pac = new EmptyMessagingPlan(pac);
 			}
 		}
+		
 		if (dataOption != null) {
 			switch (dataOption) {
 			case PLATINUM:
@@ -79,6 +87,9 @@ public class SimplePaCBundleFactory {
 				break;
 			case ZERO:
 				pac = new ZeroDataPlan(pac);
+				break;
+			case NONE:
+				pac = new EmptyDataPlan(pac);
 				break;
 			}
 		}
