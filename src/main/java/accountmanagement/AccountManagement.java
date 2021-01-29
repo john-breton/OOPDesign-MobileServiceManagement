@@ -78,16 +78,6 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
-     * Add an Account object to the list of managed service accounts.
-     *
-     * @param acc The Account object to be added to the list of managed service accounts.
-     */
-    public void addAccount(Account acc) {
-        // Delegate to the other addAccount method to avoid code repetition.
-        addAccount(acc.getUser(), acc.getPhoneNum(), acc.getBundle());
-    }
-
-    /**
      * Remove an account from the list of managed accounts.
      *
      * @param phoneNum The phone number for the service account being removed, as a String.
@@ -130,46 +120,12 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
-     * Get the service account/fees associated with a phone number.
+     * Adds listeners to this class.
      *
-     * @param phoneNum The phone number used to search for the service account.
-     * @param mode     True if this is to display an account, false to display the fees associated with the account.
+     * @param pcl a property change listener
      */
-    public void getAccount(String phoneNum, boolean mode) {
-        if (accountList.containsKey(phoneNum)) {
-            if (mode) {
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
-            } else {
-                support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, accountList.get(phoneNum).getBundle(), Events.FEES.getDesc());
-            }
-            return;
-        }
-        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, Events.FAILURE.getDesc());
-    }
-
-    /**
-     * Get the service accounts/fees associated with a username.
-     *
-     * @param username The username used to search for the service accounts.
-     * @param mode     True if this is to display an account, false to display the fees associated with the account.
-     */
-    public void findAccounts(String username, boolean mode) {
-        boolean found = false;
-        Set set = accountList.entrySet();
-        for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
-            if (((Account) acc.getValue()).getUser().equals(username)) {
-                if (mode) {
-                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
-                } else {
-                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
-                }
-                found = true;
-            }
-        }
-        if (!found) {
-            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, username, Events.FAILURE.getDesc());
-        }
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
     }
 
     /**
@@ -264,20 +220,46 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
-     * Adds listeners to this class.
+     * Get the service account/fees associated with a phone number.
      *
-     * @param pcl a property change listener
+     * @param phoneNum The phone number used to search for the service account.
+     * @param mode     True if this is to display an account, false to display the fees associated with the account.
      */
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
+    private void getAccount(String phoneNum, boolean mode) {
+        if (accountList.containsKey(phoneNum)) {
+            if (mode) {
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
+            } else {
+                support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, accountList.get(phoneNum).getBundle(), Events.FEES.getDesc());
+            }
+            return;
+        }
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, Events.FAILURE.getDesc());
     }
 
     /**
-     * Removes listeners to this class.
+     * Get the service accounts/fees associated with a username.
      *
-     * @param pcl a property change listener
+     * @param username The username used to search for the service accounts.
+     * @param mode     True if this is to display an account, false to display the fees associated with the account.
      */
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        support.removePropertyChangeListener(pcl);
+    private void findAccounts(String username, boolean mode) {
+        boolean found = false;
+        Set set = accountList.entrySet();
+        for (Object o : set) {
+            Map.Entry acc = (Map.Entry) o;
+            if (((Account) acc.getValue()).getUser().equals(username)) {
+                if (mode) {
+                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
+                } else {
+                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
+                }
+                found = true;
+            }
+        }
+        if (!found) {
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, username, Events.FAILURE.getDesc());
+        }
     }
+
 }
