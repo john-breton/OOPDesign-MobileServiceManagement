@@ -18,12 +18,14 @@ public class UserObject extends UserObjectIf {
 	/**
 	 * Constructor for creating the user object
 	 * @param name The user name of the user.
+	 * @param vals the list of all properties you wish to modify
 	 * */
-	public UserObject(String name) {
+	public UserObject(String name, TreeMap<PropertyIdEnum, String> userProperties) {
 		propertyList = new TreeMap<PropertyIdEnum, PropertyIf>();
 		propertyList.put(PropertyIdEnum.USER_NAME, new UserNameProperty(name));
 		propertyList.put(PropertyIdEnum.USER_ADDRESS, new UserAddressProperty(""));
 		propertyList.put(PropertyIdEnum.USER_EMAIL, new UserEmailProperty(""));
+		modifyProperties(userProperties);
 	}
 	
 	/**
