@@ -35,7 +35,7 @@ public class UserManagement extends AbstractUserManagement {
 	private static final String USER_ID_KEY = "userId";
 
 	private PropertyChangeSupport support;
-	private static UserManagement UNIQUE_INSTANCE = new UserManagement();
+	private volatile static UserManagement UNIQUE_INSTANCE = new UserManagement();
 	private volatile ConcurrentHashMap<String, UserObjectIf> users;
 	private ManagementFactoryIf<UserObjectIf> userFactory;
 
@@ -60,21 +60,21 @@ public class UserManagement extends AbstractUserManagement {
 	 * Add a single user by name, it will set the attributes empty string by default
 	 * @param name (Surfoplane) The user name of the user to be added
 	 */
-	private void addUser(String name) {
-		if (name == null || name.isBlank() || users.containsKey(name)) {
-			support.firePropertyChange(
-					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
-					PropertyNameStrings.Events.FAILURE.getDesc(),
-					name);
-			return;
-		}
-		
-		users.put(name, userFactory.createObjectById(name));
-		support.firePropertyChange(
-				PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
-				PropertyNameStrings.Events.SUCCESS.getDesc(),
-				name);
-	}
+//	private void addUser(String name) {
+//		if (name == null || name.isBlank() || users.containsKey(name)) {
+//			support.firePropertyChange(
+//					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+//					PropertyNameStrings.Events.FAILURE.getDesc(),
+//					name);
+//			return;
+//		}
+//		
+//		users.put(name, userFactory.createObjectById(name));
+//		support.firePropertyChange(
+//				PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+//				PropertyNameStrings.Events.SUCCESS.getDesc(),
+//				name);
+//	}
 	
 	/**
 	 * {@inheritDoc}
@@ -85,7 +85,6 @@ public class UserManagement extends AbstractUserManagement {
 		//check if the user exists
 		if (!users.containsKey(name)) 
 		{
-			addUser(name);
 			TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
 			if (address != null)
 				attr.put(PropertyIdEnum.USER_ADDRESS, address);
@@ -96,8 +95,14 @@ public class UserManagement extends AbstractUserManagement {
 				attr.put(PropertyIdEnum.USER_EMAIL, email);
 			else
 				attr.put(PropertyIdEnum.USER_EMAIL, "");
+			
+			users.put(name, userFactory.createObjectById(name,attr));
+			
+			support.firePropertyChange(
+					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+					PropertyNameStrings.Events.SUCCESS.getDesc(),
+					name);
 
-			modifyUser(name, attr);
 			
 		}
 		else 

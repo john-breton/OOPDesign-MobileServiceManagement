@@ -1,5 +1,8 @@
 package users;
 
+import java.util.TreeMap;
+
+import properties.PropertyIdEnum;
 import services.ManagementFactoryIf;
 
 /**
@@ -18,7 +21,7 @@ public class UserManagementFactory extends ManagementFactoryIf<UserObjectIf> {
 	 * @param id The user name of the User
 	 * @return UserObjectIf newly created user object
 	 * */
-	public UserObjectIf createObjectById(String id) {
-		return new UserObject(id);
+	public UserObjectIf createObjectById(String id, TreeMap<PropertyIdEnum, String> userProperties) {
+		return new UserObject(id,userProperties);
 	}
 }
