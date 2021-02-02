@@ -45,7 +45,7 @@ public class UserInterfaceManagement {
      * @param phoneNum the phone number associated with the account
      */
     public void listAccount(String phoneNum) {
-        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + FIND, Events.SUCCESS.getDesc(), phoneNum);
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + LIST, Events.SUCCESS.getDesc(), phoneNum);
     }
 
     /**
@@ -55,7 +55,7 @@ public class UserInterfaceManagement {
      * @param username the user name associated with the accounts
      */
     public void listAccounts(String username) {
-        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + FIND, Events.SPECIAL.getDesc(), username);
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + LIST, Events.SPECIAL.getDesc(), username);
     }
 
     /**

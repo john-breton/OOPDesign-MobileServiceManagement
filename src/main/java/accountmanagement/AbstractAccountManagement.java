@@ -25,7 +25,8 @@ public abstract class AbstractAccountManagement implements PropertyChangeListene
     public abstract void addAccount(String user, String phoneNum, String bundle);
 
 	/**
-     * Remove an account from the list of managed accounts.
+     * Makes an attempt to delete a user if the deleted account was the last
+     * account said user was associated with.
      *
      * @param phoneNum The phone number for the service account being removed, as a String.
      */

@@ -4,6 +4,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
@@ -78,24 +79,41 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
-     * Remove an account from the list of managed accounts.
+     * 
+     * Makes an attempt to delete a user if the deleted account was the last
+     * account said user was associated with
      *
      * @param phoneNum The phone number for the service account being removed, as a String.
      */
     public void removeAccount(String phoneNum) {
-        if (accountList.containsKey(phoneNum)) {
-            String deletedUser = accountList.get(phoneNum).getUser();
+    	String deletedUser = accountList.get(phoneNum).getUser();
+    	boolean deleted = helperRemoveAccount(phoneNum);
+    	if (deleted) {
+    		 Set<Entry<String, Account>> set = accountList.entrySet();
+             for (Object o : set) {
+                 ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
+                 if (((Account) acc.getValue()).getUser().equals(deletedUser)) {
+                     return;
+                 }
+             }
+             support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SPECIAL.getDesc(), deletedUser);
+    	}
+    }
+
+    /**
+     * Remove an account from the list of managed accounts.
+     *
+     * @param phoneNum The phone number for the service account being removed, as a String.
+     * @return True if the account was deleted successfully, false otherwise.
+     */
+    private boolean helperRemoveAccount(String phoneNum) {
+    	if (accountList.containsKey(phoneNum)) {
             support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), phoneNum);
             accountList.remove(phoneNum);
-            // Special case, the User the account was associated with is not associated with any other Accounts.
-            // If that's the case, the User must also be deleted (MR 1.9.10)
-            if (accountList.containsValue(deletedUser)) {
-                return;
-            }
-            support.firePropertyChange(USER + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), deletedUser);
-            return;
+            return true;
         }
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.FAILURE.getDesc(), phoneNum);
+        return false;
     }
 
     /**
@@ -136,6 +154,7 @@ public class AccountManagement extends AbstractAccountManagement {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
+    	System.out.println(evt.getPropertyName());
         switch (evt.getPropertyName()) {
             case PRINT_ACCOUNT_ADDED:
                 if (evt.getOldValue().equals(Events.FAILURE.getDesc())) {
@@ -156,9 +175,10 @@ public class AccountManagement extends AbstractAccountManagement {
                 break;
             case PRINT_ACCOUNT_DETAILS:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
+                	System.out.println();
                     printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
                 } else {
-                    if (!validatePhoneNum((String) evt.getNewValue())) {
+                    if (accountList.containsKey((String) evt.getNewValue())) {
                         System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                     } else {
                         System.out.printf("No service account with the username %s was found%n", evt.getNewValue());
@@ -177,6 +197,9 @@ public class AccountManagement extends AbstractAccountManagement {
             case FIND_ACCOUNTS_FEES:
                 findAccounts((String) evt.getNewValue(), false);
                 break;
+            case DELETE_ACCOUNT:
+            	deleteAccounts((String) evt.getNewValue());
+            	break;
             default:
                 break;
         }
@@ -191,7 +214,7 @@ public class AccountManagement extends AbstractAccountManagement {
      * @param acc The Account to be printed.
      */
     private void printAccountDetails(Account acc) {
-        System.out.println("\n-----ACCOUNT REPORT-----");
+        System.out.println("-----ACCOUNT REPORT-----");
         System.out.printf("Phone Number: %s%n", acc.getPhoneNum());
         // Print the user details for the report.
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getUser(), USER);
@@ -245,9 +268,10 @@ public class AccountManagement extends AbstractAccountManagement {
      */
     private void findAccounts(String username, boolean mode) {
         boolean found = false;
-        Set set = accountList.entrySet();
+        Set<Entry<String, Account>> set = accountList.entrySet();
+        System.out.println(set.isEmpty());
         for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
+            ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
             if (((Account) acc.getValue()).getUser().equals(username)) {
                 if (mode) {
                     support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
@@ -259,6 +283,24 @@ public class AccountManagement extends AbstractAccountManagement {
         }
         if (!found) {
             support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, username, Events.FAILURE.getDesc());
+        }
+    }
+    
+    /**
+     * Delete accounts associated with a specific username. Will not
+     * fire off an event to delete a user once the last account
+     * has been deleted. For such functionality, see removeAccount()
+     * 
+     * @param username The username that will be used to delete associated accounts
+     */
+    private void deleteAccounts(String username) {
+    	Set<Entry<String, Account>> set = accountList.entrySet();
+        for (Object o : set) {
+            ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
+            Account checkAcc = ((Account) acc.getValue());
+            if (checkAcc.getUser().equals(username)) {
+            	helperRemoveAccount(checkAcc.getPhoneNum());
+            }
         }
     }
 

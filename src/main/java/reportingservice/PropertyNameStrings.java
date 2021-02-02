@@ -41,6 +41,7 @@ public final class PropertyNameStrings {
     public static final String DELETE_USER = "DELETE_USER";
     public static final String PRINT_BUNDLE_DETAILS = "PRINT_BUNDLE_DETAILS";
     public static final String PRINT_BUNDLE_ADDED = "PRINT_BUNDLE_ADDED";
+    public static final String DELETE_ACCOUNT = "DELETE_ACCOUNT";
 
     /**
      * Enum used to simplify event passing.
