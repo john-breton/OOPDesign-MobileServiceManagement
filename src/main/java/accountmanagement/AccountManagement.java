@@ -154,7 +154,6 @@ public class AccountManagement extends AbstractAccountManagement {
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-    	System.out.println(evt.getPropertyName());
         switch (evt.getPropertyName()) {
             case PRINT_ACCOUNT_ADDED:
                 if (evt.getOldValue().equals(Events.FAILURE.getDesc())) {
