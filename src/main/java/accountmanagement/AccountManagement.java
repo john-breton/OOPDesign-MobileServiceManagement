@@ -66,7 +66,7 @@ public class AccountManagement extends AbstractAccountManagement {
             return;
         }
 
-        // A phone number can only be associated with a single phone number.
+        // A phone number can only be associated with a single account.
         if (accountList.containsKey(phoneNum)) {
             support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), phoneNum);
             return;
