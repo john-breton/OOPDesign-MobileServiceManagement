@@ -148,8 +148,9 @@ public class UserManagement extends AbstractUserManagement {
 	 * Remove the User Object by UserName 
 	 * 
 	 * @param userId The user name for the user to be deleted.
+	 * @param successState Events.SUCCESS normally, Events.SPECIAL to avoid a feedback loop when deleting accounts.
 	 */
-	public void deleteUser(String userId) {
+	public void deleteUser(String userId, String successState) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.DELETE,
@@ -161,7 +162,7 @@ public class UserManagement extends AbstractUserManagement {
 		users.remove(userId);
 		support.firePropertyChange(
 				PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.DELETE,
-				PropertyNameStrings.Events.SUCCESS.getDesc(),
+				successState,
 				userId);
 	}
 
@@ -173,7 +174,7 @@ public class UserManagement extends AbstractUserManagement {
 	public void deleteUsers(ArrayList<String> userIds) {
 		for (String userId : userIds) {
 			// remove the current user from the list
-			deleteUser(userId);
+			deleteUser(userId, PropertyNameStrings.Events.SUCCESS.getDesc());
 		}
 	}
 
@@ -268,7 +269,7 @@ public class UserManagement extends AbstractUserManagement {
 				return;
 			}
 			
-			deleteUser(userId);
+			deleteUser(userId, evt.getOldValue().toString());
 			break;
 			
 		case PropertyNameStrings.PRINT_USER_DETAILS:

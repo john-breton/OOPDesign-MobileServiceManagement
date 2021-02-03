@@ -51,8 +51,9 @@ public abstract class AbstractUserManagement implements PropertyChangeListener {
 	 * Remove the User Object by UserName 
 	 * 
 	 * @param userId The user name for the user to be deleted.
+	 * @param successState Events.SUCCESS normally, Events.SPECIAL to avoid a feedback loop when deleting accounts.
 	 */
-	public abstract void deleteUser(String userId);
+	public abstract void deleteUser(String userId, String successState);
 	
 	/**
 	 * Remove the list of User Objects by UserName 

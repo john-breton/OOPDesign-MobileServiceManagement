@@ -140,6 +140,9 @@ public class ReportingService extends AbstractReportingService {
                 	support.firePropertyChange(PRINT_USER_UPDATED, event.getOldValue(), event.getNewValue());
                 	break;
                 case DELETE:
+                	if (event.getOldValue().equals(Events.SUCCESS.getDesc())) {
+                		support.firePropertyChange(DELETE_ACCOUNT, event.getOldValue(), event.getNewValue());
+                	}
                 	support.firePropertyChange(PRINT_USER_DELETED, event.getOldValue(), event.getNewValue());
                 	break;
                 case DISPLAY:

@@ -11,6 +11,7 @@ import bundlemanagement.service.BundleOption;
 import accountmanagement.AccountManagement;
 import services.UserManagement;
 import bundlemanagement.service.BundleManagement;
+import reportingservice.PropertyNameStrings;
 import reportingservice.ReportingService;
 
 /**
@@ -163,7 +164,7 @@ public class UserInterface {
                     if (parameters.equals("Back")) {
                         break;
                     }
-                    userService.deleteUser(parameters);
+                    userService.deleteUser(parameters, PropertyNameStrings.Events.SUCCESS.getDesc());
                     System.out.println("Hit Enter to return to the menu");
                     input.next();
                     break;

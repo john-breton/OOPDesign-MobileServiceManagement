@@ -4,6 +4,8 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import static reportingservice.PropertyNameStrings.*;
@@ -24,8 +26,8 @@ import static reportingservice.PropertyNameStrings.*;
  */
 public class AccountManagement extends AbstractAccountManagement {
     // We will always need an AccountManagement instance, so use eager instantiation.
-    private static final AccountManagement UNIQUE_INSTANCE = new AccountManagement();
-    private final TreeMap<String, Account> accountList;
+    private static volatile AccountManagement UNIQUE_INSTANCE = new AccountManagement();
+    private volatile ConcurrentHashMap<String, Account> accountList;
     private final PropertyChangeSupport support;
     private final Pattern phoneNumPattern = Pattern.compile("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
 
@@ -35,7 +37,7 @@ public class AccountManagement extends AbstractAccountManagement {
      */
     private AccountManagement() {
         support = new PropertyChangeSupport(this);
-        accountList = new TreeMap<>();
+        accountList = new ConcurrentHashMap<>();
     }
 
     /**
@@ -64,59 +66,54 @@ public class AccountManagement extends AbstractAccountManagement {
             return;
         }
 
-        // A phoneNum can only be associated with a single Account.
-        Set set = accountList.entrySet();
-        for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
-            if (acc.getKey().equals(phoneNum)) {
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), acc.getKey());
-                return;
-            }
+        // A phone number can only be associated with a single account.
+        if (accountList.containsKey(phoneNum)) {
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.FAILURE.getDesc(), phoneNum);
+            return;
         }
 
         // Add the Account to the list.
         Account acc = new Account(user, phoneNum, bundle);
         accountList.put(phoneNum, acc);
-        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(), acc.getPhoneNum());
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(), phoneNum);
     }
 
     /**
-     * Add an Account object to the list of managed service accounts.
+     * 
+     * Makes an attempt to delete a user if the deleted account was the last
+     * account said user was associated with
      *
-     * @param acc The Account object to be added to the list of managed service accounts.
+     * @param phoneNum The phone number for the service account being removed, as a String.
      */
-    public void addAccount(Account acc) {
-        // Delegate to the other addAccount method to avoid code repetition.
-        addAccount(acc.getUser(), acc.getPhoneNum(), acc.getBundle());
+    public void removeAccount(String phoneNum) {
+    	String deletedUser = accountList.get(phoneNum).getUser();
+    	boolean deleted = helperRemoveAccount(phoneNum);
+    	if (deleted) {
+    		 Set<Entry<String, Account>> set = accountList.entrySet();
+             for (Object o : set) {
+                 ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
+                 if (((Account) acc.getValue()).getUser().equals(deletedUser)) {
+                     return;
+                 }
+             }
+             support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SPECIAL.getDesc(), deletedUser);
+    	}
     }
 
     /**
      * Remove an account from the list of managed accounts.
      *
      * @param phoneNum The phone number for the service account being removed, as a String.
+     * @return True if the account was deleted successfully, false otherwise.
      */
-    public void removeAccount(String phoneNum) {
-        Set set = accountList.entrySet();
-        for (Object value : set) {
-            Map.Entry acc = (Map.Entry) value;
-            if (acc.getKey().equals(phoneNum)) {
-                String deletedUser = ((Account) acc.getValue()).getUser();
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), phoneNum);
-                accountList.remove(phoneNum);
-                // Special case, the User the account was associated with is not associated with any other Accounts.
-                // If that's the case, the User must also be deleted (MR 1.9.10)
-                Set setCheck = accountList.entrySet();
-                for (Object o : setCheck) {
-                    Map.Entry accCheck = (Map.Entry) o;
-                    if (((Account) accCheck.getValue()).getUser().equals(deletedUser)) {
-                        return;
-                    }
-                }
-                support.firePropertyChange(USER + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), ((Account) acc.getValue()).getUser());
-                return;
-            }
+    private boolean helperRemoveAccount(String phoneNum) {
+    	if (accountList.containsKey(phoneNum)) {
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.SUCCESS.getDesc(), phoneNum);
+            accountList.remove(phoneNum);
+            return true;
         }
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DELETE, Events.FAILURE.getDesc(), phoneNum);
+        return false;
     }
 
     /**
@@ -126,68 +123,27 @@ public class AccountManagement extends AbstractAccountManagement {
      * @param bundle   The new bundle name identifier that is being associated with the service account.
      */
     public void updateAccountBundle(String phoneNum, String bundle) {
-        Set set = accountList.entrySet();
-        for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
-            if (acc.getKey().equals(phoneNum)) {
-                // Found the service account. Display state prior to update and after update.
-                System.out.println("Generating report prior to account update:");
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATING, Events.SUCCESS.getDesc(), phoneNum);
-                ((Account) acc.getValue()).setBundle(bundle);
-                System.out.println("\nGenerating report after account update:");
-                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATED, Events.SUCCESS.getDesc(), phoneNum);
-                return;
-            }
+        if (accountList.containsKey(phoneNum)) {
+            // Found the service account. Display state prior to update and after update.
+            System.out.println("Generating report prior to account update:");
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATING, Events.SUCCESS.getDesc(), phoneNum);
+            // Update the bundle and generate a new report.
+            accountList.get(phoneNum).setBundle(bundle);
+            System.out.println("\nGenerating report after account update:");
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATED, Events.SUCCESS.getDesc(), phoneNum);
+            return;
         }
         // No service account exists with the passed phone number.
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + UPDATED, Events.FAILURE.getDesc(), phoneNum);
     }
 
     /**
-     * Get the service account/fees associated with a phone number.
+     * Adds listeners to this class.
      *
-     * @param phoneNum The phone number used to search for the service account.
-     * @param mode True if this is to display an account, false to display the fees associated with the account.
+     * @param pcl a property change listener
      */
-    public void getAccount(String phoneNum, boolean mode) {
-        Set set = accountList.entrySet();
-        for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
-            if (acc.getKey().equals(phoneNum)) {
-                if (mode) {
-                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
-                } else {
-                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
-                }
-                return;
-            }
-        }
-        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, Events.FAILURE.getDesc());
-    }
-
-    /**
-     * Get the service accounts/fees associated with a username.
-     *
-     * @param username The username used to search for the service accounts.
-     * @param mode True if this is to display an account, false to display the fees associated with the account.
-     */
-    public void findAccounts(String username, boolean mode) {
-        boolean found = false;
-        Set set = accountList.entrySet();
-        for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
-            if (((Account) acc.getValue()).getUser().equals(username)) {
-                if (mode) {
-                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
-                } else {
-                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
-                }
-                found = true;
-            }
-        }
-        if (!found) {
-            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, username, Events.FAILURE.getDesc());
-        }
+    public void addPropertyChangeListener(PropertyChangeListener pcl) {
+        support.addPropertyChangeListener(pcl);
     }
 
     /**
@@ -204,23 +160,24 @@ public class AccountManagement extends AbstractAccountManagement {
                     System.out.printf("Failed to add a service account for the phone number %s (Used in another service account)%n", evt.getNewValue());
                 } else {
                     System.out.printf("Successfully created a service account for the phone number %s%n", evt.getNewValue());
-                    printAccountDetails(Objects.requireNonNull(getAccountDetails((String) evt.getNewValue())));
+                    printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
                 }
                 break;
             case PRINT_ACCOUNT_DELETED:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
                     System.out.printf("Successfully removed the service account associated with the phone number %s%n", evt.getNewValue());
                     System.out.println("Deleted account details:");
-                    printAccountDetails(Objects.requireNonNull(getAccountDetails((String) evt.getNewValue())));
+                    printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
                 } else {
                     System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                 }
                 break;
             case PRINT_ACCOUNT_DETAILS:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
-                    printAccountDetails(Objects.requireNonNull(getAccountDetails((String) evt.getNewValue())));
+                	System.out.println();
+                    printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
                 } else {
-                    if (!validatePhoneNum((String) evt.getNewValue())) {
+                    if (accountList.containsKey((String) evt.getNewValue())) {
                         System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                     } else {
                         System.out.printf("No service account with the username %s was found%n", evt.getNewValue());
@@ -239,6 +196,9 @@ public class AccountManagement extends AbstractAccountManagement {
             case FIND_ACCOUNTS_FEES:
                 findAccounts((String) evt.getNewValue(), false);
                 break;
+            case DELETE_ACCOUNT:
+            	deleteAccounts((String) evt.getNewValue());
+            	break;
             default:
                 break;
         }
@@ -253,31 +213,13 @@ public class AccountManagement extends AbstractAccountManagement {
      * @param acc The Account to be printed.
      */
     private void printAccountDetails(Account acc) {
-        System.out.println("\n-----ACCOUNT REPORT-----");
+        System.out.println("-----ACCOUNT REPORT-----");
         System.out.printf("Phone Number: %s%n", acc.getPhoneNum());
         // Print the user details for the report.
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getUser(), USER);
         // Print the bundle details for the report.
         support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, acc.getBundle(), BUNDLE);
-        System.out.println("");
-    }
-
-    /**
-     * Return an Account object for the given phone number.
-     * Will not be called unless the Account is known to exist.
-     *
-     * @param phoneNum The phone number associated with the service account.
-     * @return The Account object that is associated with the phone number provided.
-     */
-    private Account getAccountDetails(String phoneNum) {
-        Set set = accountList.entrySet();
-        for (Object o : set) {
-            Map.Entry acc = (Map.Entry) o;
-            if (acc.getKey().equals(phoneNum)) {
-                return (Account) acc.getValue();
-            }
-        }
-        return null;
+        System.out.println();
     }
 
     /**
@@ -300,20 +242,65 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
-     * Adds listeners to this class.
+     * Get the service account/fees associated with a phone number.
      *
-     * @param pcl a property change listener
+     * @param phoneNum The phone number used to search for the service account.
+     * @param mode     True if this is to display an account, false to display the fees associated with the account.
      */
-    public void addPropertyChangeListener(PropertyChangeListener pcl) {
-        support.addPropertyChangeListener(pcl);
+    private void getAccount(String phoneNum, boolean mode) {
+        if (accountList.containsKey(phoneNum)) {
+            if (mode) {
+                support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, ACCOUNT);
+            } else {
+                support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, accountList.get(phoneNum).getBundle(), Events.FEES.getDesc());
+            }
+            return;
+        }
+        support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, phoneNum, Events.FAILURE.getDesc());
     }
 
     /**
-     * Removes listeners to this class.
+     * Get the service accounts/fees associated with a username.
      *
-     * @param pcl a property change listener
+     * @param username The username used to search for the service accounts.
+     * @param mode     True if this is to display an account, false to display the fees associated with the account.
      */
-    public void removePropertyChangeListener(PropertyChangeListener pcl) {
-        support.removePropertyChangeListener(pcl);
+    private void findAccounts(String username, boolean mode) {
+        boolean found = false;
+        Set<Entry<String, Account>> set = accountList.entrySet();
+        System.out.println(set.isEmpty());
+        for (Object o : set) {
+            ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
+            if (((Account) acc.getValue()).getUser().equals(username)) {
+                if (mode) {
+                    support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getPhoneNum(), ACCOUNT);
+                } else {
+                    support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, ((Account) acc.getValue()).getBundle(), Events.FEES.getDesc());
+                }
+                found = true;
+            }
+        }
+        if (!found) {
+            support.firePropertyChange(ACCOUNT + PROPERTY_CHANGE_SCOPE_DELIMITER + DISPLAY, username, Events.FAILURE.getDesc());
+        }
     }
+    
+    /**
+     * Delete accounts associated with a specific username. Will not
+     * fire off an event to delete a user once the last account
+     * has been deleted. For such functionality, see removeAccount()
+     * 
+     * @param username The username that will be used to delete associated accounts
+     */
+    private void deleteAccounts(String username) {
+    	Set<Entry<String, Account>> set = accountList.entrySet();
+        for (Object o : set) {
+            ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
+            Account checkAcc = ((Account) acc.getValue());
+            if (checkAcc.getUser().equals(username)) {
+            	helperRemoveAccount(checkAcc.getPhoneNum());
+            }
+        }
+    }
+
 }
