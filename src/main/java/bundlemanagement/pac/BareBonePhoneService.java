@@ -3,7 +3,6 @@ package bundlemanagement.pac;
 import java.math.BigDecimal;
 
 import bundlemanagement.service.BundleNames;
-import bundlemanagement.service.BundleNames;
 
 /**
  * This class is responsible for creating the bare bone phone service for the

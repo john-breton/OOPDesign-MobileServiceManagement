@@ -102,7 +102,7 @@ public class BundleManagement extends AbstractBundleManagement {
 					"Sorry, we only take order for \"PLATINUM\", \"GOLD\", \"SILVER\", \"BRONZE\" Preconfigured Bundle in this option");
 			return;
 		}
-		if (bundleList.containsKey(option)) {
+		if (bundleList.containsKey(name)) {
 			support.firePropertyChange(BUNDLE + PROPERTY_CHANGE_SCOPE_DELIMITER + NEW, Events.SUCCESS.getDesc(),
 					name);
 			return;
