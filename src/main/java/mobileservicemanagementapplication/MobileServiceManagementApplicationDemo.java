@@ -21,7 +21,6 @@ public class MobileServiceManagementApplicationDemo {
 	 * @param args The command line arguments passed during program initialization
 	 */
 	public static void main(String[] args) {
-//		UserManagementService service = new UserManagementService();
 		AbstractUserManagement service = UserManagement.getInstance();
 		ReportingService reporting = ReportingService.getInstance();
 		UserServiceTestRunner runner = new UserServiceTestRunner();
