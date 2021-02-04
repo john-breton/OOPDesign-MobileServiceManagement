@@ -37,6 +37,18 @@ public class MobileServiceManagementApplicationDemo {
 		service.addUser("David", "124 Main St.", "valid.email@gmail.com");
 		
 		System.out.println("---------------");
+		System.out.println("Test Duplicate User");
+		System.out.println("---------------");
+		
+		service.addUser("David", "Wrong", "Wrong.email@gmail.com");
+		
+		System.out.println("---------------");
+		System.out.println("Test Empty User");
+		System.out.println("---------------");
+		service.addUser("", "Empty", "Empty.email@gmail.com");
+
+		
+		System.out.println("---------------");
 		System.out.println("Test Add Users");
 		System.out.println("---------------");
 		
@@ -50,12 +62,25 @@ public class MobileServiceManagementApplicationDemo {
 		TreeMap<PropertyIdEnum, String> userTwo = new TreeMap<PropertyIdEnum, String>();
 		userTwo.put(PropertyIdEnum.USER_NAME, "Gabriel");
 		userTwo.put(PropertyIdEnum.USER_ADDRESS, "159 Main St.");
-		userOne.put(PropertyIdEnum.USER_EMAIL, "gabe@gmail.com");
+		userTwo.put(PropertyIdEnum.USER_EMAIL, "gabe@gmail.com");
 		
+//		TreeMap<PropertyIdEnum, String> userThree = new TreeMap<PropertyIdEnum, String>();
+//		userThree.put(PropertyIdEnum.USER_NAME, "Gabriel");
+//		userThree.put(PropertyIdEnum.USER_ADDRESS, "123 WRONG.");
+//		userThree.put(PropertyIdEnum.USER_EMAIL, "INCORRECT@gmail.com");
+//		
+//		TreeMap<PropertyIdEnum, String> userFour = new TreeMap<PropertyIdEnum, String>();
+//		userFour.put(PropertyIdEnum.USER_NAME, "");
+//		userFour.put(PropertyIdEnum.USER_ADDRESS, "EMPTY");
+//		userFour.put(PropertyIdEnum.USER_EMAIL, "EMPTY@gmail.com");
+//		
 		users.add(userOne);
 		users.add(userTwo);
-		service.addUsers(users);
+//		users.add(userThree);
+//		users.add(userFour);
 		
+		service.addUsers(users);
+
 		System.out.println("---------------");
 		System.out.println("Test Modify Users");
 		System.out.println("---------------");
