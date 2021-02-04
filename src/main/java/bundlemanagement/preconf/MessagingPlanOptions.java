@@ -5,10 +5,8 @@ public enum MessagingPlanOptions {
 	/**
 	 * Messaging Plan Options
 	 */
-	PLATINUM("Platinum Messaging Plan", "Unlimited Messages"), 
-	GOLD("Gold Messaging Plan", "10K Messages"),
-	SILVER("Silver Messaging Plan", "5K Messages"), 
-	BRONZE("Bronze Messaging Plan", "250 Messages"), 
+	PLATINUM("Platinum Messaging Plan", "Unlimited Messages"), GOLD("Gold Messaging Plan", "10K Messages"),
+	SILVER("Silver Messaging Plan", "5K Messages"), BRONZE("Bronze Messaging Plan", "250 Messages"),
 	ZERO("Zero Messaging Plan", "0 Message");
 
 	/**
@@ -38,13 +36,13 @@ public enum MessagingPlanOptions {
 	String getdMessagingPlanOptionsDesription() {
 		return messagingPlanOptionDescription;
 	}
-	
+
 	/**
 	 * It will return description for the invoked messaging plan option.
 	 * 
 	 * @return messagingPlanOptionDescription
 	 */
-	String getdMessagingPlanName() {
+	String getMessagingPlanName() {
 		return name;
 	}
 
