@@ -22,6 +22,10 @@ public class UserManagementFactory extends ManagementFactoryIf<UserObjectIf> {
 	 * @return UserObjectIf newly created user object
 	 * */
 	public UserObjectIf createObjectById(String id, TreeMap<PropertyIdEnum, String> userProperties) {
+		if (id == null || id.isBlank()) {
+			System.out.println("The User ID should not be empty");
+			return null;
+		}
 		return new UserObject(id,userProperties);
 	}
 }
