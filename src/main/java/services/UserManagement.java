@@ -57,26 +57,6 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Add a single user by name, it will set the attributes empty string by default
-	 * @param name (Surfoplane) The user name of the user to be added
-	 */
-//	private void addUser(String name) {
-//		if (name == null || name.isBlank() || users.containsKey(name)) {
-//			support.firePropertyChange(
-//					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
-//					PropertyNameStrings.Events.FAILURE.getDesc(),
-//					name);
-//			return;
-//		}
-//		
-//		users.put(name, userFactory.createObjectById(name));
-//		support.firePropertyChange(
-//				PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
-//				PropertyNameStrings.Events.SUCCESS.getDesc(),
-//				name);
-//	}
-	
-	/**
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -96,7 +76,16 @@ public class UserManagement extends AbstractUserManagement {
 			else
 				attr.put(PropertyIdEnum.USER_EMAIL, "");
 			
-			users.put(name, userFactory.createObjectById(name,attr));
+			UserObjectIf currentUser = userFactory.createObjectById(name,attr);
+			if (currentUser == null) {
+				support.firePropertyChange(
+						PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+						PropertyNameStrings.Events.FAILURE.getDesc(),
+						name);
+				return;
+			}
+				
+			users.put(name, currentUser);
 			
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
@@ -268,8 +257,6 @@ public class UserManagement extends AbstractUserManagement {
 		String userId;
 		userId = (String) dict.get(USER_ID_KEY);
 
-		System.out.println("User property change");
-
 		switch (propertyName) {
 		case PropertyNameStrings.DELETE_USER:
 			if (!users.containsKey(userId)) {
@@ -296,12 +283,10 @@ public class UserManagement extends AbstractUserManagement {
 			break;
 			
 		case PropertyNameStrings.PRINT_USER_ADDED:
-			if (!users.containsKey(userId)) {
-				System.out.println("User does not exist!: " + userId);
+			if (!success || !users.containsKey(userId)) {
+				System.out.println("Failed to add the user: "+ userId);
 				return;
 			}
-			
-			System.out.println("New user added:");
 			printUser(userId);
 
 			break;
