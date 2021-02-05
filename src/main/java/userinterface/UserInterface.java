@@ -545,7 +545,7 @@ public class UserInterface {
      */
     private static String addPlainPacBundle(BundleManagement bundleService, Scanner input) {
         System.out.println("Please enter your desired plain Pac bundle name\n"
-                + "For example: John's Plain Pac Bundle\n"
+                + "For example: PLAINPACBUNDLE\n"
                 + "Enter 'Back' to go back to the menu\n");
         String parameters = input.next();
         if (parameters.equals("Back")) {
