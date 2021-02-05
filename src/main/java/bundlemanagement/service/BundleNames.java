@@ -45,9 +45,9 @@ public enum BundleNames {
 	PAC_WITH_ZERO_DATA_PLAN("Pick and Choose Bundle with Zero Data Plan", "Zero Data Plan: 0 GB"),
 
 	//PaC Bundle without Plan options
-	PAC_WITH_OUT_CALLING_PLAN("PaC without Calling", "PaC Calling Plan: Not Choose"),
-	PAC_WITH_OUT_MESSAGING_PLAN("PaC without Messaging", "PaC Messaging Plan: Not Choose"),
-	PAC_WITH_OUT_DATA_PLAN("PaC without Data", "PaC Data Plan: Not Choose");	
+	PAC_WITH_OUT_CALLING_PLAN("PaC without Calling", "PaC Calling Plan: No Calling Plan"),
+	PAC_WITH_OUT_MESSAGING_PLAN("PaC without Messaging", "PaC Messaging Plan: No Messaging Plan"),
+	PAC_WITH_OUT_DATA_PLAN("PaC without Data", "PaC Data Plan: No Data Plan");	
 	
 	/**
 	 * The bundlename will store the name of bundles
