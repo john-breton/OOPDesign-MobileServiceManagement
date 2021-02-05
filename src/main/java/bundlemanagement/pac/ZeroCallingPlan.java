@@ -1,5 +1,10 @@
 package bundlemanagement.pac;
 
+import java.math.BigDecimal;
+
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
+
 /**
  * This class implements Zero calling plan for PaC bundle.
  * 
@@ -9,9 +14,9 @@ package bundlemanagement.pac;
 public class ZeroCallingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
-	private static final int ZERO_CALLING_MINUTES = 0;
-	private static final int ZERO_CALLING_PLAN_FEE = 0;
-	private static final String ZERO_CALLING_DESCRIPTION = "Calling Plan: Zero - Zero min";
+	private final BigDecimal zeroCallingFee;
+	private final BigDecimal zeroCallingMinutes;
+	private final String description;
 
 	/**
 	 * Setup constructor
@@ -20,6 +25,9 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 */
 	public ZeroCallingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.zeroCallingFee = BundleFees.PaCWithCallingOptionFees.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
+		this.zeroCallingMinutes = BundleNumericalValues.PaCWithCallingOptionTotalMinutes.get(BundleNames.PAC_WITH_ZERO_CALLING_PLAN);
+		this.description = BundleNames.PAC_WITH_ZERO_CALLING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -30,7 +38,7 @@ public class ZeroCallingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + ZERO_CALLING_DESCRIPTION + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
@@ -39,9 +47,9 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 * @return cost integer value to PaC side.
 	 */
 	@Override
-	public int cost() {
+	public BigDecimal cost() {
 
-		return pacbundle.cost() + ZERO_CALLING_PLAN_FEE;
+		return pacbundle.cost().add(zeroCallingFee);
 	}
 
 	/**
@@ -49,9 +57,9 @@ public class ZeroCallingPlan extends BundleDecorator {
 	 * 
 	 * @return calling minutes time to PaC bundle.
 	 */
-	public int getCallingMinutes() {
+	public BigDecimal getCallingMinutes() {
 
-		return ZERO_CALLING_MINUTES;
+		return zeroCallingMinutes;
 	}
 
 }

@@ -1,5 +1,9 @@
 package bundlemanagement.preconf;
 
+import java.math.BigDecimal;
+
+import bundlemanagement.service.BundleNames;
+
 /**
  * This an interface class to create bundle components such as callingS plan,
  * messaging plan, data plan, and monthly fee.
@@ -13,11 +17,13 @@ package bundlemanagement.preconf;
 
 public interface BundleComponentFactory {
 	// responsible to create component for every bundle
-	CallingPlan createCallingPlan();
+	BundleNames createBundleNames();
 
-	MessagingPlan createMessagingPlan();
+	CallingPlanOptions createCallingPlan();
 
-	DataPlan createDataPlan();
+	MessagingPlanOptions createMessagingPlan();
 
-	MonthlyFees createMonthlyFees();
+	DataPlanOptions createDataPlan();
+
+	BigDecimal createMonthlyFees();
 }

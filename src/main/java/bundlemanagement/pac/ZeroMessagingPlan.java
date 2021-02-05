@@ -1,5 +1,10 @@
 package bundlemanagement.pac;
 
+import java.math.BigDecimal;
+
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
+
 /**
  * This class implements Zero messaging plan for PaC bundle.
  * 
@@ -9,9 +14,9 @@ package bundlemanagement.pac;
 public class ZeroMessagingPlan extends BundleDecorator {
 
 	private final PaCBundle pacbundle;
-	private static final int ZERO_NUMBER_OF_MESSAGES = 0;
-	private static final int ZERO_MESSAGING_PLAN_FEE = 0;
-	private static final String ZERO_MESSAGING_DESCRIPTION = "Messaging Plan: Zero - Zero Messages";
+	private final BigDecimal zeroMessagingFee;
+	private final BigDecimal zeroMessagingNums;
+	private final String description;
 
 	/**
 	 * Setup constructor
@@ -20,6 +25,9 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	 */
 	public ZeroMessagingPlan(PaCBundle pacbundle) {
 		this.pacbundle = pacbundle;
+		this.zeroMessagingFee = BundleFees.PaCWithMessagingOptionFees.get(BundleNames.PAC_WITH_OUT_MESSAGING_PLAN);
+		this.zeroMessagingNums = BundleNumericalValues.PaCWithMessagingOptionTotalNumberOfMessages.get(BundleNames.PAC_WITH_OUT_MESSAGING_PLAN);
+		this.description = BundleNames.PAC_WITH_OUT_MESSAGING_PLAN.getBundleDescription();
 	}
 
 	/**
@@ -31,28 +39,28 @@ public class ZeroMessagingPlan extends BundleDecorator {
 	@Override
 	public String getDescription() {
 
-		return pacbundle.getDescription() + ZERO_MESSAGING_DESCRIPTION + "\n";
+		return pacbundle.getDescription() + description + "\n";
 	}
 
 	/**
 	 * Sets fee for zero messaging plan.
 	 * 
-	 * @return cost integer value to PaC side.
+	 * @return cost value to PaC side.
 	 */
 	@Override
-	public int cost() {
+	public BigDecimal cost() {
 
-		return pacbundle.cost() + ZERO_MESSAGING_PLAN_FEE;
+		return pacbundle.cost().add(zeroMessagingFee);
 	}
 
 	/**
-	 * Sets minutes for PaC bundle.
+	 * return number of messages for zero messaging plan.
 	 * 
 	 * @return number of messages to PaC bundle.
 	 */
-	public int getNumberOfMessages() {
+	public BigDecimal getNumberOfMessages() {
 
-		return ZERO_NUMBER_OF_MESSAGES;
+		return zeroMessagingNums;
 	}
 
 }

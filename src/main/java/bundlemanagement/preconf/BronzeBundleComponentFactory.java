@@ -1,6 +1,9 @@
 package bundlemanagement.preconf;
 
-import bundlemanagement.component.*;
+import java.math.BigDecimal;
+
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This Class implements Bronze Bundle Component Factory.
@@ -14,43 +17,57 @@ import bundlemanagement.component.*;
 public class BronzeBundleComponentFactory implements BundleComponentFactory {
 
 	/**
-	 * This method return instance of bronze calling plan.
+	 * This method returns Bronze calling plan from CallingPlanOptions enum class.
 	 * 
-	 * @return calling plan to PreconfBundle class to create bronze preconf plan.
+	 * @return Bronze calling plan to PreconfBundle class to create bronze preconf
+	 *         plan.
 	 */
-	public CallingPlan createCallingPlan() {
+	public CallingPlanOptions createCallingPlan() {
 
-		return new BronzeCallingPlan();
+		return CallingPlanOptions.BRONZE;
 	}
 
 	/**
-	 * This method return instance of Bronze messaging plan.
+	 * This method returns bronze messaging plan from MessagingPlanOptions enum
+	 * class.
 	 * 
-	 * @return messaging plan to PreconfBundle class to create bronze preconf plan.
+	 * @return Bronze messaging plan to PreconfBundle class to create bronze preconf
+	 *         plan.
 	 */
-	public MessagingPlan createMessagingPlan() {
+	public MessagingPlanOptions createMessagingPlan() {
 
-		return new BronzeMessagingPlan();
+		return MessagingPlanOptions.BRONZE;
 	}
 
 	/**
-	 * This method return instance of Bronze data plan.
+	 * This method returns bronze data plan from DataPlanOptions enum class.
 	 * 
-	 * @return data plan to PreconfBundle class to create bronze preconf plan.
+	 * @return Bronze data plan to PreconfBundle class to create bronze preconf
+	 *         plan.
 	 */
-	public DataPlan createDataPlan() {
+	public DataPlanOptions createDataPlan() {
 
-		return new BronzeDataPlan();
+		return DataPlanOptions.BRONZE;
 	}
 
 	/**
-	 * This method return instance of bronze monthly fee for Bronze preconf plan.
+	 * This method returns bronze monthly fee for Bronze preconf plan.
 	 * 
 	 * @return Monthly fee to PreconfBundle class to create bronze preconf plan.
 	 */
-	public MonthlyFees createMonthlyFees() {
+	public BigDecimal createMonthlyFees() {
 
-		return new BronzeMonthlyFees();
+		return BundleFees.preconfFees.get(BundleNames.BRONZE);
+	}
+
+	/**
+	 * This method returns the name for preconf bronze plan.
+	 * 
+	 * @return Monthly fee to PreconfBundle class to create bronze preconf plan.
+	 */
+	public BundleNames createBundleNames() {
+
+		return BundleNames.BRONZE;
 	}
 
 }

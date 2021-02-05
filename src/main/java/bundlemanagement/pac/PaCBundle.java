@@ -1,5 +1,7 @@
 package bundlemanagement.pac;
 
+import java.math.BigDecimal;
+
 import bundlemanagement.service.*;
 
 /**
@@ -10,7 +12,7 @@ import bundlemanagement.service.*;
  */
 public abstract class PaCBundle extends Bundle {
 	String description = "Unknown plain and customized bundle";
-	int fee = 0;
+	BigDecimal fee = new BigDecimal(0);
 
 	/**
 	 * This method returns a description of the plan(s) associated with this PaC
@@ -28,5 +30,5 @@ public abstract class PaCBundle extends Bundle {
 	 * 
 	 * @return fee for each decorator
 	 */
-	public abstract int cost();
+	public abstract BigDecimal cost();
 }

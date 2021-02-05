@@ -1,6 +1,9 @@
 package bundlemanagement.preconf;
 
-import bundlemanagement.component.*;
+import java.math.BigDecimal;
+
+import bundlemanagement.service.BundleFees;
+import bundlemanagement.service.BundleNames;
 
 /**
  * This Class implements Silver Bundle Component Factory.
@@ -19,9 +22,9 @@ public class SilverBundleComponentFactory implements BundleComponentFactory {
 	 * 
 	 * @return calling plan to preconf class to create silver preconf plan.
 	 */
-	public CallingPlan createCallingPlan() {
+	public CallingPlanOptions createCallingPlan() {
 
-		return new SilverCallingPlan();
+		return CallingPlanOptions.SILVER;
 	}
 
 	/**
@@ -29,9 +32,9 @@ public class SilverBundleComponentFactory implements BundleComponentFactory {
 	 * 
 	 * @return messaging plan to preconf class to create silver preconf plan.
 	 */
-	public MessagingPlan createMessagingPlan() {
+	public MessagingPlanOptions createMessagingPlan() {
 
-		return new SilverMessagingPlan();
+		return MessagingPlanOptions.SILVER;
 	}
 
 	/**
@@ -39,19 +42,29 @@ public class SilverBundleComponentFactory implements BundleComponentFactory {
 	 * 
 	 * @return data plan to preconf class to create silver preconf plan.
 	 */
-	public DataPlan createDataPlan() {
+	public DataPlanOptions createDataPlan() {
 
-		return new SilverDataPlan();
+		return DataPlanOptions.SILVER;
 	}
 
 	/**
-	 * This method return instance of silver monthly fee for silver preconf plan.
+	 * This method returns silver monthly fee for silver preconf plan.
 	 * 
 	 * @return Monthly fee to preconf class to create silver preconf plan.
 	 */
-	public MonthlyFees createMonthlyFees() {
+	public BigDecimal createMonthlyFees() {
 
-		return new SilverMonthlyFees();
+		return BundleFees.preconfFees.get(BundleNames.SILVER);
+	}
+
+	/**
+	 * This method returns the name for preconf silver plan.
+	 * 
+	 * @return Monthly fee to PreconfBundle class to create silver preconf plan.
+	 */
+	public BundleNames createBundleNames() {
+
+		return BundleNames.SILVER;
 	}
 
 }
