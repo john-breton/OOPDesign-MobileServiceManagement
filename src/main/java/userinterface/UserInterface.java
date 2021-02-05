@@ -171,7 +171,7 @@ public class UserInterface {
                 case "5":
                     // 5. Delete Users <username1, username2, username3, etc.>
                     System.out.println("Please enter the usernames of the users to delete in a comma separated list\n"
-                            + "For example: John Doe\n"
+                            + "For example: John Doe, Jane Doe, Joey Doe\n"
                             + "Enter 'Back' to go back to the menu\n");
                     parameters = input.next();
                     if (parameters.equals("Back")) {
