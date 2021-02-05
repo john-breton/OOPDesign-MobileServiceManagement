@@ -527,7 +527,7 @@ public class UserInterface {
                 System.out.println("Unrecognized Option! Please enter one of PLATINUM, GOLD, SILVER, BRONZE");
                 break;
         }
-        bundleService.addPreconfBundle(paramArray[0], bundleOption);
+        bundleService.addPreconfBundle(paramArray[0]);
         return paramArray[0];
     }
 
@@ -597,7 +597,7 @@ public class UserInterface {
                 System.out.println("Unrecognized Option! Please enter one of PLATINUM, GOLD, SILVER, BRONZE");
                 break;
         }
-        bundleService.addPacBundleWithCalling(paramArray[0], callingOption);
+        bundleService.addPacBundleWithCalling(paramArray[0]);
         return paramArray[0];
     }
 
@@ -643,7 +643,7 @@ public class UserInterface {
                 System.out.println("Unrecognized Option! Please enter one of PLATINUM, GOLD, SILVER, BRONZE");
                 break;
         }
-        bundleService.addPacBundleWithMessaging(paramArray[0], messagingOption);
+        bundleService.addPacBundleWithMessaging(paramArray[0]);
         return paramArray[0];
     }
 }
