@@ -268,7 +268,6 @@ public class AccountManagement extends AbstractAccountManagement {
     private void findAccounts(String username, boolean mode) {
         boolean found = false;
         Set<Entry<String, Account>> set = accountList.entrySet();
-        System.out.println(set.isEmpty());
         for (Object o : set) {
             ConcurrentHashMap.Entry<?, ?> acc = (ConcurrentHashMap.Entry<?, ?>) o;
             if (((Account) acc.getValue()).getUser().equals(username)) {
