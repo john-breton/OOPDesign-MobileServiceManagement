@@ -75,7 +75,7 @@ public class UserObject extends UserObjectIf {
 		StringBuffer result = new StringBuffer();
 		
 		for(Map.Entry<PropertyIdEnum, PropertyIf> entry : propertyList.entrySet()) {
-			result.append(entry.toString()).append("\n");
+			result.append(entry.getValue().toString()).append("\n");
 		}
 		
 		return result.toString();
