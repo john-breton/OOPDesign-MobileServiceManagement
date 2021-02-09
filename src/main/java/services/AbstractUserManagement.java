@@ -15,22 +15,42 @@ import users.UserObjectIf;
 public abstract class AbstractUserManagement implements PropertyChangeListener {
 	
 	/**
-	 * Add a single user by name, it will set the attributes empty string by default
-	 * @param name (Surfoplane) The user name of the user to be added
+	 * {@inheritDoc}
 	 */
-	public abstract void addUser(String name);
+	@Override
+	public abstract void propertyChange(PropertyChangeEvent arg0);
 	
 	/**
-	 * Overloaded Method
-	 * Add a single user by name and filling the parameters to the user object
-	 * @param name (Surfoplance) The username for the user.
-	 * @param address The address for the user.
-	 * @param email address The email for the user.
+	 * Adds property change listeners to this class.
+	 * 
+	 * @param pcl a property change listener
+	 */
+	public abstract void addPropertyChangeListener(PropertyChangeListener pcl);
+	
+	/**
+	 * Removes property change listeners to this class.
+	 * 
+	 * @param pcl a property change listener
+	 */
+	public abstract void removePropertyChangeListener(PropertyChangeListener pcl);
+	
+	/**
+	 * Sets the factory to be used for creating new users.
+	 * 
+	 * @param userFactory The Factory that is being set.
+	 */
+	public abstract void setManagementFactory(ManagementFactoryIf<UserObjectIf> userFactory);
+
+	/**
+	 * Adds a single user by name and filling the parameters to the user object
+	 * @param name The name of the user.
+	 * @param address The address o the user.
+	 * @param email The email for the user.
 	 */
 	public abstract void addUser(String name, String address, String email);
 	
 	/**
-	 * Add a list of users in to the system. 
+	 * Adds a list of users. 
 	 * the TreeMap has to use PropertyIdEnum as Key
 	 * 
 	 * @param users The list of users
@@ -38,63 +58,33 @@ public abstract class AbstractUserManagement implements PropertyChangeListener {
 	public abstract void addUsers(ArrayList<TreeMap<PropertyIdEnum, String>> users);
 	
 	/**
-	 * Modify the User Object by UserName 
+	 * Modify the User Object - identifying them by userId.
 	 * the TreeMap has to use PropertyIdEnum as Key
 	 * 
 	 * @param userName The user name of the user.
 	 * @param userProperties The properties that will be used to modify the user.
 	 */
-	public abstract void modifyUser(String userName, TreeMap<PropertyIdEnum, String> userProperties);
-	
+	public abstract void modifyUser(String userId, TreeMap<PropertyIdEnum, String> userProperties);
 	
 	/**
-	 * Remove the User Object by UserName 
+	 * Removes a user by userId 
 	 * 
 	 * @param userId The user name for the user to be deleted.
-	 * @param successState Events.SUCCESS normally, Events.SPECIAL to avoid a feedback loop when deleting accounts.
 	 */
 	public abstract void deleteUser(String userId, String successState);
 	
 	/**
-	 * Remove the list of User Objects by UserName 
+	 * Remove a list of users by userId 
 	 * 
 	 * @param userIds The usernames for the users to be deleted.
 	 */
 	public abstract void deleteUsers(ArrayList<String> userIds);
 	
 	/**
-	 * Get the user by its username
+	 * Requests a printing of user details by userId
 	 * 
-	 * @param userId The user name for the user that is being looked for.
+	 * @param userId The id of the user that should be printed.
 	 */
 	public abstract void getUser(String userId);
-	
-	/**
-	 * Used to Config the Factory
-	 * 
-	 * @param userFactory The Factory that is being set.
-	 */
-	public abstract void setManagementFactory(ManagementFactoryIf<UserObjectIf> userFactory);
-	
-	/**
-	 * this method will be triggered once the event changed.
-	 * @param evt The event that was received.
-	 */
-	@Override
-	public abstract void propertyChange(PropertyChangeEvent evt);
-	
-	/**
-	 * Adds listeners to this class.
-	 *
-	 * @param pcl a property change listener
-	 */
-	public abstract void addPropertyChangeListener(PropertyChangeListener pcl);
 
-	/**
-	 * Removes listeners to this class.
-	 *
-	 * @param pcl a property change listener
-	 */
-	public abstract void removePropertyChangeListener(PropertyChangeListener pcl);
-	
 }

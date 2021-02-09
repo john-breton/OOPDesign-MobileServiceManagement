@@ -6,6 +6,7 @@ import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.concurrent.ConcurrentHashMap;
 
 import properties.PropertyIdEnum;
 import reportingservice.PropertyNameStrings;
@@ -34,16 +35,16 @@ public class UserManagement extends AbstractUserManagement {
 	private static final String USER_ID_KEY = "userId";
 
 	private PropertyChangeSupport support;
-	private static UserManagement UNIQUE_INSTANCE = new UserManagement();
-	private TreeMap<String, UserObjectIf> users;
+	private volatile static UserManagement UNIQUE_INSTANCE = new UserManagement();
+	private volatile ConcurrentHashMap<String, UserObjectIf> users;
 	private ManagementFactoryIf<UserObjectIf> userFactory;
 
 	/**
 	 * private constructor to make this class singleton
 	 * */ 
 	private UserManagement() {
-		users = new TreeMap<String, UserObjectIf>();
-		userFactory = new UserManagementFactory();
+		users = new ConcurrentHashMap<String, UserObjectIf>();
+		setManagementFactory(new UserManagementFactory());
 		support = new PropertyChangeSupport(this);
 	}
 	
@@ -56,54 +57,60 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Add a single user by name, it will set the attributes empty string by default
-	 * @param name (Surfoplane) The user name of the user to be added
+	 * {@inheritDoc}
 	 */
-	public void addUser(String name) {
-		if (name == null || name.isBlank() || users.containsKey(name)) {
+	@Override
+	public void addUser(String name, String address, String email) {
+		
+		//check if the user exists
+		if (!users.containsKey(name)) 
+		{
+			TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
+			if (address != null)
+				attr.put(PropertyIdEnum.USER_ADDRESS, address);
+			else
+				attr.put(PropertyIdEnum.USER_ADDRESS, "");
+			
+			if (email != null)
+				attr.put(PropertyIdEnum.USER_EMAIL, email);
+			else
+				attr.put(PropertyIdEnum.USER_EMAIL, "");
+			
+			UserObjectIf currentUser = userFactory.createObjectById(name,attr);
+			if (currentUser == null) {
+				support.firePropertyChange(
+						PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+						PropertyNameStrings.Events.FAILURE.getDesc(),
+						name);
+				return;
+			}
+				
+			users.put(name, currentUser);
+			
+			support.firePropertyChange(
+					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
+					PropertyNameStrings.Events.SUCCESS.getDesc(),
+					name);
+
+			
+		}
+		else 
+		{
+			System.out.println("User Already Exists! : " + name);
+
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
 					PropertyNameStrings.Events.FAILURE.getDesc(),
 					name);
-			return;
+			
 		}
 		
-		users.put(name, userFactory.createObjectById(name));
-		support.firePropertyChange(
-				PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
-				PropertyNameStrings.Events.SUCCESS.getDesc(),
-				name);
 	}
 	
 	/**
-	 * Overloaded Method
-	 * Add a single user by name and filling the parameters to the user object
-	 * @param name (Surfoplance) The username for the user.
-	 * @param address The address for the user.
-	 * @param email address The email for the user.
+	 * {@inheritDoc}
 	 */
-	public void addUser(String name, String address, String email) {
-		addUser(name);
-		TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
-		if (address != null)
-			attr.put(PropertyIdEnum.USER_ADDRESS, address);
-		else
-			attr.put(PropertyIdEnum.USER_ADDRESS, "");
-		
-		if (email != null)
-			attr.put(PropertyIdEnum.USER_EMAIL, email);
-		else
-			attr.put(PropertyIdEnum.USER_EMAIL, "");
-
-		modifyUser(name, attr);
-	}
-	
-	/**
-	 * Add a list of users in to the system. 
-	 * the TreeMap has to use PropertyIdEnum as Key
-	 * 
-	 * @param users The list of users
-	 */
+	@Override
 	public void addUsers(ArrayList<TreeMap<PropertyIdEnum, String>> users) {
 		for (TreeMap<PropertyIdEnum, String> currentUser:users) {
 			String currentName = currentUser.get(PropertyIdEnum.USER_NAME);
@@ -115,12 +122,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Modify the User Object by UserName 
-	 * the TreeMap has to use PropertyIdEnum as Key
-	 * 
-	 * @param userName The user name of the user.
-	 * @param userProperties The properties that will be used to modify the user.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void modifyUser(String userName, TreeMap<PropertyIdEnum, String> userProperties) {
 		if (!users.containsKey(userName)) {
 			System.out.println("Cannot find user with username: " + userName);
@@ -145,11 +149,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Remove the User Object by UserName 
-	 * 
-	 * @param userId The user name for the user to be deleted.
-	 * @param successState Events.SUCCESS normally, Events.SPECIAL to avoid a feedback loop when deleting accounts.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void deleteUser(String userId, String successState) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
@@ -167,10 +169,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Remove the list of User Objects by UserName 
-	 * 
-	 * @param userIds The usernames for the users to be deleted.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void deleteUsers(ArrayList<String> userIds) {
 		for (String userId : userIds) {
 			// remove the current user from the list
@@ -179,10 +180,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Get the user by its username
-	 * 
-	 * @param userId The user name for the user that is being looked for.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void getUser(String userId) {
 		if (!users.containsKey(userId)) {
 			support.firePropertyChange(
@@ -199,10 +199,9 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Used to Config the Factory
-	 * 
-	 * @param userFactory The Factory that is being set.
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void setManagementFactory(ManagementFactoryIf<UserObjectIf> userFactory) {
 		this.userFactory = userFactory;
 	}
@@ -232,8 +231,7 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * this method will be triggered once the event changed.
-	 * @param evt The event that was received.
+	 * {@inheritDoc}
 	 */
 	@Override
 	public void propertyChange(PropertyChangeEvent evt) {
@@ -259,8 +257,6 @@ public class UserManagement extends AbstractUserManagement {
 		// Declare variables common to multiple branches here.
 		String userId;
 		userId = (String) dict.get(USER_ID_KEY);
-
-		System.out.println("User property change");
 
 		switch (propertyName) {
 		case PropertyNameStrings.DELETE_USER:
@@ -288,12 +284,10 @@ public class UserManagement extends AbstractUserManagement {
 			break;
 			
 		case PropertyNameStrings.PRINT_USER_ADDED:
-			if (!users.containsKey(userId)) {
-				System.out.println("User does not exist!: " + userId);
+			if (!success || !users.containsKey(userId)) {
+				System.out.println("Failed to add the user: "+ userId);
 				return;
 			}
-			
-			System.out.println("New user added:");
 			printUser(userId);
 
 			break;
@@ -333,22 +327,19 @@ public class UserManagement extends AbstractUserManagement {
 	}
 
 	/**
-	 * Adds listeners to this class.
-	 * 
-	 * @param pcl a property change listener
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void addPropertyChangeListener(PropertyChangeListener pcl) {
 		support.addPropertyChangeListener(pcl);
 	}
 
 	/**
-	 * Removes listeners to this class.
-	 * 
-	 * @param pcl a property change listener
+	 * {@inheritDoc}
 	 */
+	@Override
 	public void removePropertyChangeListener(PropertyChangeListener pcl) {
 		support.removePropertyChangeListener(pcl);
 	}
 }
-
 

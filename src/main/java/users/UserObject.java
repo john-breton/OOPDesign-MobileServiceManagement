@@ -18,12 +18,33 @@ public class UserObject extends UserObjectIf {
 	/**
 	 * Constructor for creating the user object
 	 * @param name The user name of the user.
+	 * @param vals the list of all properties you wish to modify
 	 * */
-	public UserObject(String name) {
+	public UserObject(String name, TreeMap<PropertyIdEnum, String> userProperties) {
 		propertyList = new TreeMap<PropertyIdEnum, PropertyIf>();
+
 		propertyList.put(PropertyIdEnum.USER_NAME, new UserNameProperty(name));
-		propertyList.put(PropertyIdEnum.USER_ADDRESS, new UserAddressProperty(""));
-		propertyList.put(PropertyIdEnum.USER_EMAIL, new UserEmailProperty(""));
+
+		for(Map.Entry<PropertyIdEnum,String> prop : userProperties.entrySet()) {
+			
+			PropertyIdEnum key = prop.getKey();
+			String value = prop.getValue();
+			switch (key) {
+				
+				case USER_ADDRESS:
+					propertyList.put(key, new UserAddressProperty(value));
+					break;
+				
+				case USER_EMAIL:
+					propertyList.put(key, new UserEmailProperty(value));
+					break;
+				
+				default:
+					//propertyList.put(key, new PropertyIf(value));
+					System.out.println("User Object: Unknown Property type");
+					
+				}
+			}
 	}
 	
 	/**
@@ -54,7 +75,7 @@ public class UserObject extends UserObjectIf {
 		StringBuffer result = new StringBuffer();
 		
 		for(Map.Entry<PropertyIdEnum, PropertyIf> entry : propertyList.entrySet()) {
-			result.append(entry.toString()).append("\n");
+			result.append(entry.getValue().toString()).append("\n");
 		}
 		
 		return result.toString();
