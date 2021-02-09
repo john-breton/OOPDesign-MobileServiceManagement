@@ -177,7 +177,7 @@ public class AccountManagement extends AbstractAccountManagement {
                 	System.out.println();
                     printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
                 } else {
-                    if (accountList.containsKey((String) evt.getNewValue())) {
+                    if (phoneNumPattern.matcher((String) evt.getNewValue()).matches()) {
                         System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                     } else {
                         System.out.printf("No service account with the username %s was found%n", evt.getNewValue());
