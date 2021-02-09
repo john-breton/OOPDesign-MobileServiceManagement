@@ -96,7 +96,8 @@ public class UserManagement extends AbstractUserManagement {
 		}
 		else 
 		{
-			System.out.println("User Exists! : " + name);
+			System.out.println("User Already Exists! : " + name);
+
 			support.firePropertyChange(
 					PropertyNameStrings.USER + PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER + PropertyNameStrings.NEW,
 					PropertyNameStrings.Events.FAILURE.getDesc(),
@@ -341,5 +342,4 @@ public class UserManagement extends AbstractUserManagement {
 		support.removePropertyChangeListener(pcl);
 	}
 }
-
 
