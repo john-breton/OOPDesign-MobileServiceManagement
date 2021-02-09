@@ -138,6 +138,17 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
+     * checks to see if account exists
+     * @return boolean value if user exists
+     */
+    public boolean accountExists(String phoneNum) {
+        if (!accountList.containsKey(phoneNum)) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * Adds listeners to this class.
      *
      * @param pcl a property change listener

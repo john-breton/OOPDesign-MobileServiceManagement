@@ -291,6 +291,17 @@ public class BundleManagement extends AbstractBundleManagement {
 	}
 
 	/**
+     * checks to see if bundle exists
+     * @return boolean value if bundle exists
+     */
+    public boolean bundleExists(String name) {
+        if (!bundleList.containsKey(convertBundleToEnum(name))) {
+            return false;
+        }
+        return true;
+    }
+	
+	/**
 	 * Print out the details of a given bundle
 	 * 
 	 * @param bundle The bundle to be printed

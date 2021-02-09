@@ -207,6 +207,17 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
+	 * checks to see if user exists
+	 * @return boolean value if user exists
+	 */
+	public boolean userExists(String userId) {
+	    if (!users.containsKey(userId)) {
+	        return false;
+	    }
+	    return true;
+	}
+	
+	/**
 	 * printing all users
 	 */
 	private void printAllUserNames() {
