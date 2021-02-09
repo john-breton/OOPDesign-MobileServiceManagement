@@ -58,25 +58,25 @@ public class UserInterface {
                 String menu = "\nPlease enter the number corresponding to the option you want to perform\n"
                         + "0.	Exit Program\n"
                         + "1.	Add User <username, address, email>\n"
-                        + "2.	Add Users <username, address, email>\n" 
+                        + "2.	Add Users <username, address, email>\n"
                         + "3.	Update User <username, ADDRESS | EMAIL | BOTH, address|email, [address|email]>\n"
-                        + "4.	Delete User <username>\n" 
+                        + "4.	Delete User <username>\n"
                         + "5.	Delete Users <username1, username2, username3, etc.>\n"
-                        + "6.	Add Account <phone, user, bundle name>\n" 
+                        + "6.	Add Account <phone, user, bundle name>\n"
                         + "7.	Add Account <account>\n"
-                        + "8.	Delete Account <phone>\n" 
+                        + "8.	Delete Account <phone>\n"
                         + "9.	Update Account <phone, bundle name>\n"
-                        + "10.	Add Preconfigured Bundle <bundle name> \n" 
+                        + "10.	Add Preconfigured Bundle <bundle name> \n"
                         + "11.	Add Plain Pac Bundle <bundle name> \n"
                         + "12.	Add Pac Bundle With Calling Option <calling plan name>\n"
                         + "13.	Add Pac Bundle With Messaging Option <messaging plan name>\n"
-                        + "14.	List User Details <username>\n" 
+                        + "14.	List User Details <username>\n"
                         + "15.	List All Users Names\n"
-                        + "16.	List Account <phone>\n" 
+                        + "16.	List Account <phone>\n"
                         + "17.	List Accounts <username>\n"
                         + "18.	List Monthly Fees <phone>\n"
                         + "19.	List Monthly Fees <username>\n"
-                        + "20.	List Bundle Details <bundle name>\n" 
+                        + "20.	List Bundle Details <bundle name>\n"
                         + "21.	List All Preconfigured Bundles Names\n"
                         + "22.	List All Pac Bundles Names\n";
                 System.out.println(menu);
@@ -128,7 +128,6 @@ public class UserInterface {
                             input.next();
                             break;
                         }
-                        
                     case "3":
                         // 3. Update User <username, ADDRESS | EMAIL | BOTH, address|email, [address|email]>
                         System.out.println("Please enter the username to update details for followed by one of 'ADDRESS', 'EMAIL' or 'BOTH'\n"
@@ -252,16 +251,35 @@ public class UserInterface {
                             submenuOption = input.next();
                             switch (submenuOption) {
                                 case "1":
-                                    bundle = addPreconfBundle(bundleService, input);
+                                    do {
+                                        bundle = addPreconfBundle(bundleService, input);
+                                    } while (bundle.equals("Error"));
                                     break;
                                 case "2":
-                                    bundle = addPlainPacBundle(bundleService, input);
+                                    System.out.println("Please enter 'PLAINPACBUNDLE' to add a Plain PaC bundle\n"
+                                            + "Enter 'Back' to go back to the menu\n");
+                                    do {
+                                        parameters = input.next();
+                                        if(!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE"))) {
+                                            System.out.println("Please enter 'PLAINPACBUNDLE' to add a Plain PaC bundle\n"
+                                                    + "Enter 'Back' to go back to the menu\n");
+                                        }
+                                    } while (!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE")));
+                                    if(parameters.equals("Back")) {
+                                        break;
+                                    }
+                                    bundleService.addPlainPacBundle("PLAINPACBUNDLE");
+                                    bundle = "PLAINPACBUNDLE";
                                     break;
                                 case "3":
-                                    bundle = addPacBundleWithCalling(bundleService, input);
+                                    do {
+                                        bundle = addPacBundleWithCalling(bundleService, input);
+                                    } while (bundle.equals("Error"));
                                     break;
                                 case "4":
-                                    bundle = addPacBundleWithMessaging(bundleService, input);
+                                    do {
+                                        bundle = addPacBundleWithMessaging(bundleService, input);
+                                    } while (bundle.equals("Error"));
                                     break;
                                 case "5":
                                     System.out.println("These are the existing bundle options to choose from:\n");
@@ -312,7 +330,7 @@ public class UserInterface {
                         // 9. Update Account <phone, bundle name>
                         System.out.println("Please enter the phone number for the account you want to update followed by\n"
                                             + "the desired bundle in a comma separated list\n"
-                                            + "For example: 555-555-5555, Platinum\n"
+                                            + "For example: 555-555-5555, PLATINUM\n"
                                             + "Enter 'Back' to go back to the menu\n");
                         parameters = input.next();
                         if (parameters.equals("Back")) {
@@ -325,37 +343,52 @@ public class UserInterface {
                         break;
                     case "10":
                         // 10.  Add Preconfigured Bundle <bundle name>
-                        back = addPreconfBundle(bundleService, input);
-                        if (back.equals("Back")) {
-                            break;
-                        }
+                        do {
+                            back = addPreconfBundle(bundleService, input);
+                            if (back.equals("Back")) {
+                                break;
+                            }
+                        } while (back.equals("Error"));
                         System.out.println("Hit Enter to return to the menu");
                         input.next();
                         break;
                     case "11":
-                        // 11. Add Plain Pac Bundle <bundle name>
-                        back = addPlainPacBundle(bundleService, input);
-                        if (back.equals("Back")) {
+                        // 11. Add Plain Pac Bundle
+                        System.out.println("Please enter 'PLAINPACBUNDLE' to add a Plain PaC bundle\n"
+                                + "Enter 'Back' to go back to the menu\n");
+                        do {
+                            parameters = input.next();
+                            if(!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE"))) {
+                                System.out.println("Please enter 'PLAINPACBUNDLE' to add a Plain PaC bundle\n"
+                                        + "Enter 'Back' to go back to the menu\n");
+                            }
+                        } while (!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE")));
+                        if (parameters.equals("Back")) {
                             break;
                         }
+                        bundleService.addPlainPacBundle("PLAINPACBUNDLE");
                         System.out.println("Hit Enter to return to the menu");
                         input.next();
                         break;
                     case "12":
                         // 12. Add Pac Bundle With Calling Option <bundle name, calling plan option>
-                        back = addPacBundleWithCalling(bundleService, input);
-                        if (back.equals("Back")) {
-                            break;
-                        }
+                        do {
+                            back = addPacBundleWithCalling(bundleService, input);
+                            if (back.equals("Back")) {
+                                break;
+                            }
+                        } while (back.equals("Error"));
                         System.out.println("Hit Enter to return to the menu");
                         input.next();
                         break;
                     case "13":
                         // 13. Add Pac Bundle With Messaging Option <messaging plan option>
-                        back = addPacBundleWithMessaging(bundleService, input);
-                        if (back.equals("Back")) {
-                            break;
-                        }
+                        do {
+                            back = addPacBundleWithMessaging(bundleService, input);
+                            if (back.equals("Back")) {
+                                break;
+                            }
+                        } while (back.equals("Error"));
                         System.out.println("Hit Enter to return to the menu");
                         input.next();
                         break;
@@ -510,63 +543,25 @@ public class UserInterface {
      * 
      * @param bundleService BundleManagement instance 
      * @param input Scanner instance to get user input
-     * @return String of either the bundle name or "Back"
+     * @return String of either the bundle name, "Back", or "Error"
      */
     private static String addPreconfBundle(BundleManagement bundleService, Scanner input) {
-        System.out.println("Please enter your desired bundle name and one of the following bundle options in a comma separated list\n"
+        System.out.println("Please enter your desired bundle option\n"
                 + "Available Preconfigured Bundle Options: PLATINUM, GOLD, SILVER, BRONZE\n"
-                + "For example: John's Platinum Bundle, PLATINUM\n"
+                + "For example: PLATINUM\n"
                 + "Enter 'Back' to go back to the menu\n");
         String parameters = input.next();
         if (parameters.equals("Back")) {
             return parameters;
         }
-        String[] paramArray = parameters.split(", ");
-        BundleOption bundleOption = BundleOption.ZERO;
-        switch (paramArray[1]) {
-            case "PLATINUM":
-                bundleOption = BundleOption.PLATINUM;
-                break;
-            case "GOLD":
-                bundleOption = BundleOption.GOLD;
-                break;
-            case "SILVER":
-                bundleOption = BundleOption.SILVER;
-                break;
-            case "BRONZE":
-                bundleOption = BundleOption.BRONZE;
-                break;
-            default:
-                // Fragile with current implementation as inputting anything else will cause system failure because of NullPointerException
-                System.out.println("Unrecognized Option! Please enter one of PLATINUM, GOLD, SILVER, BRONZE");
-                break;
-        }
-        bundleService.addPreconfBundle(paramArray[0], bundleOption);
-        return paramArray[0];
-    }
-
-    /**
-     * Method that implements menu option 11 - Add Plain Pac bundle.
-     * Prints a prompt and waits for user input to pass to the
-     * BundleManagement instance. If the user enters "Back", immediately
-     * returns such that no bundle is created and the option menu is
-     * printed again. Otherwise, returns the bundle name of the new
-     * Plain Pac bundle
-     * 
-     * @param bundleService BundleManagement instance 
-     * @param input Scanner instance to get user input
-     * @return String of either the bundle name or "Back"
-     */
-    private static String addPlainPacBundle(BundleManagement bundleService, Scanner input) {
-        System.out.println("Please enter your desired plain Pac bundle name\n"
-                + "For example: John's Plain Pac Bundle\n"
-                + "Enter 'Back' to go back to the menu\n");
-        String parameters = input.next();
-        if (parameters.equals("Back")) {
+        if (parameters.matches("PLATINUM|GOLD|SILVER|BRONZE")) {
+            bundleService.addPreconfBundle(parameters);
             return parameters;
+        } else {
+            System.out.println("Unrecognized Preconfigured Bundle Option was inputted\n"
+                    + "Please try again\n");
+            return "Error";
         }
-        bundleService.addPlainPacBundle(parameters);
-        return parameters;
     }
 
     /**
@@ -580,39 +575,26 @@ public class UserInterface {
      * 
      * @param bundleService BundleManagement instance 
      * @param input Scanner instance to get user input
-     * @return String of either the bundle name or "Back"
+     * @return String of either the bundle name, "Back", or "Error"
      */
     private static String addPacBundleWithCalling(BundleManagement bundleService, Scanner input) {
-        System.out.println("Please enter your desired Pac bundle name and one of the following calling plan options in a comma separated list\n"
-                + "Available Calling Plan Options: PLATINUM, GOLD, SILVER, BRONZE\n"
-                + "For example: John's Pac Bundle with Platinum Calling, PLATINUM\n"
+        System.out.println("Please enter one of the following PaC with Calling Plan options\n"
+                + "Available PaC with Calling Plan Options: PACWITHPLATINUMCALLING, PACWITHGOLDCALLING, "
+                + "PACWITHSILVERCALLING, PACWITHBRONZECALLING\n"
+                + "For example: PACWITHPLATINUMCALLING\n"
                 + "Enter 'Back' to go back to the menu\n");
         String parameters = input.next();
         if (parameters.equals("Back")) {
             return parameters;
         }
-        String[] paramArray = parameters.split(", ");
-        BundleOption callingOption = BundleOption.ZERO;
-        switch (paramArray[1]) {
-            case "PLATINUM":
-                callingOption = BundleOption.PLATINUM;
-                break;
-            case "GOLD":
-                callingOption = BundleOption.GOLD;
-                break;
-            case "SILVER":
-                callingOption = BundleOption.SILVER;
-                break;
-            case "BRONZE":
-                callingOption = BundleOption.BRONZE;
-                break;
-            default:
-                // Fragile with current implementation as inputting anything else will cause system failure because of NullPointerException
-                System.out.println("Unrecognized Option! Please enter one of PLATINUM, GOLD, SILVER, BRONZE");
-                break;
+        if (parameters.matches("PACWITHPLATINUMCALLING|PACWITHGOLDCALLING|PACWITHSILVERCALLING|PACWITHBRONZECALLING")) {
+            bundleService.addPacBundleWithCalling(parameters);
+            return parameters;
+        } else {
+            System.out.println("Unrecognized PaC with Calling Plan Option was inputted\n"
+                    + "Please try again\n");
+            return "Error";
         }
-        bundleService.addPacBundleWithCalling(paramArray[0], callingOption);
-        return paramArray[0];
     }
 
     /**
@@ -626,39 +608,26 @@ public class UserInterface {
      * 
      * @param bundleService BundleManagement instance 
      * @param input Scanner instance to get user input
-     * @return String of either the bundle name or "Back"
+     * @return String of either the bundle name, "Back", or "Error"
      */
     private static String addPacBundleWithMessaging(BundleManagement bundleService, Scanner input) {
-        System.out.println("Please enter your desired Pac bundle name and one of the following messaging plan options in a comma separated list\n"
-                + "Available Messaging Plan Options: PLATINUM, GOLD, SILVER, BRONZE\n"
-                + "For example: John's Pac Bundle with Platinum Messaging, PLATINUM\n"
+        System.out.println("Please enter one of the following PaC with Calling Plan options\n"
+                + "Available PaC with Calling Plan Options: PACWITHPLATINUMMESSAGING, PACWITHGOLDMESSAGING, "
+                + "PACWITHSILVERMESSAGINGVER, PACWITHBRONZEMESSAGING\n"
+                + "For example: PACWITHPLATINUMMESSAGING\n"
                 + "Enter 'Back' to go back to the menu\n");
         String parameters = input.next();
         if (parameters.equals("Back")) {
             return parameters;
         }
-        String[] paramArray = parameters.split(", ");
-        BundleOption messagingOption = BundleOption.ZERO;
-        switch (paramArray[1]) {
-            case "PLATINUM":
-                messagingOption = BundleOption.PLATINUM;
-                break;
-            case "GOLD":
-                messagingOption = BundleOption.GOLD;
-                break;
-            case "SILVER":
-                messagingOption = BundleOption.SILVER;
-                break;
-            case "BRONZE":
-                messagingOption = BundleOption.BRONZE;
-                break;
-            default:
-                // Fragile with current implementation as inputting anything else will cause system failure because of NullPointerException
-                System.out.println("Unrecognized Option! Please enter one of PLATINUM, GOLD, SILVER, BRONZE");
-                break;
+        if (parameters.matches("PACWITHPLATINUMMESSAGING|PACWITHGOLDMESSAGING|PACWITHSILVERMESSAGING|PACWITHBRONZEMESSAGING")) {
+            bundleService.addPacBundleWithMessaging(parameters);
+            return parameters;
+        } else {
+            System.out.println("Unrecognized PaC with Messaging Plan Option was inputted\n"
+                    + "Please try again\n");
+            return "Error";
         }
-        bundleService.addPacBundleWithMessaging(paramArray[0], messagingOption);
-        return paramArray[0];
     }
 }
 
