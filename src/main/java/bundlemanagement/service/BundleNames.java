@@ -25,7 +25,7 @@ public enum BundleNames {
 	
 	// PaC Bundle with calling plan options 
 	PAC_WITH_GOLD_CALLING_PLAN("PACWITHGOLDCALLING - Pick and Choose Bundle with Gold Calling Plan", "Gold Calling Plan: Unlimited Canada wide calling"),
-	PAC_WITH_PLATINUM_CALLING_PLAN("PACWITHPLATINUM - CALLINGPick and Choose Bundle with Platinum Calling Plan", "Platinum Calling Plan: Unlimited US & Canada wide calling"),
+	PAC_WITH_PLATINUM_CALLING_PLAN("PACWITHPLATINUMCALLING - Pick and Choose Bundle with Platinum Calling Plan", "Platinum Calling Plan: Unlimited US & Canada wide calling"),
 	PAC_WITH_BRONZE_CALLING_PLAN("PACWITHBRONZECALLING - Pick and Choose Bundle with Bronze Calling Plan", "Bronze Calling Plan: 30 min free Canada wide calling"),
 	PAC_WITH_SILVER_CALLING_PLAN("PACWITHSILVERCALLING - Pick and Choose Bundle with Silver Calling Plan", "Silver Calling Plan: 100 min free Canada wide calling"),
 	PAC_WITH_ZERO_CALLING_PLAN("PACWITHZEROCALLING - Pick and Choose Bundle with Zero Calling Plan", "Zero Calling Plan: Zero min"),

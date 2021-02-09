@@ -107,6 +107,10 @@ public class UserInterface {
                             if (!(submenuOption.equals("Back") || submenuOption.equals("Done"))) {
                                 System.out.printf("User details to add: %s\n", submenuOption);
                                 paramArray = submenuOption.split(", ");
+                                if (paramArray.length != 3) {
+                                    System.out.println("You must enter a username, user address, and user email in a comma separated list");
+                                    continue;
+                                }
                                 TreeMap<PropertyIdEnum, String> user = new TreeMap<PropertyIdEnum, String>();
                                 user.put(PropertyIdEnum.USER_NAME,  paramArray[0]);
                                 user.put(PropertyIdEnum.USER_ADDRESS,  paramArray[1]);
@@ -195,7 +199,7 @@ public class UserInterface {
                     case "6":
                         // 6. Add Account <phone, user, bundle name>
                         System.out.println("Please enter the new account phone number, username, and bundle name in a comma separated list\n"
-                                            + "For example: 555-555-5555, John Doe, Platinum\n"
+                                            + "For example: 555-555-5555, John Doe, PLATINUM\n"
                                             + "Enter 'Back' to go back to the menu\n");
                         parameters = input.next();
                         if (parameters.equals("Back")) {
@@ -469,7 +473,7 @@ public class UserInterface {
                     case "20":
                         // 20. List Bundle Details <bundle name>
                         System.out.println("Please enter the bundle name that you want to view details of\n"
-                                + "For example: John's Platinum Bundle\n"
+                                + "For example: PLATINUM\n"
                                 + "Enter 'Back' to go back to the menu\n");
                         parameters = input.next();
                         if (parameters.equals("Back")) {
@@ -524,11 +528,20 @@ public class UserInterface {
         System.out.println("Please enter a new username, user address, and user email in a comma separated list\n"
                             + "For example: John Doe, 123 Example St, john.doe@example.com\n"
                             + "Enter 'Back' to go back to the menu\n");
-        String parameters = input.next();
-        if (parameters.equals("Back")) {
-            return parameters;
-        }
-        String[] paramArray = parameters.split(", ");
+        String[] paramArray;
+        do {
+            String parameters = input.next();
+            if (parameters.equals("Back")) {
+                return parameters;
+            }
+            paramArray = parameters.split(", ");
+            if (paramArray.length != 3) {
+                System.out.println("You must enter a username, user address, and user email in a comma separated list\n"
+                        + "For example: John Doe, 123 Example St, john.doe@example.com\n"
+                        + "Enter 'Back' to go back to the menu\n");
+                continue;
+            }
+        } while (paramArray.length != 3);
         userService.addUser(paramArray[0], paramArray[1], paramArray[2]);
         return paramArray[0];
     }

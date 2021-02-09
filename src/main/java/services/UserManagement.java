@@ -318,7 +318,11 @@ public class UserManagement extends AbstractUserManagement {
 			break;
 
 		case PropertyNameStrings.PRINT_USER_DELETED:
-			System.out.println("Removed user: " + userId);
+			if (success) {
+			    System.out.println("Removed user: " + userId);
+			} else {
+			    System.out.println("Failed to remove user \"" + userId + "\" because that user does not exist.");
+			}
 			break;
 
 		default:
