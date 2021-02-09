@@ -13,10 +13,10 @@ public enum BundleNames {
 	 */
 
 	// Pre-configured (preconf) bundle names
-	PLATINUM("PLATINUM - Platinum Preconfigured Bundle", null), 
-	GOLD("GOLD - Gold Preconfigured Bundle", null), 
+	PLATINUM("PLATINUM - Platinum Preconfigured Bundle", null),
+	GOLD("GOLD - Gold Preconfigured Bundle", null),
 	SILVER("SILVER - Silver Preconfigured Bundle", null),
-	BRONZE("BRONZE - Bronze Preconfigured Bundle", null), 
+	BRONZE("BRONZE - Bronze Preconfigured Bundle", null),
 	PICKANDCHOOSE("PAC - Pick and Choose Bundle", null),
 
 	
@@ -47,7 +47,7 @@ public enum BundleNames {
 	//PaC Bundle without Plan options
 	PAC_WITH_OUT_CALLING_PLAN("PACWITHOUTCALLING - PaC without Calling", "PaC Calling Plan: No Calling Plan"),
 	PAC_WITH_OUT_MESSAGING_PLAN("PACWITHOUTMESSAGING - PaC without Messaging", "PaC Messaging Plan: No Messaging Plan"),
-	PAC_WITH_OUT_DATA_PLAN("PACWITHOUTDATA - PaC without Data", "PaC Data Plan: No Data Plan");	
+	PAC_WITH_OUT_DATA_PLAN("PACWITHOUTDATA - PaC without Data", "PaC Data Plan: No Data Plan");
 	
 	/**
 	 * The bundlename will store the name of bundles
