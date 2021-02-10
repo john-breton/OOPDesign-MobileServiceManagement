@@ -27,71 +27,38 @@ public class SimplePaCBundleFactory {
 		PaCBundle pac = new BareBonePhoneService();
 
 		if (callingOption != null) {
-			switch (callingOption) {
-			case PLATINUM:
-				pac = new PlatinumCallingPlan(pac);
-				break;
-			case GOLD:
-				pac = new GoldCallingPlan(pac);
-				break;
-			case SILVER:
-				pac = new SilverCallingPlan(pac);
-				break;
-			case BRONZE:
-				pac = new BronzeCallingPlan(pac);
-				break;
-			case ZERO:
-				pac = new ZeroCallingPlan(pac);
-				break;
-			case NONE:
-				pac = new EmptyCallingPlan(pac);
-				break;
-			}
+			pac = switch (callingOption) {
+				case PLATINUM -> new PlatinumCallingPlan(pac);
+				case GOLD -> new GoldCallingPlan(pac);
+				case SILVER -> new SilverCallingPlan(pac);
+				case BRONZE -> new BronzeCallingPlan(pac);
+				case ZERO -> new ZeroCallingPlan(pac);
+				case NONE -> new EmptyCallingPlan(pac);
+			};
 		}
 		
 		if (messagingOption != null) {
-			switch (messagingOption) {
-			case PLATINUM:
-				pac = new PlatinumMessagingPlan(pac);
-				break;
-			case GOLD:
-				pac = new GoldMessagingPlan(pac);
-				break;
-			case SILVER:
-				pac = new SilverMessagingPlan(pac);
-				break;
-			case BRONZE:
-				pac = new BronzeMessagingPlan(pac);
-				break;
-			case ZERO:
-				pac = new ZeroMessagingPlan(pac);
-				break;
-			case NONE:
-				pac = new EmptyMessagingPlan(pac);
-			}
+			pac = switch (messagingOption) {
+				case PLATINUM -> new PlatinumMessagingPlan(pac);
+				case GOLD -> new GoldMessagingPlan(pac);
+				case SILVER -> new SilverMessagingPlan(pac);
+				case BRONZE -> new BronzeMessagingPlan(pac);
+				case ZERO -> new ZeroMessagingPlan(pac);
+				case NONE -> new EmptyMessagingPlan(pac);
+				default -> pac;
+			};
 		}
 		
 		if (dataOption != null) {
-			switch (dataOption) {
-			case PLATINUM:
-				pac = new PlatinumDataPlan(pac);
-				break;
-			case GOLD:
-				pac = new GoldDataPlan(pac);
-				break;
-			case SILVER:
-				pac = new SilverDataPlan(pac);
-				break;
-			case BRONZE:
-				pac = new BronzeDataPlan(pac);
-				break;
-			case ZERO:
-				pac = new ZeroDataPlan(pac);
-				break;
-			case NONE:
-				pac = new EmptyDataPlan(pac);
-				break;
-			}
+			pac = switch (dataOption) {
+				case PLATINUM -> new PlatinumDataPlan(pac);
+				case GOLD -> new GoldDataPlan(pac);
+				case SILVER -> new SilverDataPlan(pac);
+				case BRONZE -> new BronzeDataPlan(pac);
+				case ZERO -> new ZeroDataPlan(pac);
+				case NONE -> new EmptyDataPlan(pac);
+				default -> pac;
+			};
 		}
 		pac.setName(name);
 		return pac;

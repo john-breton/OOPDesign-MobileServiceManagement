@@ -9,8 +9,8 @@ import java.beans.PropertyChangeListener;
  *
  */
 public abstract class AbstractAccountManagement implements PropertyChangeListener {
-	
-    /**
+
+	/**
      * Add a new service account based on the passed in parameters. This
      * requires a User and Bundle object to have already been created and
      * instantiated previously. The phone number is required to be unique,
@@ -54,5 +54,12 @@ public abstract class AbstractAccountManagement implements PropertyChangeListene
 	 * @param pcl a property change listener
 	 */
 	public abstract void addPropertyChangeListener(PropertyChangeListener pcl);
+
+	/**
+	 * Check to see if an account exists.
+	 *
+	 * @return True if the account exists, false otherwise
+	 */
+	public abstract boolean accountExists(String phoneNum);
 
 }

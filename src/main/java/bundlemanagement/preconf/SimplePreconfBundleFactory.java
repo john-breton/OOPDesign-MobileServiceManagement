@@ -16,27 +16,25 @@ public class SimplePreconfBundleFactory{
 	 */
 	public PreconfBundle createBundle(BundleNames option) {
 		PreconfBundle bundle;
-		switch (option) {
-			case PLATINUM:
-				BundleShop platinumStore = new PlatinumBundleShop();
-				bundle = platinumStore.orderBundle();
-				break;
-			case GOLD:
-				BundleShop goldStore = new GoldBundleShop();
-				bundle = goldStore.orderBundle();
-				break;
-			case SILVER:
-				BundleShop silverStore = new SilverBundleShop();
-				bundle = silverStore.orderBundle();
-				break;
-			case BRONZE:
-				BundleShop bronzeStore = new BronzeBundleShop();
-				bundle = bronzeStore.orderBundle();
-				break;
-			default:
-				bundle = null;
-				break;
-		}
+        switch (option) {
+            case PLATINUM -> {
+                BundleShop platinumStore = new PlatinumBundleShop();
+                bundle = platinumStore.orderBundle();
+            }
+            case GOLD -> {
+                BundleShop goldStore = new GoldBundleShop();
+                bundle = goldStore.orderBundle();
+            }
+            case SILVER -> {
+                BundleShop silverStore = new SilverBundleShop();
+                bundle = silverStore.orderBundle();
+            }
+            case BRONZE -> {
+                BundleShop bronzeStore = new BronzeBundleShop();
+                bundle = bronzeStore.orderBundle();
+            }
+            default -> bundle = null;
+        }
 		return bundle;
 	}
 

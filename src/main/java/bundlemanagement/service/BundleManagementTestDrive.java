@@ -1,11 +1,6 @@
 package bundlemanagement.service;
 
-import static reportingservice.PropertyNameStrings.BUNDLE;
-import static reportingservice.PropertyNameStrings.DISPLAY;
-import static reportingservice.PropertyNameStrings.PROPERTY_CHANGE_SCOPE_DELIMITER;
-
 import reportingservice.ReportingService;
-import reportingservice.PropertyNameStrings.Events;
 
 public class BundleManagementTestDrive {
 

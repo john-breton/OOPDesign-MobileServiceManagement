@@ -15,9 +15,9 @@ public class BundleNumericalValues {
 	 * It will represent numerical values for calling plan. Total minutes of calling for each plan.
 	 */
 	
-	public static Map<BundleNames, BigDecimal> PaCWithCallingOptionTotalMinutes = new EnumMap<BundleNames,BigDecimal>(BundleNames.class);
+	public static Map<BundleNames, BigDecimal> PaCWithCallingOptionTotalMinutes = new EnumMap<>(BundleNames.class);
 	
-	/**
+	/*
 	 * Import fee for PaC bundle with different calling plan options.
 	 */
 	static {
@@ -38,9 +38,9 @@ public class BundleNumericalValues {
 	 * It will represent numerical values for data plan.Total amount of data for each plan. 
 	 */
 	
-	public static Map<BundleNames, BigDecimal> PaCWithDataOptionDataQuantity = new EnumMap<BundleNames,BigDecimal>(BundleNames.class);
+	public static Map<BundleNames, BigDecimal> PaCWithDataOptionDataQuantity = new EnumMap<>(BundleNames.class);
 	
-	/**
+	/*
 	 * Import fee for PaC bundle with different data plan options.
 	 */
 	static {
@@ -60,9 +60,9 @@ public class BundleNumericalValues {
 	 *  It will represent numerical values for messaging plan.Total Number of Messages for each plan.
 	 */
 	
-	public static Map<BundleNames, BigDecimal> PaCWithMessagingOptionTotalNumberOfMessages = new EnumMap<BundleNames,BigDecimal>(BundleNames.class);
+	public static Map<BundleNames, BigDecimal> PaCWithMessagingOptionTotalNumberOfMessages = new EnumMap<>(BundleNames.class);
 	
-	/**
+	/*
 	 * Import fee for PaC bundle with different massaging plan options.
 	 */
 	static {

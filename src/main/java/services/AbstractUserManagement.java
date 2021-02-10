@@ -61,7 +61,7 @@ public abstract class AbstractUserManagement implements PropertyChangeListener {
 	 * Modify the User Object - identifying them by userId.
 	 * the TreeMap has to use PropertyIdEnum as Key
 	 * 
-	 * @param userName The user name of the user.
+	 * @param userId The user name of the user.
 	 * @param userProperties The properties that will be used to modify the user.
 	 */
 	public abstract void modifyUser(String userId, TreeMap<PropertyIdEnum, String> userProperties);
@@ -86,5 +86,12 @@ public abstract class AbstractUserManagement implements PropertyChangeListener {
 	 * @param userId The id of the user that should be printed.
 	 */
 	public abstract void getUser(String userId);
+
+	/**
+	 * Check to see if a user exists
+	 *
+	 * @return True if the user exists, false otherwise
+	 */
+	public abstract boolean userExists(String userId);
 
 }

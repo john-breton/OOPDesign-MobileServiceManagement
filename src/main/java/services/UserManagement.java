@@ -5,6 +5,7 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -20,7 +21,7 @@ import users.UserManagementFactory;
  */
 public class UserManagement extends AbstractUserManagement {
 	
-	private static final ArrayList<String> USER_MANAGEMENT_EVENTS = new ArrayList<String>() {
+	private static final ArrayList<String> USER_MANAGEMENT_EVENTS = new ArrayList<>() {
 		{
 			add(PropertyNameStrings.DELETE_USER);
 			add(PropertyNameStrings.PRINT_USER_ADDED);
@@ -43,7 +44,7 @@ public class UserManagement extends AbstractUserManagement {
 	 * private constructor to make this class singleton
 	 * */ 
 	private UserManagement() {
-		users = new ConcurrentHashMap<String, UserObjectIf>();
+		users = new ConcurrentHashMap<>();
 		setManagementFactory(new UserManagementFactory());
 		support = new PropertyChangeSupport(this);
 	}
@@ -65,16 +66,10 @@ public class UserManagement extends AbstractUserManagement {
 		//check if the user exists
 		if (!users.containsKey(name)) 
 		{
-			TreeMap<PropertyIdEnum, String> attr = new TreeMap<PropertyIdEnum, String>();
-			if (address != null)
-				attr.put(PropertyIdEnum.USER_ADDRESS, address);
-			else
-				attr.put(PropertyIdEnum.USER_ADDRESS, "");
-			
-			if (email != null)
-				attr.put(PropertyIdEnum.USER_EMAIL, email);
-			else
-				attr.put(PropertyIdEnum.USER_EMAIL, "");
+			TreeMap<PropertyIdEnum, String> attr = new TreeMap<>();
+			attr.put(PropertyIdEnum.USER_ADDRESS, Objects.requireNonNullElse(address, ""));
+
+			attr.put(PropertyIdEnum.USER_EMAIL, Objects.requireNonNullElse(email, ""));
 			
 			UserObjectIf currentUser = userFactory.createObjectById(name,attr);
 			if (currentUser == null) {
@@ -207,9 +202,7 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
-	 * Check to see if a user exists
-	 * 
-	 * @return True if the user exists, false otherwise
+	 * {@inheritDoc}
 	 */
 	public boolean userExists(String userId) {
 		return users.containsKey(userId);
@@ -251,7 +244,7 @@ public class UserManagement extends AbstractUserManagement {
 			return;
 		}
 
-		TreeMap<String, Object> dict = new TreeMap<String, Object>();
+		TreeMap<String, Object> dict = new TreeMap<>();
 		
 		if (evt.getNewValue() instanceof TreeMap<?, ?>) {
 			dict = (TreeMap<String, Object>) evt.getNewValue();

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package bundlemanagement.pac;
 
 import java.math.BigDecimal;
