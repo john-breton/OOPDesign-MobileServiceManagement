@@ -34,6 +34,7 @@ public class SimplePaCBundleFactory {
 				case BRONZE -> new BronzeCallingPlan(pac);
 				case ZERO -> new ZeroCallingPlan(pac);
 				case NONE -> new EmptyCallingPlan(pac);
+				default -> pac;
 			};
 		}
 		
