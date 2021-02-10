@@ -138,6 +138,15 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
+     * Check to see if an account exists.
+     * 
+     * @return True if the account exists, false otherwise
+     */
+    public boolean accountExists(String phoneNum) {
+    	return accountList.containsKey(phoneNum);
+    }
+
+    /**
      * Adds listeners to this class.
      *
      * @param pcl a property change listener
@@ -150,7 +159,7 @@ public class AccountManagement extends AbstractAccountManagement {
      * Handle the various event from ReportingService. Any unknown
      * events are ignored.
      *
-     * @param evt The event that was received.
+     * @param evt The event that was received
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -177,7 +186,7 @@ public class AccountManagement extends AbstractAccountManagement {
                 	System.out.println();
                     printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
                 } else {
-                    if (accountList.containsKey((String) evt.getNewValue())) {
+                    if (phoneNumPattern.matcher((String) evt.getNewValue()).matches()) {
                         System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                     } else {
                         System.out.printf("No service account with the username %s was found%n", evt.getNewValue());

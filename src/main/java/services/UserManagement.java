@@ -207,6 +207,15 @@ public class UserManagement extends AbstractUserManagement {
 	}
 	
 	/**
+	 * Check to see if a user exists
+	 * 
+	 * @return True if the user exists, false otherwise
+	 */
+	public boolean userExists(String userId) {
+		return users.containsKey(userId);
+	}
+
+	/**
 	 * printing all users
 	 */
 	private void printAllUserNames() {
@@ -318,7 +327,11 @@ public class UserManagement extends AbstractUserManagement {
 			break;
 
 		case PropertyNameStrings.PRINT_USER_DELETED:
-			System.out.println("Removed user: " + userId);
+			if (success) {
+			    System.out.println("Removed user: " + userId);
+			} else {
+			    System.out.println("Failed to remove user \"" + userId + "\" because that user does not exist.");
+			}
 			break;
 
 		default:

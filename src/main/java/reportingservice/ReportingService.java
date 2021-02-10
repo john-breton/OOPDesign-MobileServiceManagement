@@ -108,23 +108,26 @@ public class ReportingService extends AbstractReportingService {
                         support.firePropertyChange(PRINT_USER_DETAILS, Events.SUCCESS.getDesc(), event.getOldValue());
                     } else if (event.getNewValue().equals(BUNDLE)) {
                         support.firePropertyChange(PRINT_BUNDLE_DETAILS, event.getOldValue(), Events.SINGLE.getDesc());
-                    } else if (event.getNewValue().equals(ACCOUNT)) {
+                    } else if (event.getNewValue().toString().equals(ACCOUNT)) {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.SUCCESS.getDesc(), event.getOldValue());
                     } else {
                         support.firePropertyChange(PRINT_ACCOUNT_DETAILS, Events.FAILURE.getDesc(), event.getOldValue());
                     }
+                    break;
                 case FIND:
                     if (event.getOldValue().equals(Events.SUCCESS.getDesc())) {
                         support.firePropertyChange(GET_ACCOUNT, event.getOldValue(), event.getNewValue());
                     } else if (event.getOldValue().equals(Events.SPECIAL.getDesc())) {
                         support.firePropertyChange(FIND_ACCOUNTS, event.getOldValue(), event.getNewValue());
                     }
+                    break;
                 case LIST:
                     if (event.getOldValue().equals(Events.SUCCESS.getDesc())) {
                         support.firePropertyChange(GET_ACCOUNT_FEES, event.getOldValue(), event.getNewValue());
                     } else if (event.getOldValue().equals(Events.SPECIAL.getDesc())) {
                         support.firePropertyChange(FIND_ACCOUNTS_FEES, event.getOldValue(), event.getNewValue());
                     }
+                    break;
                 default:
                     break;
             }
