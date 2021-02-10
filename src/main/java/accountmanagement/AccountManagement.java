@@ -138,14 +138,12 @@ public class AccountManagement extends AbstractAccountManagement {
     }
 
     /**
-     * checks to see if account exists
-     * @return boolean value if user exists
+     * Check to see if an account exists.
+     * 
+     * @return True if the account exists, false otherwise
      */
     public boolean accountExists(String phoneNum) {
-        if (!accountList.containsKey(phoneNum)) {
-            return false;
-        }
-        return true;
+    	return accountList.containsKey(phoneNum);
     }
 
     /**
@@ -161,7 +159,7 @@ public class AccountManagement extends AbstractAccountManagement {
      * Handle the various event from ReportingService. Any unknown
      * events are ignored.
      *
-     * @param evt The event that was received.
+     * @param evt The event that was received
      */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
