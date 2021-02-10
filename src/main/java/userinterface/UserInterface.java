@@ -354,7 +354,7 @@ public class UserInterface {
                             break;
                         }
                         if (!accountService.accountExists(parameters)) {
-                        	System.out.println("The inputted bundle does not exist! Please try again!");
+                        	System.out.println("No account with the phone number \"" + parameters + "\" exists! Please try again!");
                         	break;
                         }
                         accountService.removeAccount(parameters);
