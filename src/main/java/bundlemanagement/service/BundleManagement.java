@@ -295,8 +295,12 @@ public class BundleManagement extends AbstractBundleManagement {
      * @return boolean value if bundle exists
      */
     public boolean bundleExists(String name) {
-        if (!bundleList.containsKey(convertBundleToEnum(name))) {
-            return false;
+        try {
+        	if (!bundleList.containsKey(convertBundleToEnum(name))) {
+        		return false;
+        	}
+        } catch (NullPointerException e) {
+        	return false;
         }
         return true;
     }

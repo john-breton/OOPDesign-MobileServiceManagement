@@ -206,6 +206,14 @@ public class UserInterface {
                             break;
                         }
                         paramArray = parameters.split(", ");
+                        if(!userService.userExists(paramArray[1])) {
+                        	System.out.println("The inputted user does not exist! Please try again!");
+                        	break;
+                        }
+                        if(!bundleService.bundleExists(paramArray[2])) {
+                        	System.out.println("The inputted bundle does not exist! Please try again!");
+                        	break;
+                        }
                         accountService.addAccount(paramArray[1], paramArray[0], paramArray[2]);
                         System.out.println("Hit Enter to return to the menu");
                         input.next();
@@ -214,6 +222,7 @@ public class UserInterface {
                         // 7. Add Account <account>
                         System.out.println("Step 1. Create a new user or choose an existing user\n");
                         String user = "";
+                        boolean invalid = false;
                         do {
                             System.out.println("Select one of the following options by enter the corresponding number:\n"
                                                 + "1.  Create a new user\n"
@@ -222,7 +231,8 @@ public class UserInterface {
                             submenuOption = input.next();
                             switch (submenuOption) {
                             case "1":
-                                user = addUser(userService, input);
+                            	invalid = false;
+                            	user = addUser(userService, input);
                                 break;
                             case "2":
                                 System.out.println("These are the existing users:\n");
@@ -230,14 +240,21 @@ public class UserInterface {
                                 System.out.println("Please enter an existing username:\n"
                                                     + "Enter 'Back' to go back to the menu\n");
                                 user = input.next();
+                                if(!userService.userExists(user)) {
+                                	System.out.println("The inputted user does not exist! Please try again!");
+                                	invalid = true;
+                                	continue;
+                                }
+                                invalid = false;
                                 break;
                             case "3":
+                            	invalid = false;
                                 break;
                             default:
                                 System.out.println("Unrecognized option! Please try again!\n");
                                 break;
                             }
-                        } while (!submenuOption.matches("[1-3]{1}"));
+                        } while (!submenuOption.matches("[1-3]{1}") || invalid);
                         if (submenuOption.equals("3") || user.equals("Back")) {
                             break;
                         }
@@ -255,13 +272,15 @@ public class UserInterface {
                             submenuOption = input.next();
                             switch (submenuOption) {
                                 case "1":
-                                    do {
+                                    invalid = false;
+                                	do {
                                         bundle = addPreconfBundle(bundleService, input);
                                     } while (bundle.equals("Error"));
                                     break;
                                 case "2":
                                     System.out.println("Please enter 'PLAINPACBUNDLE' to add a Plain PaC bundle\n"
                                             + "Enter 'Back' to go back to the menu\n");
+                                    invalid = false;
                                     do {
                                         parameters = input.next();
                                         if(!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE"))) {
@@ -276,12 +295,14 @@ public class UserInterface {
                                     bundle = "PLAINPACBUNDLE";
                                     break;
                                 case "3":
-                                    do {
+                                    invalid = false;
+                                	do {
                                         bundle = addPacBundleWithCalling(bundleService, input);
                                     } while (bundle.equals("Error"));
                                     break;
                                 case "4":
-                                    do {
+                                    invalid = false;
+                                	do {
                                         bundle = addPacBundleWithMessaging(bundleService, input);
                                     } while (bundle.equals("Error"));
                                     break;
@@ -292,14 +313,20 @@ public class UserInterface {
                                     System.out.println("Please enter the desired bundle name:\n"
                                                         + "Enter 'Back' to go back to the menu\n");
                                     bundle = input.next();
+                                    if(!bundleService.bundleExists(bundle)) {
+                                    	System.out.println("The inputted bundle does not exist! Please try again!");
+                                    	invalid = true;
+                                    	continue;
+                                    }
                                     break;
                                 case "6":
+                                	invalid = false;
                                     break;
                                 default:
                                     System.out.println("Unrecognized option! Please try again!\n");
                                     break;
                             }
-                        } while (!submenuOption.matches("[1-6]{1}"));
+                        } while (!submenuOption.matches("[1-6]{1}") || invalid);
                         if (submenuOption.equals("6") || bundle.equals("Back")) {
                             break;
                         }
@@ -311,7 +338,7 @@ public class UserInterface {
                         if (phone.equals("Back")) {
                             break;
                         }
-    
+                        
                         System.out.println("Creating new account with the details provded\n");
                         accountService.addAccount(user, phone, bundle);
                         System.out.println("Hit Enter to return to the menu");
@@ -325,6 +352,10 @@ public class UserInterface {
                         parameters = input.next();
                         if (parameters.equals("Back")) {
                             break;
+                        }
+                        if (!accountService.accountExists(parameters)) {
+                        	System.out.println("The inputted bundle does not exist! Please try again!");
+                        	break;
                         }
                         accountService.removeAccount(parameters);
                         System.out.println("Hit Enter to return to the menu");
@@ -341,6 +372,10 @@ public class UserInterface {
                             break;
                         }
                         paramArray = parameters.split(", ");
+                        if(!bundleService.bundleExists(paramArray[1])) {
+                        	System.out.println("The inputted bundle does not exist! Please try again!");
+                        	break;
+                        }
                         accountService.updateAccountBundle(paramArray[0], paramArray[1]);
                         System.out.println("Hit Enter to return to the menu");
                         input.next();
@@ -362,11 +397,11 @@ public class UserInterface {
                                 + "Enter 'Back' to go back to the menu\n");
                         do {
                             parameters = input.next();
-                            if(!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE"))) {
+                            if(!(parameters.equals("Back") || parameters.equals("PLAINPACBUNDLE"))) {
                                 System.out.println("Please enter 'PLAINPACBUNDLE' to add a Plain PaC bundle\n"
                                         + "Enter 'Back' to go back to the menu\n");
                             }
-                        } while (!(parameters.equals("Back")||parameters.equals("PLAINPACBUNDLE")));
+                        } while (!(parameters.equals("Back") || parameters.equals("PLAINPACBUNDLE")));
                         if (parameters.equals("Back")) {
                             break;
                         }
