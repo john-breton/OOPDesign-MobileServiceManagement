@@ -307,6 +307,7 @@ public class UserInterface {
                                     } while (bundle.equals("Error"));
                                     break;
                                 case "5":
+                                    invalid = false;
                                     System.out.println("These are the existing bundle options to choose from:\n");
                                     userIfService.listAllPreconfBundles();
                                     userIfService.listAllPacBundles();
