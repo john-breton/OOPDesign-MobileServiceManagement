@@ -55,4 +55,10 @@ public abstract class AbstractAccountManagement implements PropertyChangeListene
 	 */
 	public abstract void addPropertyChangeListener(PropertyChangeListener pcl);
 
+	/**
+	 * Removes listeners to this class.
+	 *
+	 * @param pcl a property change listener
+	 */
+	public abstract void removePropertyChangeListener(PropertyChangeListener pcl);
 }
