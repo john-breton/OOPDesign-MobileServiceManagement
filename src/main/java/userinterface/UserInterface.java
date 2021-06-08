@@ -312,8 +312,9 @@ public class UserInterface {
                                     do {
                                         bundle = addPacBundleWithMessaging(bundleService, input);
                                     } while (bundle.equals("Error"));
-                                }
-                                case "5" -> {
+                                    break;
+                                case "5":
+                                    invalid = false;
                                     System.out.println("These are the existing bundle options to choose from:\n");
                                     userIfService.listAllPreconfBundles();
                                     userIfService.listAllPacBundles();
