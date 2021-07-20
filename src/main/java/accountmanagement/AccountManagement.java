@@ -23,13 +23,15 @@ import static reportingservice.PropertyNameStrings.*;
  * private constructor and ensures that only one instance of the class will
  * exist at any given time. This is to prevent data corruption once it comes
  * to multiple admins making use of the AccountManagement service.
+ * <p>
+ * @author ebreojh
  */
 public class AccountManagement extends AbstractAccountManagement {
     // We will always need an AccountManagement instance, so use eager instantiation.
     private static volatile AccountManagement UNIQUE_INSTANCE = new AccountManagement();
     private volatile ConcurrentHashMap<String, Account> accountList;
     private final PropertyChangeSupport support;
-    private final Pattern phoneNumPattern = Pattern.compile("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$");
+    private final Pattern phoneNumPattern = Pattern.compile("^[+]?[(]?[0-9]{3}[)]?[-\\s.]?[0-9]{3}[-\\s.]?[0-9]{4,6}$");
 
     /**
      * Constructor for the AccountManagement class.
@@ -169,14 +171,14 @@ public class AccountManagement extends AbstractAccountManagement {
                     System.out.printf("Failed to add a service account for the phone number %s (Used in another service account)%n", evt.getNewValue());
                 } else {
                     System.out.printf("Successfully created a service account for the phone number %s%n", evt.getNewValue());
-                    printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
+                    printAccountDetails(Objects.requireNonNull(accountList.get((String) evt.getNewValue())));
                 }
                 break;
             case PRINT_ACCOUNT_DELETED:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
                     System.out.printf("Successfully removed the service account associated with the phone number %s%n", evt.getNewValue());
                     System.out.println("Deleted account details:");
-                    printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
+                    printAccountDetails(Objects.requireNonNull(accountList.get((String) evt.getNewValue())));
                 } else {
                     System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());
                 }
@@ -184,7 +186,7 @@ public class AccountManagement extends AbstractAccountManagement {
             case PRINT_ACCOUNT_DETAILS:
                 if (evt.getOldValue().equals(Events.SUCCESS.getDesc())) {
                 	System.out.println();
-                    printAccountDetails(Objects.requireNonNull(accountList.get(evt.getNewValue())));
+                    printAccountDetails(Objects.requireNonNull(accountList.get((String) evt.getNewValue())));
                 } else {
                     if (phoneNumPattern.matcher((String) evt.getNewValue()).matches()) {
                         System.out.printf("No service account with the phone number %s was found%n", evt.getNewValue());

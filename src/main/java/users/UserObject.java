@@ -18,6 +18,10 @@ public class UserObject extends UserObjectIf {
 	/**
 	 * Constructor for creating the user object
 	 * @param name The user name of the user.
+	 * @param userProperties the list of all properties you wish to modify
+	 * */
+	public UserObject(String name, TreeMap<PropertyIdEnum, String> userProperties) {
+		propertyList = new TreeMap<>();
 	 * @param vals the list of all properties you wish to modify
 	 * */
 	public UserObject(String name, TreeMap<PropertyIdEnum, String> userProperties) {
@@ -29,21 +33,12 @@ public class UserObject extends UserObjectIf {
 			
 			PropertyIdEnum key = prop.getKey();
 			String value = prop.getValue();
+			//propertyList.put(key, new PropertyIf(value));
 			switch (key) {
-				
-				case USER_ADDRESS:
-					propertyList.put(key, new UserAddressProperty(value));
-					break;
-				
-				case USER_EMAIL:
-					propertyList.put(key, new UserEmailProperty(value));
-					break;
-				
-				default:
-					//propertyList.put(key, new PropertyIf(value));
-					System.out.println("User Object: Unknown Property type");
-					
-				}
+				case USER_ADDRESS -> propertyList.put(key, new UserAddressProperty(value));
+				case USER_EMAIL -> propertyList.put(key, new UserEmailProperty(value));
+				default -> System.out.println("User Object: Unknown Property type");
+			    }
 			}
 	}
 	

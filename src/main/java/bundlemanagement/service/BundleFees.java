@@ -17,11 +17,10 @@ public class BundleFees {
 	/**
 	 * Create a map for preconf bundle fee.
 	 */
-	public static Map<BundleNames, BigDecimal> preconfFees = new EnumMap<BundleNames, BigDecimal>(BundleNames.class);
+	public static Map<BundleNames, BigDecimal> preconfFees = new EnumMap<>(BundleNames.class);
 
-	/**
+	/*
 	 * Import fee for each precofigured bundle into enum map.
-	 *
 	 */
 	static {
 		preconfFees.put(BundleNames.PLATINUM, new BigDecimal(100));
@@ -38,10 +37,10 @@ public class BundleFees {
 	 * Create a map for PaC bundle with calling plan options fee.
 	 */
 
-	public static Map<BundleNames, BigDecimal> PaCWithCallingOptionFees = new EnumMap<BundleNames, BigDecimal>(
+	public static Map<BundleNames, BigDecimal> PaCWithCallingOptionFees = new EnumMap<>(
 			BundleNames.class);
 
-	/**
+	/*
 	 * Import fee for PaC bundle with different calling plan options.
 	 */
 	static {
@@ -60,10 +59,10 @@ public class BundleFees {
 	 * Create a map for PaC bundle with data plan options fee.
 	 */
 
-	public static Map<BundleNames, BigDecimal> PaCWithDataOptionFees = new EnumMap<BundleNames, BigDecimal>(
+	public static Map<BundleNames, BigDecimal> PaCWithDataOptionFees = new EnumMap<>(
 			BundleNames.class);
 
-	/**
+	/*
 	 * Import fee for PaC bundle with different data plan options.
 	 */
 	static {
@@ -82,10 +81,10 @@ public class BundleFees {
 	 * Create a map for PaC bundle with messaging plan options fee.
 	 */
 
-	public static Map<BundleNames, BigDecimal> PaCWithMessagingOptionFees = new EnumMap<BundleNames, BigDecimal>(
+	public static Map<BundleNames, BigDecimal> PaCWithMessagingOptionFees = new EnumMap<>(
 			BundleNames.class);
 
-	/**
+	/*
 	 * Import fee for PaC bundle with different massaging plan options.
 	 */
 	static {

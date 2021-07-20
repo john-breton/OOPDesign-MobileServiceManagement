@@ -1,7 +1,5 @@
 package bundlemanagement.service;
 
-import reportingservice.PropertyNameStrings.Events;
-
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -10,7 +8,7 @@ import java.util.concurrent.*;
 
 import bundlemanagement.pac.*;
 import bundlemanagement.preconf.*;
-import reportingservice.PropertyNameStrings.Events;
+
 import static reportingservice.PropertyNameStrings.*;
 
 
@@ -42,7 +40,7 @@ public class BundleManagement extends AbstractBundleManagement {
 	 * no more than one object can be created
 	 */
 	private BundleManagement() {
-		bundleList = new ConcurrentHashMap<BundleNames, Bundle>();
+		bundleList = new ConcurrentHashMap<>();
 		support = new PropertyChangeSupport(this);
 	}
 
@@ -166,7 +164,7 @@ public class BundleManagement extends AbstractBundleManagement {
 	/**
 	 * check if the bundle name is for pac bundle with calling plan
 	 * 
-	 * @param bundleName bundle name in BundleNames Enum format.
+	 * @param name bundle name in BundleNames Enum format.
 	 * @return BundleOption return the calling plan level indicate by the bundle
 	 *         name
 	 */
@@ -213,7 +211,7 @@ public class BundleManagement extends AbstractBundleManagement {
 	/**
 	 * check if the bundle name is for pac bundle with messaging plan
 	 * 
-	 * @param bundleName bundle name in BundleNames Enum format.
+	 * @param name bundle name in BundleNames Enum format.
 	 * @return BundleOption return the messaging plan level indicate by the bundle
 	 *         name
 	 */
@@ -313,9 +311,9 @@ public class BundleManagement extends AbstractBundleManagement {
 		System.out.printf("Bundle Name: %s\n", bundle.getName().getBundleNames());
 		if (bundle instanceof PaCBundle) {
 			System.out.print(((PaCBundle) bundle).getDescription());
-			System.out.println("Monthly Fee: $" + ((PaCBundle) bundle).cost());
+			System.out.println("Monthly Fee: $" + bundle.cost());
 		} else if (bundle instanceof PreconfBundle) {
-			System.out.println((PreconfBundle) bundle);
+			System.out.println(bundle);
 		}
 
 	}
@@ -387,32 +385,32 @@ public class BundleManagement extends AbstractBundleManagement {
 					System.out.print("New Bundle Added:");
 					printBundleDetails(Objects.requireNonNull(getBundle(bundleName)));
 				} catch (NullPointerException e) {
-					System.out.println(e);
+					System.out.println("Invalid bundle, could not be printed.");
 				}
 
 			}
 			break;
 		case PRINT_BUNDLE_DETAILS:
-			if (((String) evt.getNewValue()).equals(Events.SINGLE.getDesc())) {// print single bundle detail
+			if (evt.getNewValue().equals(Events.SINGLE.getDesc())) {// print single bundle detail
 				String name = (String) evt.getOldValue();
 				Bundle bundle = getBundle(convertBundleToEnum(name));
 				if (bundle != null) {
 					printBundleDetails(bundle);
 				} else {
-					System.out.printf("No Bundle with the name \"%s\" was found.\n", (String) evt.getOldValue());
+					System.out.printf("No Bundle with the name \"%s\" was found.\n", evt.getOldValue());
 				}
-			} else if (((String) evt.getNewValue()).equals(Events.PAC.getDesc())) {// list all pac bundles names
+			} else if (evt.getNewValue().equals(Events.PAC.getDesc())) {// list all pac bundles names
 				listAllPacBundles();
-			} else if (((String) evt.getNewValue()).equals(Events.PRECFG.getDesc())) {// list all preconfigured bundles
+			} else if (evt.getNewValue().equals(Events.PRECFG.getDesc())) {// list all preconfigured bundles
 																						// names
 				listAllPreconfBundles();
-			} else if (((String) evt.getNewValue()).equals(Events.FEES.getDesc())) {// display single bundle's monthly
+			} else if (evt.getNewValue().equals(Events.FEES.getDesc())) {// display single bundle's monthly
 																					// fees
 				Bundle bundle = getBundle(convertBundleToEnum((String) evt.getOldValue()));
 				if (bundle != null) {
 					printBundleFees(bundle);
 				} else {
-					System.out.printf("No Bundle with the name \"%s\" was found.\n", (String) evt.getOldValue());
+					System.out.printf("No Bundle with the name \"%s\" was found.\n", evt.getOldValue());
 				}
 			}
 

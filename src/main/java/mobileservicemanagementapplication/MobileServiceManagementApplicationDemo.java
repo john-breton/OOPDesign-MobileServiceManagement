@@ -52,14 +52,14 @@ public class MobileServiceManagementApplicationDemo {
 		System.out.println("Test Add Users");
 		System.out.println("---------------");
 		
-		ArrayList<TreeMap<PropertyIdEnum, String>> users = new ArrayList<TreeMap<PropertyIdEnum, String>>();
+		ArrayList<TreeMap<PropertyIdEnum, String>> users = new ArrayList<>();
 		
-		TreeMap<PropertyIdEnum, String> userOne = new TreeMap<PropertyIdEnum, String>();
+		TreeMap<PropertyIdEnum, String> userOne = new TreeMap<>();
 		userOne.put(PropertyIdEnum.USER_NAME, "John");
 		userOne.put(PropertyIdEnum.USER_ADDRESS, "321 Main St.");
 		userOne.put(PropertyIdEnum.USER_EMAIL, "john@gmail.com");
 		
-		TreeMap<PropertyIdEnum, String> userTwo = new TreeMap<PropertyIdEnum, String>();
+		TreeMap<PropertyIdEnum, String> userTwo = new TreeMap<>();
 		userTwo.put(PropertyIdEnum.USER_NAME, "Gabriel");
 		userTwo.put(PropertyIdEnum.USER_ADDRESS, "159 Main St.");
 		userTwo.put(PropertyIdEnum.USER_EMAIL, "gabe@gmail.com");
@@ -87,7 +87,7 @@ public class MobileServiceManagementApplicationDemo {
 		
 		TreeMap<PropertyIdEnum, String> vals;
 		
-		vals = new TreeMap<PropertyIdEnum, String>();
+		vals = new TreeMap<>();
 		vals.put(PropertyIdEnum.USER_ADDRESS, "123 Main St.");
 		vals.put(PropertyIdEnum.USER_EMAIL, "also.valid.email@gmail.com");
 		
@@ -95,7 +95,7 @@ public class MobileServiceManagementApplicationDemo {
 		
 		System.out.println("---------------");
 		
-		vals = new TreeMap<PropertyIdEnum, String>();
+		vals = new TreeMap<>();
 		vals.put(PropertyIdEnum.USER_NAME, "Gabriel");
 		vals.put(PropertyIdEnum.USER_EMAIL, "invalid.email");
 
@@ -126,7 +126,7 @@ public class MobileServiceManagementApplicationDemo {
 		System.out.println("Test Delete Users");
 		System.out.println("---------------");
 		
-		ArrayList<String> deleteUsers = new ArrayList<String>();
+		ArrayList<String> deleteUsers = new ArrayList<>();
 		deleteUsers.add("Gabriel");
 		deleteUsers.add("David");
 		service.deleteUsers(deleteUsers);
