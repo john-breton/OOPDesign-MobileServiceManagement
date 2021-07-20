@@ -12,7 +12,7 @@ import java.beans.PropertyChangeSupport;
  * 
  * @author eleugab
  */
-public class UserInterfaceManagement {
+public class UserInterfaceManagement extends AbstractUserInterfaceManagement {
     private static UserInterfaceManagement uniqueInstance = new UserInterfaceManagement();
     private PropertyChangeSupport support;
     
